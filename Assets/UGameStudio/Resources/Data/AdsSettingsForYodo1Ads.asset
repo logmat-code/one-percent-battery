@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8985c03d87518d4b831d1d464ef631c, type: 3}
+  m_Name: AdsSettingsForYodo1Ads
+  m_EditorClassIdentifier: 
+  frequencyToShowInterstitialVideosWithButton: 1
+  placements:
+  - placementType: 1
+    placementID: Interstitial
+    bannerSize: 0
+    verticalAlignment: 1
+    horizontalAlignment: 0
+  - placementType: 0
+    placementID: Rewarded Video
+    bannerSize: 0
+    verticalAlignment: 1
+    horizontalAlignment: 0
+  - placementType: 2
+    placementID: Banner
+    bannerSize: 0
+    verticalAlignment: 1
+    horizontalAlignment: 0

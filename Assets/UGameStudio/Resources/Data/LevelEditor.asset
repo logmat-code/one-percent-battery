@@ -1,0 +1,2625 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0bdf7fb30e285a4387923743af528c6, type: 3}
+  m_Name: LevelEditor
+  m_EditorClassIdentifier: 
+  categories:
+  - name: Enemies
+    objects:
+    - obj: {fileID: 0}
+      assetPreview: {fileID: 0}
+      zPos: 0
+      description: 
+      isUI: 0
+    - obj: {fileID: 3137558309890436719, guid: 1251617abe1e6ad47b95614d9a65d00f, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: 0
+      description: 
+      isUI: 0
+    - obj: {fileID: 6780706091280149755, guid: cc3d4c6454d724747bc6c4bdf0820f8b, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: 0.59
+      description: 
+      isUI: 0
+    - obj: {fileID: 7713296912971701909, guid: 84065849b28157042b3b27a71a34b4c0, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: 0.59
+      description: 
+      isUI: 0
+    - obj: {fileID: 2141091589287394620, guid: b501cff04706c614ba734dc724a84b76, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: 0.59
+      description: 
+      isUI: 0
+    - obj: {fileID: 5500346544443267010, guid: 71f195fceae830e4c883c14d695bcad4, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: 0.59
+      description: 
+      isUI: 0
+    - obj: {fileID: 8892653575021758135, guid: c81d6924ed3dee44f85893cedd109c0b, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: 0.59
+      description: 
+      isUI: 0
+    - obj: {fileID: 1031786631456196, guid: b4d2c24932e31b748a8e52b3f3bbb952, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: 0.773
+      description: 
+      isUI: 0
+    - obj: {fileID: 1550085487723230, guid: b87fcb67054e7a546b860b883396b2aa, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: 0.773
+      description: 
+      isUI: 0
+    - obj: {fileID: 1947327081361954, guid: 024b97f9b6cadfe47a05bea6102f5824, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: 0.56
+      description: 
+      isUI: 0
+    - obj: {fileID: 3840437114315899725, guid: 88cf19313c6e0e34a97b70f20570268b, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 7564103108380100233, guid: 2ec247112a3bea843a2e408e6c331d99, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 3520822089862252781, guid: 3613cb67d65beae4a999b1d0445d84b5, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 6904848600829462967, guid: 097febe77b403f24d9193453f3455d9b, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 1184646532474932597, guid: d05fc118c43b6244bbecf6ad5f03a4e4, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 946056017450914224, guid: 074f98cc17725ed46a899d983b4d792c, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 8077170829021728405, guid: 4e27994db9ff0634e862254c53594037, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 7078745845999579871, guid: a0e1f53b2dac7d04c997b66f57d554ad, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 8222238898516807628, guid: 1518c57082499f541821636e214c2233, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 6900272015436224542, guid: 78eb0f64114a64d47a0aa9d186ba1b25, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 6247157057114422518, guid: e5d32b2aeff22994c8402d095f65d382, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 9014853462528435262, guid: 250dd5936ae064142bc796e5640eb94e, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 225064660187725990, guid: db4cc9e1fb290fe43be33cdfbc97a994, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 8216751529603667772, guid: 8d188bc874fd6e14cabc8be054eb4f69, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 4162048554857697354, guid: 345564d7a327bec4b80bd7edc718d168, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 7694036901007837352, guid: 01d90e91625c77f438267bac242c2456, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 620527886149439003, guid: deca78c9d397b0b4194894d91eff9fb1, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 4017739962756910919, guid: daf5eca186e6fe7468d94216657d78d5, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 4567036056764814483, guid: e769c692541e6854dbcc01993d22ea00, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 4639607950538953840, guid: f86499cf919861b45ac5af518fead79b, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 3994579227503282940, guid: 5b462e24779ba20438bef29fa99f6de4, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 7873140734597942685, guid: a49ead3246d7c414cbfe5a6d312e41e2, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 4062421833443309468, guid: 20a834bb1f2af8441ae2afe4da88e2ed, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 1265680123888834, guid: f8177976b38128245a6041f50d9a8f2a, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.053
+      description: 
+      isUI: 0
+    - obj: {fileID: 1074454796252338, guid: 3480f462378b7f5468fb4938f818fefd, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.31
+      description: 
+      isUI: 0
+    - obj: {fileID: 1148113805069582, guid: 591132ae146cc6a4fb3b9038cc0c34eb, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: 0.36
+      description: 
+      isUI: 0
+    - obj: {fileID: 3251909900175484639, guid: 9f7e79a66ac1732468459e490b9065a5, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 6317048277947898159, guid: 69f59d38b63bb794788e5479208cc63e, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 5216964183821844537, guid: d0cfc53802cb68f4c843218459d33812, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 2545891909467761812, guid: 1ca825b508d4a71438c5d09bfc2279fe, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 8910159575738933584, guid: 35ae3d9994da11347ab40e46e44f0c24, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 5488645933612560166, guid: e0817cf02a822a84f80b339d2a31675a, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 4966117214257326856, guid: 15b6c30a356ee644da5057ed6efae1f9, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 5246183881398781336, guid: 0c9254ea8403b5b479defeab19043a11, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 6105221940813070400, guid: 78de222b0329f794ea4ab01babc2b301, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 1207752272304042, guid: 7940ac0cd4604fa4489be599070c0a98, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -1.71
+      description: 
+      isUI: 0
+    - obj: {fileID: 1249798609504988, guid: 926ea82226a4433439e3ab2925cb25c4, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: 0.51
+      description: 
+      isUI: 0
+    - obj: {fileID: 5763114589367442345, guid: 388c69553b75b504b97203b4e9d7e4f1, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 1362398161242810591, guid: 2f38a62492c48ae45b9bbf4ecdf87859, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 9082575976908853909, guid: f5a0559e6c5f3a74790b170b6877333b, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 3887928695146443146, guid: c1cd1355028c031499bbabf281835722, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -5
+      description: 
+      isUI: 0
+    - obj: {fileID: 7953123424714788953, guid: 7a04eb71c9eb43b44b1a0e0ad0b844ad, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: 2
+      description: 
+      isUI: 0
+    divideInSubcategory: 0
+    subCategory: []
+    isLocked: 0
+  - name: World Objects
+    objects:
+    - obj: {fileID: 0}
+      assetPreview: {fileID: 0}
+      zPos: 0
+      description: 
+      isUI: 0
+    divideInSubcategory: 1
+    subCategory:
+    - name: General Objects
+      objects:
+      - obj: {fileID: 0}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1855538052393790, guid: 1087b65d33336f24c9707575f0d66517, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0.36
+        description: 
+        isUI: 0
+      - obj: {fileID: 1316080889784408, guid: 1b768d5cb4a9bd24c94537f97ae654cf, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1724279826539744, guid: b076e966722264b439b67012805f0119, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.244
+        description: 
+        isUI: 0
+      - obj: {fileID: 1461104450619102, guid: 204eb0186a9b8cb43921c2b13e77ba60, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0.41
+        description: 
+        isUI: 0
+      - obj: {fileID: 1605557466172202, guid: 0d2054fd6d0a7c743af99a11bc1bce81, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -3.45
+        description: 
+        isUI: 0
+    - name: World 1 - Forest
+      objects:
+      - obj: {fileID: 0}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1535174721508818, guid: d5c5710fe44d3374c8f16fe2a211d480, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0.87
+        description: 
+        isUI: 0
+      - obj: {fileID: 8453220623623594196, guid: 8e71c7fe6595cbf4f9bf4f75ce6f887e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.57
+        description: 
+        isUI: 0
+      - obj: {fileID: 1458304434663254, guid: 4720338e76a6c1c4f9ced1d5c8f5a88b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0.53
+        description: 
+        isUI: 0
+      - obj: {fileID: 1287931177176960, guid: 95e2f911b71a1d545bf00cffe8e8738e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1437492200640608, guid: aee900b2321da464b829a943ac7dfcab, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1516611377153794, guid: 2d50cf83d5774ea4b8322726a84b6693, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1603684361118202, guid: d74e75bc0503fac4fb502af4dfb9855c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1619436302890756, guid: e7253e835cb0dff48a4b5d3c2138c044, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1378709788028148, guid: fce3c991febb2d941908e7fb0e2883fe, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1746342066399282, guid: c0429a3345853b94eb1c92246e921f1a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1304235395519342, guid: cbf83c78aaeb5e34c9fa121f0f55c0ca, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1993237591182770, guid: ebe95d2b46ba3dc449ab3946a695ce19, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1504771300059828, guid: 835bded6de834d74997594fb39ffdb00, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1597740230967480, guid: f34d27fc480b7c54ca9c4c256d6fc920, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1704663742198404, guid: c4a1afb3224ab004780d94b23f5b9374, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1423803898913636, guid: e4acda763e38dfd4f8939ee7c0fa7c51, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1699077777926068, guid: 21ce85a2497b99d41be70de91825dc68, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1056157181029204, guid: 505e5cee067ce6d4db84b267c49f2e4c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1162136959077402, guid: bfd6d9ea17f3688449af1c3c88eebb58, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1777181809131074, guid: d3925d7536a6cd249a5915fe5c0f24b9, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1235035593064824, guid: 1ddf3dfabc5a5534bb8a436ff629803f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5232655775904562972, guid: 88ca78a49045c4b41b551d7506f92bb0, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.57
+        description: 
+        isUI: 0
+      - obj: {fileID: 1763000775357740, guid: 7ceccd7f486a7834b92cca47ecc5492a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1262577076153380, guid: 60074d84bbad42c468387455fbd553c5, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1314150069455326, guid: 1387aead0552c53449fd98cce3c806fe, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 146838891586591201, guid: f8e01c4908797f345afdb0fb79ec2b72, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.57
+        description: 
+        isUI: 0
+      - obj: {fileID: 1676255977998570, guid: 7394b512bc8785944872523f1b52ade8, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1628872045653186, guid: ecfdd4b10de415c4386d15e3fb53f350, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1164319434950500, guid: 88f459c3a092c1c4ea54dac3769dd654, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5666676936091790194, guid: 0461d0f8a42d66041b2365949807dc29, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.57
+        description: 
+        isUI: 0
+      - obj: {fileID: 4718047881101584223, guid: 18ff0f028436ea34389de41cc0a3ed15, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.57
+        description: 
+        isUI: 0
+      - obj: {fileID: 8279962270548704662, guid: a35afb9c20095b24fa289cf9ac35694e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.57
+        description: 
+        isUI: 0
+      - obj: {fileID: 3386893968041228396, guid: 6bfde1ec533c3c14594a81e65096a9f9, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.693
+        description: 
+        isUI: 0
+      - obj: {fileID: 1543489220448688, guid: 4c1b93261ef2efd42a108e8c7f0ce4ea, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0.73
+        description: 
+        isUI: 0
+      - obj: {fileID: 1516931942178758, guid: b7462526656799240a64b5e05e473047, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0.87
+        description: 
+        isUI: 0
+      - obj: {fileID: 1226135681095428, guid: 9eaf3211e0c06b94ca88c19b841c1558, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.14
+        description: 
+        isUI: 0
+      - obj: {fileID: 1099227129577294, guid: bbe3c08ecc115ba4da56ec5e102daeb5, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.08
+        description: 
+        isUI: 0
+      - obj: {fileID: 2190292277008972299, guid: eb34406f75f62d345833f33ef82a1ff0, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.57
+        description: 
+        isUI: 0
+      - obj: {fileID: 6274587696850295778, guid: 79c69f59a733c004990a5b5a94832753, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1134763457922004, guid: eba0c6d1da1f90d428b7352c559765fc, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.157
+        description: 
+        isUI: 0
+      - obj: {fileID: 1993056800527156, guid: 6ccf5f257e59aed49854e7f0cb39b75b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -6.2
+        description: 
+        isUI: 0
+    - name: World 2 - Savana
+      objects:
+      - obj: {fileID: 0}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 426181713529617774, guid: 6012fd4c55778da43946ed381965c221, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4391067887638672852, guid: bdbf3188f9728c64fb5f6be7b789f22c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2332372502229825988, guid: 13bfc1e6c88e2ca40a3c903f0810a0b4, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0.53
+        description: 
+        isUI: 0
+      - obj: {fileID: 5321304581155937371, guid: 2fdfe71b4a4c96e4c814f54aa4720599, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6394133289451617217, guid: afd4aefb55e21c0438343b8958dc724e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7253704862831028205, guid: 7fe25cad550fa0244b6222e71444f2a7, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5588291476852679202, guid: fb280cd4da94383458daed2eefa5702d, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1947607480949175069, guid: bd42169f23fa6d848a6e5076ef056eff, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2435407205166512527, guid: b26bb8169d52e964eacb32bad4de0ed9, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5633078591446396407, guid: 12104383a2bf47847b666b568102276f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 214486470581463311, guid: 2b9c19174c87de84ab4accd2f0890f1a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2457747854347258180, guid: bce73fadd198c5545909e5310729175f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4577097832042508794, guid: f8c24823c407e5e49b15a9db2cee6d13, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4078501963347077238, guid: f8ed99e4f67deef458e8754577d07a66, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2211165827334496945, guid: 0785db23ee00f15429fdfd5dab5a9512, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 9150540351304114707, guid: 4feb85f6df3cf9844bb8fa2ba97d774c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7872308051359336120, guid: 1760004991430904f83856b2f7306af5, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2331420294865758639, guid: 4655890bc6aea7c4bb733462e8eaac9e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3980874755517615047, guid: 3a3f87cda748e8c4ca8d0e887d386d7a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1946870327832165693, guid: ed9f564c2ecc9ef42a9896b9f9e8838d, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4569067813426656364, guid: a0b92db9d69539e40b2b2a97d7587b24, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2658214379088616719, guid: 5a6520a81e03c7348bf0e067fdb04b8b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7352125178401471824, guid: 10f725ef8048d6a45bc70c1358d92516, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5230643126124136122, guid: 81a92665204dc8d4bb3d74cb80e4ceef, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1996286127546450661, guid: 33978122d9f28af4897e08ec85367597, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4381973992709393329, guid: f832b5387f7ff464fab80218f8b9db77, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4062058132583344969, guid: 9038e45e658b24841a4d99c9175b1ff7, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6856220389673686187, guid: 576fb014c7ee5d348bc305498a0cbd18, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6621387351824585239, guid: 262be8daf961e13459fe35b9fcf211be, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5964851295171451643, guid: 313697ae5d2899242932c2fcaae90a40, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 658315534904878533, guid: 37ce4bd19e2a8f04d90f63e6d00c0f4b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1948398144063503124, guid: 551b9acf3627e6e4d8e5bb5e5b0b01b6, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 9060344082988146639, guid: d44ed7841c939724eb6462a2f38627a2, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5731709892047895488, guid: 74dfb8aa525742349b3d02049d780e47, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7231285902045145028, guid: ee87b65c21472be428dbaedfe37ac430, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8435902151273703353, guid: 73dff4fe4ca10a84b8b0665bae9638bb, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2133157036534124444, guid: bddacb97c3cd86d40bed60ca3555be58, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6831225280683147346, guid: aeabcc14ce5570a45852a0052ff8db4f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4837205873194238579, guid: c8fd84a44a4c35449b9ae51ff989d37d, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4646953287662816333, guid: 150b562f33fbd754cb6cfec4aba710ea, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8020597643527572247, guid: ebfeac53e11c71743bed722d66593350, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.157
+        description: 
+        isUI: 0
+    - name: World 3 - Ice
+      objects:
+      - obj: {fileID: 0}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1349045628511134692, guid: f4ce862b2e3f3e64db034ef003a69c3b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8091424903002441308, guid: 2cdc3f3ccbdd5bc45a9557445b9b816c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4700720216360053223, guid: e7df044a4f8874d4e8cce01902ccfb2f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0.53
+        description: 
+        isUI: 0
+      - obj: {fileID: 4548669542657607558, guid: c47588f87f4b28b4cb6ae9b3a61f9f2d, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3975744794710095405, guid: db53638bff73b534c8d30215bdddf648, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 815407822842467670, guid: 4b1bb68bf104ea649b89b8cce09c5fa6, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6151844176952666938, guid: 28d9e0465ba424c42b56976f851b0ea9, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2360139447945107020, guid: 28202354a19ac404886e0b0f2a259cb2, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 533081603779944535, guid: a881fb1d9240500429790310d7cebd5e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2858025098002499999, guid: 6b6c423c220255e4ca4390bdbe40a04c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2282995676292106124, guid: edb5da68165b6fd45ae8a80b94e5d476, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7063869890680508612, guid: 9a99d47fb31f69b41b89ed772b806681, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 87333181321237261, guid: ea225cbf74073df40b1ee91aa76e8418, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8862249182619205909, guid: 9287cc2d7c4be2246b3a74cd9a264193, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8405012874013947999, guid: 781f47989db22784899a352788527259, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8787424218892547507, guid: 1d5eab815fee5bf4d9a731509d80f256, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1989875828578301525, guid: d8204d3aeaefaac46825109594df68d4, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1824818828859356477, guid: f01222a98c101a34f99a909af3723b95, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7843338743136722816, guid: 59aa2cc4edff7d7499685a66bb4cec74, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6252757145158049546, guid: 6ebb8de277748b94dbe1eae52c7565b5, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8448360921190094241, guid: e58dd8d1617407545aef675d4fab288c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8179011245950472448, guid: 8b98d96dec0933b41868fdc7373aa515, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7124889177614877696, guid: f526a7a85ac22a14cae4a1f550096dfd, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8754675316832656552, guid: 3deb9e5dee38b844c828babe54d6ceb0, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8845776773616480751, guid: 6f8d583404d2f8f4d90812d46a58ecfe, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5294147103997193990, guid: fb35ec94c654fd74cba52ebc677d3891, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7634928810172691601, guid: 6cf6ea46c03965e47889001202cef9a5, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8212728246727765521, guid: 267a66d0c40c83f48a5dd3713490fd19, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1875071345518345537, guid: c799426f83512db44baf07f897c47091, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6587117280424591675, guid: 369de88d31d7e1c44a3ca2f8c7d25996, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8574905571520272194, guid: 833e1a30b1759d0489f878aacf86f7d0, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 661402711926300204, guid: 36bef82b2fb73234aaadcb02a287d984, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3149559952699764674, guid: 1c651b33bd4456a4f972553b06caec48, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8985589961594724038, guid: 43b4b5795f502224e96f99874d5a12e5, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8795576472650329907, guid: 7444df2034692cb4c9d520e1ad1cbe4c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2433878431260280163, guid: b24e07c07279beb439f2d33e4ccb1c9b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1258028663303535028, guid: 88fdcc67e1afc0b4d9f4d305621085fc, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4926489596248593334, guid: 9f81b524765fbd244a8bae252efaccf8, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3209506673189588806, guid: 0e5e0b74aa7e78d4d9c4d0c34ba13462, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4887079624255141600, guid: 323ef8ce8cd41ac49a02ff4f1e523ecb, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8793584156348941168, guid: 5ce4a6796da81964086878d13bd6ca9a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 863521723641796215, guid: 52028fb1e0458d049bebc3856fb76da4, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 221445472004410521, guid: 17a745c6f744b1144a7ab084fe567836, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4587886018566071333, guid: 0b5c6eee4f094c546a15e709f6b9ee5f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5710383638892185914, guid: dd43c999dc8eeaf4093a71b302ffb122, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1595813424195613510, guid: e17e6e2ea20b5664490e7c429086ec45, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7983323014172793751, guid: 583c46d2ee47e7f40bd943e893cbb08b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 9121673694276114546, guid: f532342a902373a40b866b0757a7af87, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7924712086234853483, guid: b2bb9e69187b75d46b5e01be0bce6ba4, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1757894516808917625, guid: cab9c3bda15230f4ab593e9e9d051d1e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 323680426852305309, guid: 1f5a2ebe1e3cdef41bde56b0928b3670, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1038269447411305590, guid: f98772e86e3b1774487ae892b1ee4f45, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5409219248928522381, guid: 489a41bbc4dcf2344b294f50ceeef16d, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 815158344152944937, guid: 399b10c96f05ad24589c7f4682dbc929, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2138724328155130864, guid: 42a6fc8e577b6f541b3b311599ba00cb, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2588522496636110878, guid: 4fdc49650c9c9c8489c9075a6e7abec2, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5490125551089105022, guid: f5de92ff9fe027443ae37c5b5749b3a8, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7406029967112118805, guid: 7130cfd2ea385134ea1950c0099f72b1, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5805633003310172798, guid: 03f60dbbb0e008143bfa628713c58c78, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3787788416127869092, guid: 6c2a692c88e56f14c8d950e3d14baf80, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7483543562069242592, guid: 0c3494cafad17c846a79b67be202933f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3231021680604757161, guid: e546d4f50d8e03c4c894d6a4ae772a20, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5898152959310375587, guid: 226410b77e487b543a664594bdc8a31e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8349621932793463990, guid: 9915d8f9aa6964543907125a4483e337, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3509542288556649074, guid: afef0f999df1ef24c88f0cb673deffec, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3802880613554758867, guid: 84e6e829582b34e43a146c7f50674423, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 55966379561758761, guid: 6d2624819d19c1c45b92afc79b7e3bb3, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5798655838579311733, guid: 94418344d91640b4f8675b7976c606c9, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.157
+        description: 
+        isUI: 0
+    - name: World 4 - Temple
+      objects:
+      - obj: {fileID: 0}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1493046950182428478, guid: 061c320a8f60cad46a40662105ea4f91, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4476285941792533579, guid: cd9b14987721a3449a26bf53db583970, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1458304434663254, guid: 4a080b9e1dfdf9846b0b3cd275ae0809, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0.53
+        description: 
+        isUI: 0
+      - obj: {fileID: 8709177993423183530, guid: 3eddb702e8e7b8a479b4c72c850afe51, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 625644081206275078, guid: 9581b21b4ecbed2478098379488b1675, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2777073691316687148, guid: 892ab7eca92eed143baf6cc8d5ba3755, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6111520381885041997, guid: 91f061a4a9b0bde4a94e7158c3b1bf12, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 909350780155857299, guid: 6391006b991d1084a92db6eb929a861f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8804259419914658558, guid: f429b4773dd13f041a4c227a3d626102, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1499330239137162278, guid: 1c479ed0c8f333d47b94c53889a717a5, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 640957484927872365, guid: 4bfc95ba6f36a3a43bd45b63efda4fdd, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5373571519639519935, guid: c989ae66a9dfe8d49a52d848a6c7d145, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6826376440479850792, guid: 9861dbbe6493a9042bd73c1563e4687a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 401398233306879922, guid: a2ae26139a33ed9479d994079c11c16d, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6369631543526189168, guid: 26a634adeabff6249a8a1e01c22e4e58, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7490936492363516671, guid: 7529b8e07d336d84fb69cabb4f63ec8f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 442049989821743060, guid: 3a7e160f173d17649b98fdf2766eb9ab, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2343047661190592902, guid: e745824b827747c4189d40e55db7a01f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5021608280570035267, guid: b4962d276f086e94bbb4a8c70151deb7, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 663542458061347169, guid: f0570903a493b2046894fea945f18acf, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4346169398011854131, guid: 79d0e0e17b659ee48a7257fe86f67002, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2196285293531481100, guid: 4d9631eeec5b93c42b98562a3f4cff37, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7764794668192934579, guid: 0ad9d777b744c3847b9efd664a418a59, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4056896695575860747, guid: 8a148635677dce543a0801f74eafcd0c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2086911549691177938, guid: 9aeeafdb8b43d044bacf24fc8a736c33, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2187127011893833559, guid: bc60e6e53f45ab64eb8229283688df09, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7368454336854599561, guid: 6b96693c7e32991458654a9897a831ce, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5758975343617720032, guid: 5c46e626c70c8dd44b998f33537fa46f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5138631914003187064, guid: b609cbc586c3cbc4fbf300b865fc617d, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5546036686715852074, guid: de8ab1e4cd08c394c89316fc8a731f7f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2424777259809618001, guid: a2a85e0d6ad145d49823f555745392e1, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 9140262592389822297, guid: abf766e004881f04fba4c6ce9fd66fed, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4037233648734503172, guid: 77dbb9bb76e1abe44a24cc84e4113797, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3943825127820795115, guid: 1596a3356df1e2b4dac2e81f0b58ff74, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7844178418213439559, guid: 79c5536b40e14c04dbe47558bfda27ae, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8334234307027914977, guid: e5e29f0754ccfa34aa19bef18407d4b3, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 651815985536570651, guid: 57b741e9fff62df44b53769f6325fafe, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1913767298796263809, guid: 59c70ab5f82d9eb40b1e31369a5b40ab, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2137709341322121195, guid: e1dec653ff0a47f4fac11640fbd50402, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7092054441135324966, guid: 0ec1a5a74d54c9747ad4237d5f4d22f7, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4258878538685658411, guid: b82286abbf2abe643bf0c395855621c8, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4280287847824644013, guid: 506d2e1fb4a608a4eb72924df2b59e73, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2533914299887489619, guid: f49534e1a574b5042808197cbd3b2ca8, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1970005424306922877, guid: 4c6e9289c23144c4dbc3b0af5f28fd60, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1542266558509577431, guid: d571d666204e99440b2f033c66942412, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3377877213034779932, guid: 262895c2b87e77146bc7428ee6d174b3, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1823753496521173306, guid: d3f857adb49b4a24bb7b41289734bd94, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6893127756600230652, guid: 9150d6cc726fe1b49b36aeb6559b40b6, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7658009069829599987, guid: 6de6f3851c1f0904da5d1ede1560e396, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6086832343225827348, guid: 2c0d5d60828ee104996fc14a34a927d9, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6993185915707220089, guid: 630068191b98b184eaebf17b31e6a00a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 853910934157175640, guid: 2935fcaa66e753548bd424d32f284cd7, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7921167815308643570, guid: fdf0f58ead7e0cc4e82a9583be60c374, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6584890559384952662, guid: dc475ddaeb14f08438f2fed10682fe28, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 9109148692909270467, guid: 354a2501d301dc34091eb6880801655e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3421448163669167890, guid: def09c72ec3aa1b4791247a52c785a45, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7830788778892107221, guid: 4593d318a88a822439373472eead5241, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3546729334499439740, guid: ba472a2e1b8a7d54782b437dcd727a49, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8368597154110288776, guid: 1ee1edfaeb078dd4d811edb285e5bb34, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5659022431405727831, guid: 99c07ab549b1be34cac636e7e8d1f110, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4493553992360944352, guid: a2d61a3a222024f44a611afaf1a06040, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2460445350301018310, guid: 62d5ee4f8b2724e42aec768773a5f1ed, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7543555237604496815, guid: ffdbc1836a06feb4cb2ae03529bcb7b1, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7176532064249258516, guid: 55ad230ed513f7b4b8911537d2de6571, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4871788789709284083, guid: 57564debbc005d74a87f5b16bbf07389, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1801235053089717936, guid: 5ff9dc25cc937c84d9850b914f9d3bbd, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3230393585861472099, guid: 71ed1e5124d493a4e9a0e5978e9cae94, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.157
+        description: 
+        isUI: 0
+    - name: World 5 Part 1 - Jungle
+      objects:
+      - obj: {fileID: 0}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3638803030017897842, guid: e9068cc526f8cba44af2d2211575e1b3, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5100695587870707530, guid: f7a0d0fa5ae86f84d9d8b163d6451c6e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2960677578285565799, guid: e9f21420e021acd4081c38f50a980c8d, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0.53
+        description: 
+        isUI: 0
+      - obj: {fileID: 3974459681668392650, guid: 325a80f20334c9346861d6d16df1eeaa, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3593305153719525836, guid: 7754b6a09f57f1d4fab56c4773603728, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1197006546035593640, guid: 48bd7f34b36aea241b13dea28e84a464, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8392787499141953115, guid: b834c1c05b42e7f4196b592743151974, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5370769840730827297, guid: 6c81d7f30a483894faf45b7ec701cd2f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3743601715860140035, guid: 6d5a004c35d7ce6429b690fce38ff698, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7705398269512942666, guid: d3eec2c83a4197a47b619176d1d450cd, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4255746059939680360, guid: afdd40f0a4a5d46478f2ba7a2ef4907d, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2851898957317133906, guid: bd7138c10a3abc74bb0bf7dbd87d897e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3452114846866609099, guid: 1d8dbdebcbca1fa4d99792366a93d1e8, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5100930013437486632, guid: 78d6bacafc3f51d409825a5ec2e2e38d, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2974760936659916902, guid: cfcd28e54e38bd9418a299d5d040c790, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1889343436261664676, guid: ae6628fee2fb4a94a98695dcbba8c34e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5638548584312706869, guid: 154f5d142df0b3c48b1d50311f31bbc0, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8763279974199657147, guid: 26add16f1f81c5e4fb326fa75ac0f3d9, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 719602961273369315, guid: 0c93348a7a9765546848a78a845d5a4e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4822910903871253652, guid: 94b744f225db2b54c810dfdae9375b3a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3057818887593894309, guid: 66b5a2ae9dfed6142a8a2849ac91ad8b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1488954479931942913, guid: f2a77c99eddbc8946aec5432f38100fc, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6995742309698214572, guid: cd1e25fe8acf62f469c2d744a3331536, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8728067237305309576, guid: 4c8b361d5d5a9df429a2eb16a02a57bc, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1930971619255246503, guid: ba2ba115b3f1e0b4e9b933cb00037b6f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2282075095894393287, guid: c191e42f1ba66454aa8f4824c7bcbc96, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5569204784643558327, guid: 433d400e8ca515d4cb724c81e8c890a7, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 748379112773188912, guid: 167c81c783516fe409f26519d2868ab9, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8084607321725226839, guid: 9ab66cc7ec03faf48aee7e26a6e43dbc, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6443375649750862869, guid: 401b91082646de746a0d89a77daedcb4, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6886767889325664864, guid: 6e3caca707aab9840b0e71c8b35bda6a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8112927771823849860, guid: 55b8d9054fb6d53429821b238e2b2c75, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 276565911262177901, guid: 7f401691453bf6240a3d8581d1cde20e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4997835231976768882, guid: 57eb010252ea5eb4eb804e1fae935e08, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6862769325638715208, guid: 7d794be5cfdf548468f23d83f2d34af4, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2487347436310501432, guid: 48956fd73a8296144b495b1730a77301, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8334906316245167195, guid: 01e7c14d2029fcc4aa713dc46a1dc3be, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3261114915186199140, guid: c856f79660f975f46b54dfdc4b1e91e2, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6432602943601483049, guid: ccaf4b49ffbd554438c10b845a01e1ea, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7686302316117698108, guid: 2e83b2d384d5857408e9f32598cb285c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5773126185080065173, guid: 531f566d6535fa94c8a4238b38dce26f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5278814694934655021, guid: b988fb1d8d460dc448d1cab2d1aae8d4, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4362047669672673567, guid: ffab56d8553e7de438be538722a15b7a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 790855964775209842, guid: 97efb5a86ec7bb94f83b141ece904b3a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2439723955065438716, guid: d65ef97002ac54d49936633dc8dab817, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5471442257784810399, guid: 938846da2e2f3da41a05993bb2c59300, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 386992778977223074, guid: db62da274e8484b44b0e305513b00c56, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 643048742920150399, guid: 4692cfe7d73dd3842b227f657aef828a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7347830473525615433, guid: 3773519400919234faf0792ee17cf826, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4303210310349677793, guid: 07ae21f675c3b4d498aadf638d6a4b0a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7198211522438039355, guid: f8faee4b6b02ee7488a14509209851b6, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7901320580023678437, guid: 6889f5bdb4a7e804e83cb2276f86b21b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7532284863105525261, guid: 62fc732e43720134996a4e194cc177f4, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 438808647512919289, guid: 4fc20aae4842ba245aa098f9efc9403f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1000155707138816273, guid: 8966e82b0d743334080fb4429ccad47c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4245713554682202070, guid: 4c49f2142be3cb547b177ffc464defec, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3141621754629461880, guid: d18ceda16477f9b4399ddeeffb45bbac, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5908574908618685738, guid: 337e42d25a7c7ba4db19dbcdff5a3ced, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6290439432009639741, guid: 174aee47e4325fa428ae3c00d56fd043, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4518938008076570483, guid: ddab297c5013646499048cce3cf6c202, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6480879988403779776, guid: b9a90c16ff4866341869f2bd50a8c3d4, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 993812443938428773, guid: 2d8a63095bed1624897a760dbabd964b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7064291254035734232, guid: e3df7487d7c3b6e42b8c91ddfaed77df, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1699704168270272021, guid: ab2e4e23c0631cd4eaea8db73a668a5b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 834515709115481643, guid: c5076ddcb730925419446dca0419b4ca, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1080778745203831908, guid: b6fce049d8b6b1941a6712f7950e8dd7, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5244118574739204289, guid: dc6349d75a81abf4881748d313f70b49, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4528521677422997095, guid: 0168490ea04114049a0e14305310df3d, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.157
+        description: 
+        isUI: 0
+    - name: World 5 Part 2 - Volcano
+      objects:
+      - obj: {fileID: 0}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2290469782821435396, guid: f36b67133892dd446a0ad0a60579925c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 9168061594560539640, guid: 145bfb2e0590a914b85c62634517bbdc, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4244978568572389637, guid: 2f607b72054036745bde47ec7f76dbee, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0.53
+        description: 
+        isUI: 0
+      - obj: {fileID: 5064214617156735523, guid: 961edccfe6cf6944eae26627dafa67f2, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4962106119084683080, guid: 9481fa390a701e144a6d5405647fbfd2, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 81381986566299827, guid: cb458806c29d61643aa6a87a62e5cdc1, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4371171039195236208, guid: 6b33bb1927d01b74da3fdfe3ad30b47f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6161525500402996454, guid: bcdef56a4fd479742bdc0331d9de22a8, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7145622770683587224, guid: cfd3e642edff0684d9416cd88a4854f1, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 393922135846169986, guid: af4729df644dd4f4282d46242d865f89, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8649140442774459231, guid: 0de630b2b8f9d5a47a4a5c0901dcc701, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1201075236874213261, guid: 6d2adc712189c7948b1d00c44c2d0ecf, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7129230920409174815, guid: 9410f6e7a6d2e3e4abe4d0d0884dbcdc, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5207017671331028761, guid: aa6a2283a86beea4796f2e083f5db54b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3273408989284404078, guid: e6b338468fe79534ea477848d3daf351, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7156324128681438307, guid: 5306f2356d0302a4893ca88fe77d81af, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4477783766127369869, guid: e14e6ec6ab320b949a13eeaaad01689f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 9077942215623091526, guid: fbd1d57516f09754bb43551e13b8f2c0, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7078335003102130520, guid: 47afb3a1bb8479447b39fe6bf18045c6, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1435277338963273586, guid: 0a3ec916b0a87e34cbdd6681d4496fec, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1796461483912846568, guid: 2dc4dc9808a0bb8438e010bb2043acb9, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 104009917650652294, guid: 1c9753efb7e743040a5c4a1635ae13ee, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3857601564577668078, guid: 65024de4664107d41a3c2a62f8107518, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 355046387848385057, guid: dda8bef4ae465ec4ea9c09842cd8db56, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3701818150876663858, guid: f2476aa518b0f6d40b7b9ccddf2e9fa4, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4726745797501166391, guid: 51b63fa9d9660e84bae2dec76685e5ec, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 9012885577078858825, guid: 9631ff309c7fbd146910f926202166be, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2916080337339368362, guid: 6b2ebfe53e7062449862403a83aa8910, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6740365666471731649, guid: 3d274f4133aa2124fb0f38a2b722e7a9, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6810752789065995703, guid: 23b19d85dfb68144f8a8a71f991b9c53, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 570550548679822072, guid: 064f9abaa6bc33547b9db68f07186937, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8626267434009486223, guid: 29693277101d4b842839ab581ef65da3, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8661162547778631858, guid: ec4f059b46bf6174f860860f3899f15d, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1223199229965183241, guid: ce8d292108b46624194729f1a8461fc4, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3468842486353517780, guid: 72996b6d31efb2f4380b9a1e2f693887, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8318768621333757491, guid: 986e093d9c9471d4787f992c18b1b152, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4452542277983771555, guid: 55b5f703a2d5d2d4496bbcd7ab6db3a1, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4516594963158916093, guid: 0a24a32353e51bf4bb3dc674b88954b6, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3493850844892555687, guid: c7ee50610d35c1b41921258d594ceeb7, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1858384938757636202, guid: fe884968f7470344aabd22cccd8292cd, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7735656121035186303, guid: eca13f59cb5add54c9ec5359268262e9, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 530683447634045385, guid: f07308b0055ff0c4ea12b0e846fae4ab, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 692294588401595595, guid: af1974a600b881d4c98afaeff991cbbb, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 300169656838397695, guid: a79d944f4ab255743a8e4aed603a8f32, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7529303832148517189, guid: 7d767e13aa1c8664cbf41bf6a72ff4f2, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7854126014467905824, guid: 2c1a51300f42a7c47a324e5ede3a55a5, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7420564080765747921, guid: be6577042747ced4a878e2b208fc3ad6, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8421270176186322804, guid: 23787b083567d3f48a6151cf9e723c5e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8837390096934286630, guid: c45a75a3c8f890c469b08fcf5ccabb3f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3342110392184999950, guid: e494381e2acbfb84ba3f76a1f1a965c5, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5198058264195350365, guid: 4cba7f4be49f46d4eaf96353b0446393, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3119424791346521434, guid: 380a2a15a50fa014cb1b9fb9c8703f11, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3256468299884897379, guid: 89697437caf22974f8d5ba1e0d90844f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7383801619231832281, guid: 6c7f4ac6233c4fe4499ab089fcafffbb, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4844062669885824026, guid: f932b46fea905604e9b910d4b992a054, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5370030138331365376, guid: b51de66d4aa54c14dbd967534955fc68, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6512875010257022031, guid: cb6e24f3e8ea96843b37230c94e24b99, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7540101440010926097, guid: 77e1038ab7d3e0e4a80af415ee033aea, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6518771645548802043, guid: bda69fa9cae1f68439c412211deaf7d9, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5987367998655883619, guid: 4e5bfd6d70658824f8a9b8116e411fe7, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7915274296235408657, guid: f28dc6726170d2d4597d27c07356e8a9, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1027938433972489531, guid: b989ba8d9b5c3674db60e760edc37d98, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3162715320434295256, guid: 847eb32cf13028c42873b6e7e95c7d0b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5250336318435075645, guid: 4d44e0d0f246d70499516e248c5ca8ef, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 9044331448651775232, guid: 0e59032a3d8b6bc478ff31e9b27adc15, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5993590725705408460, guid: 04754eea704f4b04c985e4a033c13203, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2864635593417524532, guid: 9768a319e848f3c4dbffdc88a4e81236, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.157
+        description: 
+        isUI: 0
+    - name: Bonus Level - Clouds
+      objects:
+      - obj: {fileID: 0}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4482449369412408384, guid: 94c4e35012f48f04b909e67296886cf4, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6840536167879530973, guid: e6af1fcb41f36aa4f906d74cbfb45536, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4066225485446276794, guid: 409eae91b83be504483f18a4a4b0bacc, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0.53
+        description: 
+        isUI: 0
+      - obj: {fileID: 4453576403464338681, guid: 96b88358ddbbe3343aa8b0affc5640a4, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1428151884347304484, guid: 4fd97ece853f07b458cadc071ef775a1, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2486327401213880097, guid: d0a6a79be288a094c9371e0138cf995f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2859366267828904877, guid: 74f06804788061f45a3e125b2241a661, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2873019394628474960, guid: 5852fb946ec341443bbd6d15777edadc, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6539469384828484518, guid: a62412643ee25df47a7e93a38ad7450e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3489054143454976825, guid: 4a8a614d32f57854a9647fc3d9999da5, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1007455055131435060, guid: f090e0c1916be9d41aa527be6e594745, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3540098593803733085, guid: cfcb0fdf2547f464994ebab89b7deb6a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 305936628534687510, guid: 01410d307c6f05444ae8f8c6e18d6c9e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5595157114590652544, guid: b309ec93921f3b646b32cedbcc998970, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3135134886801115525, guid: 26077d871cea30f4eb25e599cdbf34fb, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7802950238192603590, guid: 0699aeea903b4b847b48d451c5aef1e2, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2350435674971945074, guid: f4109fd7bf13ea8469e3989aff89d165, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3419732257263083015, guid: 737e3b58cb4b3c147bf9c5ceaec36c6b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2215663900025410372, guid: 850fe72ae7031874aadbbf70ba967c8c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7857446082600317492, guid: 3d02089c5b7a80b4ca383ddbcac2dc92, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4943031720145167118, guid: 22676aac073d1cf419d60e294af4de0c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4556166401344171845, guid: 8792f296878540e4eace0d4cc586135f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8642330166189127560, guid: 6ef0ca2199ded664088203105cd55ce0, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4668660100597074481, guid: 7e3c6f0595137d54a89e02e1073ae5a3, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7947254327793502667, guid: 82997f39357302c4c903977ba711e7cf, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1333984288772325420, guid: 627c5f6f0bb94c84a80ac0541b710e76, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6398950180702457064, guid: ff0d60cf9e20b4148a56be103a2b2a09, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 882872977581560950, guid: 5b47543f7c9870743a4a64e10087adbf, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3063029037407526873, guid: 65a58398ddda0804fad1e8a88b7d6942, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3507744798034691134, guid: f13e40cb911945741b1760360feced88, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3761643258099792625, guid: a7d85fb9d1eb6564aa10ae7bf5f0a1b5, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 935808585259308349, guid: e0aae5207504aa7419cd619c33e18386, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7195251784122572520, guid: ded38fe237f6e1b41a61c74636a32c2c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6095856810685108431, guid: 6c24e9a32b93e6e42af33b73834f8fdd, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4172089762344037935, guid: fbe2922bb39ff094e99477eb63b8d55f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4220767877549505739, guid: 294c21ea88564984e8649014a39f2621, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6044098296970107910, guid: 140d53bd61051fe40a8ba6d2e7464d79, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7562033357569786875, guid: 4c5b2291f2f6b83439cc0fb76a4e3387, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1660819051009718611, guid: 341221249816998429ea4e53294d8697, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 9003299157609441510, guid: 8cc50f1f76c8b524185ad068987c23e0, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7941887924662100537, guid: f00c8c08e2bd5fa44b79f4cb98ced5c2, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4565745993275519928, guid: 6325559404d16384aa1677555b2bdc6c, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6649657711538965264, guid: 4564af2718231b7488f1fd6dab5b459d, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4168629175087005954, guid: 75f9c465b11a1a9459c17a61694cb18a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5063242474998707717, guid: 4a8342eb41c6bbf4795c02fb1a2a471b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 436648931729879588, guid: d40b683a62c7598449203bf7077fba3a, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6381172898846237273, guid: 45ff210565d1783409943ce0fcce63c6, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3150623587268165632, guid: 1d9cc3b328cae884ebf3cd9de039c0ef, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3512910972138338840, guid: f41a02c18c852c5419a4af3155d6f62f, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2707765147724982418, guid: dd0b8b40826b3334fa021ef06818dbaa, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4857754112642121117, guid: c37194694c49ebd4c85cf91660794f2b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8485702336978089879, guid: dc40cb3f89617d54bb129bd3cf0fc08b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 2060784314375337581, guid: d5dd79d7347e7f545819d71b10629d41, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 7017287144041440942, guid: ed61e366903e7d74bb2bf5f3987033fb, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5136396428567885491, guid: 24e80034e433fbe47bcab6d5199fdced, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 9202114632286365280, guid: e8f0c13350497cc4fb564021774c4155, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 428469725143308874, guid: fc6a5826cfc819749ae742cc457dfce9, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 5234595817623068468, guid: adfd4b47b754b6c4296e93f1d21dad81, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 1823685196401882616, guid: 057a40266985ccb4ebecd5ca95d32664, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6087255090885267834, guid: 06ff95715452ed44686c79492a0d372b, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8574664871087827844, guid: 37ea6a4591ad1d747840531517bbbfb2, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 8625950805732601770, guid: 5ebf1b0ab79021148a786b858b1f8c96, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 4589225325021310255, guid: 9e13d567e6cb8e549bf9dd4eeb8a70a3, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 675899245363998080, guid: 40305caa584320942b506fb27708b980, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3053767598867356898, guid: a8fffcd3a802720428d93364365f0456, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 9022227831118490287, guid: f782c6e25fbe5b84ebedca2c2beda94e, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 6389090258946093945, guid: 5e184240bc2d6e64d98e3f2629590eb3, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: 0
+        description: 
+        isUI: 0
+      - obj: {fileID: 3813266719362665872, guid: f6c3ae1782e509e4188c749bc3a8e5cb, type: 3}
+        assetPreview: {fileID: 0}
+        zPos: -0.157
+        description: 
+        isUI: 0
+    isLocked: 0
+  - name: Items In Game
+    objects:
+    - obj: {fileID: 0}
+      assetPreview: {fileID: 0}
+      zPos: 0
+      description: 
+      isUI: 0
+    - obj: {fileID: 1880356238861626, guid: a7e5bef6ae5d098459e4dc852907ba0c, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.215
+      description: 
+      isUI: 0
+    - obj: {fileID: 1495438961921146, guid: 0c6ddb3b3c485fd49bb1179f359b6517, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.215
+      description: 
+      isUI: 0
+    - obj: {fileID: 1715888414139010, guid: 7335443d97cfb5e489db4506b6086393, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.334
+      description: 
+      isUI: 0
+    - obj: {fileID: 1513187531906480, guid: b62aac271189ca947bf6bd4e14c5c620, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.086
+      description: 
+      isUI: 0
+    - obj: {fileID: 1004037414354068, guid: 6014b0aed92028e4d88eef84de04e61e, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: 0
+      description: 
+      isUI: 0
+    - obj: {fileID: 1372020841083314, guid: 686865bcf3a1d764db15c13565df162d, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.188
+      description: 
+      isUI: 0
+    - obj: {fileID: 8427560588377153628, guid: 94ddd95b7ec2fa642a16b048763a0840, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.188
+      description: 
+      isUI: 0
+    - obj: {fileID: 2187066386911856727, guid: bba38540e0785f249a9e83e8c061309d, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.188
+      description: 
+      isUI: 0
+    - obj: {fileID: 3136189288734457085, guid: f03c66f8ef7ce6f4696189d1d372381e, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.188
+      description: 
+      isUI: 0
+    - obj: {fileID: 2240204293382509904, guid: 51b6aa0d9b0e3a140af3ffa8335c0479, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.188
+      description: 
+      isUI: 0
+    - obj: {fileID: 754789815093291314, guid: ce2c11c1a3e4cfa42bf2da232965c0d5, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.188
+      description: 
+      isUI: 0
+    - obj: {fileID: 5065120340240916887, guid: b92ab62f8918d6e40b9f9a5ebc906a19, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.188
+      description: 
+      isUI: 0
+    - obj: {fileID: 8995069840895372881, guid: 264bba4ee9826d14db12ff5650cf4af5, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.188
+      description: 
+      isUI: 0
+    - obj: {fileID: 6450588665369051412, guid: 52d52cdc07c1f4c4aa58ff6e13b51675, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.188
+      description: 
+      isUI: 0
+    - obj: {fileID: 1120207394928478, guid: cc76566857885f4499e4687c8f2f6645, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.55
+      description: 
+      isUI: 0
+    - obj: {fileID: 2064371358630281009, guid: 586d0e96b87e6804887351899608ed72, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.55
+      description: 
+      isUI: 0
+    - obj: {fileID: 5631445767937844681, guid: da4076707eea41f4bb52e45d402aa55a, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.55
+      description: 
+      isUI: 0
+    - obj: {fileID: 7833782897538622587, guid: b555b30c5fdfec443bbc35d8a17f25ff, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.55
+      description: 
+      isUI: 0
+    - obj: {fileID: 1105949246227604, guid: 97bdd42da06dba547b6acda0c3dbc1c6, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.55
+      description: 
+      isUI: 0
+    - obj: {fileID: 5855716762014572655, guid: 12de66c4f3581764a893c8992bb08d3e, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.55
+      description: 
+      isUI: 0
+    - obj: {fileID: 3358398467546579747, guid: 11781493421f8804e9ba7d0eb28f9f8a, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.55
+      description: 
+      isUI: 0
+    - obj: {fileID: 2557370164425677896, guid: 95f4b6a931a930647a2e1c2d89c51462, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.54783
+      description: 
+      isUI: 0
+    - obj: {fileID: 5735727870300783335, guid: 3695e4c384c30fd46b1636772278bbd3, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: 0
+      description: 
+      isUI: 0
+    divideInSubcategory: 0
+    subCategory: []
+    isLocked: 0
+  - name: Mounts
+    objects:
+    - obj: {fileID: 0}
+      assetPreview: {fileID: 0}
+      zPos: 0
+      description: 
+      isUI: 0
+    - obj: {fileID: 1679778649699182, guid: a7a3b3c762886574abb6d470d5e8fdd7, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.489
+      description: 
+      isUI: 0
+    - obj: {fileID: 5430213027560158317, guid: 682e4f7e43877fe4fbbf286d1114015a, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.573
+      description: 
+      isUI: 0
+    - obj: {fileID: 147992886012509783, guid: 1a58fbeb05c5d8b49a2caf6b321f4e78, type: 3}
+      assetPreview: {fileID: 0}
+      zPos: -0.605
+      description: 
+      isUI: 0
+    divideInSubcategory: 0
+    subCategory: []
+    isLocked: 0
+  parent: {fileID: 0}
+  columns: 13
+  boxSize: 70
+  showParent: 0

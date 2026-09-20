@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 540f0ab302827624a8484cfa39240f6a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - inputControlsManager: {fileID: 11400000, guid: 04673422e89b7774ea991360850e0b35, type: 2}
+  - creatorOfPunctuationType: {fileID: 11400000, guid: 9fa6d85df19c8754db5d56a7bdce9f8d, type: 2}
+  - countdownOfPowersParent: {instanceID: 0}
+  - imageCountdownFly: {instanceID: 0}
+  - imageCountdownObjectMagnet: {instanceID: 0}
+  - imageCountdownPunctuationDuplicator: {instanceID: 0}
+  - imageCountdownProtectorShield: {instanceID: 0}
+  - imageCountdownTrapsConverter: {instanceID: 0}
+  - imageCountdownKillerShield: {instanceID: 0}
+  - imageCountdownJetpack: {instanceID: 0}
+  - objectToInstantiate: {instanceID: 0}
+  executionOrder: 0
+  icon: {fileID: 2800000, guid: 5b007ba83698db74ab31b27c6fdfea27, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

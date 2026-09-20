@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0b1b820956877449ab1fc50413a368, type: 3}
+  m_Name: ScoreTypesManager
+  m_EditorClassIdentifier: 
+  ScoresData:
+  - scoreName: Coins
+    accumulative: 1
+    accumulateOnlyIfWin: 0
+    saveBestByLevel: 0
+    saveBestOnlyIfWin: 0
+    defaultValue: 10000
+    <Icon>k__BackingField: {fileID: 0}
+    <CategoryID>k__BackingField: 1
+  - scoreName: Diamonds
+    accumulative: 1
+    accumulateOnlyIfWin: 0
+    saveBestByLevel: 0
+    saveBestOnlyIfWin: 0
+    defaultValue: 0
+    <Icon>k__BackingField: {fileID: 0}
+    <CategoryID>k__BackingField: 1
+  - scoreName: Points
+    accumulative: 0
+    accumulateOnlyIfWin: 0
+    saveBestByLevel: 1
+    saveBestOnlyIfWin: 0
+    defaultValue: 0
+    <Icon>k__BackingField: {fileID: 0}
+    <CategoryID>k__BackingField: 1
+  - scoreName: Boxes
+    accumulative: 0
+    accumulateOnlyIfWin: 0
+    saveBestByLevel: 0
+    saveBestOnlyIfWin: 0
+    defaultValue: 0
+    <Icon>k__BackingField: {fileID: 0}
+    <CategoryID>k__BackingField: 1
+  - scoreName: Stars
+    accumulative: 0
+    accumulateOnlyIfWin: 0
+    saveBestByLevel: 1
+    saveBestOnlyIfWin: 0
+    defaultValue: 0
+    <Icon>k__BackingField: {fileID: 0}
+    <CategoryID>k__BackingField: 1
+  ScoreCategories:
+  - _id: 1
+    _name: Default
+    _icon: {fileID: 0}

@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed1dd636fc2ea3640a305547dc75a201, type: 3}
+  m_Name: WeaponFactory
+  m_EditorClassIdentifier: 
+  weaponCategories:
+  - Default
+  - Hammer
+  - Sword
+  - Bow
+  - Mount Attack
+  - Melee Attack
+  - Gun
+  - Throw Grenade
+  - Slingshot
+  ProjectileData:
+  - projectileName: Projectile Example
+    projectileGameObject: {fileID: 1165956934474130, guid: 9b662647d9d486f4ab8c1d64f0751ac2, type: 3}
+    icon: {fileID: 21300000, guid: 56fd055a7e4de4f42910aec1b76e53a6, type: 3}
+  - projectileName: Grenade Example
+    projectileGameObject: {fileID: 1233878021858224, guid: e83578b0acab5404385772c774ebf048, type: 3}
+    icon: {fileID: 21300000, guid: 540ec6f3288719a43980ad02e44726f5, type: 3}
+  weaponsData:
+  - weaponName: Sword Example
+    weaponGameObject: {fileID: 1502029387087640, guid: 01d77b9001440e047844cb1723d80d5a, type: 3}
+    icon: {fileID: 21300000, guid: 9c0b08c4bddc4d841914e64b37a58f6f, type: 3}
+    shootingEffectGameObject: {fileID: 0}
+    defaultProjectilesQuantity: 0
+    infiniteProjectiles: 1
+    delayToShotAgain: 0.5
+    <Block_DelayToShotAgain>k__BackingField:
+      rid: -2
+    useListOfProjectiles: 0
+    instantiationOrderForList: 0
+    listOfProjectilesToShot: 
+    ProjectileToShoot: 0
+    weaponType: 1
+    attackDuration: 0.4
+    weaponCategory: 2
+    stopMovementWhenAttack: 0
+    stopMovementWhenAttackInXAxis: 0
+    stopMovementWhenAttackInYAxis: 0
+    stopMovementWhenAttackInZAxis: 0
+    stopRotationWhenAttack: 0
+    stopRotationWhenAttackInXAxis: 0
+    stopRotationWhenAttackInYAxis: 0
+    stopRotationWhenAttackInZAxis: 0
+    stoppingTime: 0.3
+    delayTimeBeforeAttackOrShotActivation: 0
+    isWeaponForPlayer: 1
+    inputControl: 3
+    inputAction: 0
+    useProjectilePool: 0
+    initialProjectilesInPool: 0
+    craftingRecipe: []
+    howToSolveTheLackOfProjectilesInThePool: 0
+  - weaponName: Gun Example
+    weaponGameObject: {fileID: 1057488736446558, guid: 016727d45d10d7b4783d739ac7766fcc, type: 3}
+    icon: {fileID: 21300000, guid: 55e3a315cc9af7f41bb78d25f2e31d4e, type: 3}
+    shootingEffectGameObject: {fileID: 1006572834122072, guid: c0b0cd8b9c1938a46b4aa25928278eb9, type: 3}
+    defaultProjectilesQuantity: 0
+    infiniteProjectiles: 1
+    delayToShotAgain: 0.5
+    <Block_DelayToShotAgain>k__BackingField:
+      rid: -2
+    useListOfProjectiles: 0
+    instantiationOrderForList: 0
+    listOfProjectilesToShot: 
+    ProjectileToShoot: 0
+    weaponType: 0
+    attackDuration: 0.01
+    weaponCategory: 6
+    stopMovementWhenAttack: 0
+    stopMovementWhenAttackInXAxis: 0
+    stopMovementWhenAttackInYAxis: 0
+    stopMovementWhenAttackInZAxis: 0
+    stopRotationWhenAttack: 0
+    stopRotationWhenAttackInXAxis: 0
+    stopRotationWhenAttackInYAxis: 0
+    stopRotationWhenAttackInZAxis: 0
+    stoppingTime: 0
+    delayTimeBeforeAttackOrShotActivation: 0
+    isWeaponForPlayer: 1
+    inputControl: 3
+    inputAction: 2
+    useProjectilePool: 0
+    initialProjectilesInPool: 20
+    craftingRecipe: []
+    howToSolveTheLackOfProjectilesInThePool: 0
+  - weaponName: Throw Grenade
+    weaponGameObject: {fileID: 1198881304035764, guid: 9662caa5571c6604ebea4f2d9ed6c406, type: 3}
+    icon: {fileID: 21300000, guid: 540ec6f3288719a43980ad02e44726f5, type: 3}
+    shootingEffectGameObject: {fileID: 0}
+    defaultProjectilesQuantity: 0
+    infiniteProjectiles: 1
+    delayToShotAgain: 0.5
+    <Block_DelayToShotAgain>k__BackingField:
+      rid: -2
+    useListOfProjectiles: 0
+    instantiationOrderForList: 0
+    listOfProjectilesToShot: 
+    ProjectileToShoot: 1
+    weaponType: 0
+    attackDuration: 0.01
+    weaponCategory: 7
+    stopMovementWhenAttack: 0
+    stopMovementWhenAttackInXAxis: 0
+    stopMovementWhenAttackInYAxis: 0
+    stopMovementWhenAttackInZAxis: 0
+    stopRotationWhenAttack: 0
+    stopRotationWhenAttackInXAxis: 0
+    stopRotationWhenAttackInYAxis: 0
+    stopRotationWhenAttackInZAxis: 0
+    stoppingTime: 0
+    delayTimeBeforeAttackOrShotActivation: 0
+    isWeaponForPlayer: 1
+    inputControl: 3
+    inputAction: 0
+    useProjectilePool: 0
+    initialProjectilesInPool: 0
+    craftingRecipe: []
+    howToSolveTheLackOfProjectilesInThePool: 0
+  howToSaveProjectiles: 2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

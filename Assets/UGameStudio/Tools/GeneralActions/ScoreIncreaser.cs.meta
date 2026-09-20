@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 706b83ebdf308624f8de3e589e5d41f1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - creatorOfPunctuationType: {fileID: 11400000, guid: 9fa6d85df19c8754db5d56a7bdce9f8d, type: 2}
+  executionOrder: 0
+  icon: {fileID: 2800000, guid: ad22113aee744bf479857136e0888e85, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

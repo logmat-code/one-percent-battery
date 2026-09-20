@@ -1,0 +1,87 @@
+fileFormatVersion: 2
+guid: f339e6cedf5c476aaca87534e1e3450e
+PluginImporter:
+  externalObjects: {}
+  serializedVersion: 3
+  iconMap: {}
+  executionOrder:
+    TransformChangeCheck: 1000
+    UGSSpace.OnCollisionEnter2D_ActionReceiver: -1750
+    UGSSpace.OnCollisionEnter3D_ActionReceiver: -1700
+    UGSSpace.OnCollisionExit2D_ActionReceiver: -1650
+    UGSSpace.OnCollisionExit3D_ActionReceiver: -1600
+    UGSSpace.OnCollisionStay2D_ActionReceiver: -1950
+    UGSSpace.OnCollisionStay3D_ActionReceiver: -1900
+    UGSSpace.OnTriggerEnter2D_ActionReceiver: -1550
+    UGSSpace.OnTriggerEnter3D_ActionReceiver: -1500
+    UGSSpace.OnTriggerExit2D_ActionReceiver: -1450
+    UGSSpace.OnTriggerExit3D_ActionReceiver: -1400
+    UGSSpace.OnTriggerStay2D_ActionReceiver: -1850
+    UGSSpace.OnTriggerStay3D_ActionReceiver: -1800
+    UGSSpace.UGS_Enemy: -550
+    UGSSpace.UGS_Player: -725
+    UGSSpace.UGameStudioGDK.CrossPlatformInputs: -700
+    UGSSpace.UGameStudioGDK.DataSaveManager: -3000
+  defineConstraints: []
+  isPreloaded: 0
+  isOverridable: 0
+  isExplicitlyReferenced: 0
+  validateReferences: 0
+  platformData:
+    Android:
+      enabled: 1
+      settings:
+        AndroidLibraryDependee: UnityLibrary
+        AndroidSharedLibraryType: Executable
+        CPU: ARMv7
+    Any:
+      enabled: 1
+      settings:
+        Exclude Android: 0
+        Exclude Editor: 0
+        Exclude Linux64: 0
+        Exclude OSXUniversal: 0
+        Exclude WebGL: 0
+        Exclude Win: 0
+        Exclude Win64: 0
+        Exclude iOS: 0
+    Editor:
+      enabled: 1
+      settings:
+        CPU: AnyCPU
+        DefaultValueInitialized: true
+        OS: AnyOS
+    Linux64:
+      enabled: 1
+      settings:
+        CPU: AnyCPU
+    OSXUniversal:
+      enabled: 1
+      settings:
+        CPU: AnyCPU
+    WebGL:
+      enabled: 1
+      settings: {}
+    Win:
+      enabled: 1
+      settings:
+        CPU: AnyCPU
+    Win64:
+      enabled: 1
+      settings:
+        CPU: AnyCPU
+    WindowsStoreApps:
+      enabled: 0
+      settings:
+        CPU: AnyCPU
+    iOS:
+      enabled: 1
+      settings:
+        AddToEmbeddedBinaries: false
+        CPU: AnyCPU
+        CompileFlags: 
+        FrameworkDependencies: 
+        XcodeProjectType: All
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

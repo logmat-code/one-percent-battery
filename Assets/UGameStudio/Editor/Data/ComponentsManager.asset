@@ -1,0 +1,2814 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6f369aee2b24e46b78a252d3ee2832, type: 3}
+  m_Name: ComponentsManager
+  m_EditorClassIdentifier: 
+  components:
+  - script: {fileID: 11500000, guid: b2df3202c001c4444a9e586ca9666a51, type: 3}
+    description: "This component allows you to instantiate one of the characters
+      defined on the Characters Manager window. You can define whether you'd like
+      it to be a specific character, the last character that was used by the player,
+      or a random character. You'll have to keep in mind that the character will
+      appear wherever the object with this component is. \n\nNote: If your game only
+      has one possible character, this component isn't necessary at all. Use this
+      component only if your game features multiple playable characters."
+    descriptionSpanish: "Este componente te permite instanciar uno de los personajes
+      definidos en la ventana de Characters Manager. Puede definir si deseas activar
+      un personaje espec\xEDfico, el \xFAltimo personaje seleccionado por el jugador
+      o un personaje al azar. Debes tener en cuenta que el personaje se instanciar\xE1
+      en la posici\xF3n del objeto con este componente.\n\nNota: Si en tu juego solo
+      hay un posible personaje para el jugador, no es necesario que uses este componente.
+      Usa este componente \xFAnicamente si en tu juego hay m\xFAltiples personajes
+      para el jugador."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: fb4a79b32230d5d43bdcf1d17c76b8da, type: 3}
+    description: "This component allows you to define a GameObject as the player.
+      \n\nNote 1: Remember that all of the characters in your game must be saved
+      as prefabs, and added to the Characters Manager windoww in order for you to
+      deine their health and the player's default lives. \n\nNote 2: If your game
+      has multiple characters you can use the \"PlayerActivator\" component to instantiate
+      the corresponding character. If your game only has a single character, you
+      can instante the character's prefab on the scene without any issues, but it'll
+      still need to be assigned to the Characters Manager window."
+    descriptionSpanish: "Este componente te permite definir un GameObject como el
+      jugador.\n\nNota 1: Recuerda que todos los personajes de tu juego deben ser
+      guardados como un prefab y deben ser agregados en la ventana de Characters
+      Manager para definir la salud y las vidas del jugador.\n\nNota 2: Si en tu
+      juego tienes m\xFAltiples personajes, debes usar el componente \"PlayerActivator\"
+      para instanciar el personaje correspondiente. En caso de que en tu juego solo
+      tengas un personaje, puedes tener la instancia del prefab del personaje en
+      la escena sin ning\xFAn problema, pero de igual manera debe estar asignado
+      en la ventana de Characters Manager."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 58c34d5f6dd27bd4fa60af0d7f921a6e, type: 3}
+    description: This component allows you to configure the type of jump for the
+      player or a mount.
+    descriptionSpanish: Este componente te permite configurar el tipo de salto para
+      el jugador o una montura.
+    category: 8
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 34fc3f2456f19b84faec6344dd052b28, type: 3}
+    description: This component allows you to send values of the player's states
+      to the parameters of the animator of an object. This component is normally
+      used to manage the values of the parameters of the player's or a mount's animator.
+    descriptionSpanish: "Este componente te permite enviar los valores de los estados
+      del jugador a los par\xE1metros del Animator de alg\xFAn objeto. Este componente
+      es normalmente usado para gestionar los valores de los par\xE1metros del Animator
+      del jugador o de una montura."
+    category: 2
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: f4f1b7a98c3bb4449a1716387449e75a, type: 3}
+    description: "This component allows you to configure the movement of the player,
+      or that of a mount, and is specifically designed for platform games. \n\nNote:
+      Although this component is specially designed for platform games, you can also
+      use it for games where the player moves horizontally, whether constantly or
+      by pressing an input."
+    descriptionSpanish: "Este componente te permite configurar el movimiento para
+      el jugador o una montura, especialmente para juegos de tipo side-scrolling.\n\nNota:
+      Aunque este componente est\xE1 dise\xF1ado especialmente para juegos de tipo
+      side-scrolling, tambi\xE9n puede ser usado en juegos donde el personaje se
+      mueve constantemente de forma horizontal, bien sea a la derecha o izquierda."
+    category: 8
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 540f0ab302827624a8484cfa39240f6a, type: 3}
+    description: "This component allows you to configure 7 PowerUps for the player.
+      These PowerUps were added by default to UGame Studio, and you can configure
+      and activate whichever ones you'd like to implement into your game. \n There
+      are currently 7 PowerUps, which are the most commonly used in mobile games,
+      such as: the power of flight, a magnet that pulls items in (used to attract
+      coins, usually,) a score multiplier, a protective shield, a trap converter
+      (to turn traps into items or coins,) a killer shield (which does damage as
+      well as protect the player,) and lastly, the \"Jetpack\" PowerUp. \nPowerUps
+      must be activated with the following components: GetRandomPowerUp, PowerUpActivatorButton,
+      GetPowerUpWithAction, and PowerUpByDefault. \n\nNote: To define the max amount
+      of PowerUp uses the player will have, click the \"Default Values & Testing
+      Tools\" button found on the lower part of the component."
+    descriptionSpanish: "Este componente te permite configurar 7 PowerUps para el
+      jugador. Estos PowerUps fueron a\xF1adidos por defecto a UGame Studio y puedes
+      configurar y activar los que desees implementar en tu juego.\nActualmente hay
+      7 PowerUps que son los m\xE1s comunes y usados en juegos de dispositivos m\xF3viles,
+      tales como: Poder para volar, im\xE1n de objetos (Usado normalmente para atraer
+      monedas), duplicador de puntuaci\xF3n (Puede ser usado para duplicar cualquier
+      puntuaci\xF3n), escudo protector (Usado para evitar perder salud), convertidor
+      de trampas (Usado para convertir trampas en monedas u otro objeto), escudo
+      asesino (Permite reducir la salud de los enemigos cuando colisionan con el
+      jugador y evita que el personaje pierda salud), y por \xFAltimo, el PowerUp
+      de Jetpack.\nLos PowerUps pueden ser activados con los siguientes componentes:
+      GetRandomPowerUp, PowerUpActivatorButton, GetPowerUpWithAction, PowerUpByDefault.\n\nNota:
+      Para definir la cantidad m\xE1xima de usos de un PowerUp y el tiempo de uso
+      por defecto, puedes hacerlo haciendo clic en el bot\xF3n de \"Default Values
+      & Testing Tools\" que est\xE1 ubicado en la parte inferior de este componente."
+    category: 9
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 37d7716b66cb15345b43c984a50e4837, type: 3}
+    description: "This component allows you to define the sounds that need to be
+      played when a specific condition is met regarding the player's states. \n\nNote:
+      The objects with this component can be saved as prefabs, so the \"AudioSource\"
+      on the scene won't be lost."
+    descriptionSpanish: "Este componente te permite definir los sonidos que deben
+      reproducirse cuando se cumple una condici\xF3n definida por los estados del
+      jugador.\n\nNota: Los objetos con este componente pueden ser guardados como
+      prefab y no se perder\xE1 la referencia del AudioSource en la escena."
+    category: 3
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: e399744843fe8834f9ea7cee19778391, type: 3}
+    description: "This component allows you to define the configurations for the
+      movement of a camera with an \"Ortographic\" type projection. \n\nNote: This
+      component must be added to the camera."
+    descriptionSpanish: "Este componente te permite definir las configuraciones de
+      movimiento para una c\xE1mara con proyecci\xF3n de tipo \"Orthographic\".\n\nNota:
+      Este componente debe ser agregado a la c\xE1mara."
+    category: 14
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 98ab047ce070fe44eb75bdae61bc62e9, type: 3}
+    description: "This component allows you to make objects that collide with this
+      object's collider jump. From the \"Tags\" area you'll be able to define the
+      tags of the objects which will receive this effect when colliding with the
+      object that has this component. \nThe \"Jump only if object is falling\" option
+      allows you to make objects jump only if they fell on the platform from above.
+      This can be useful, for example, on \"Endless Jumper\" type games. \n\nNote:
+      If you have a 2D game, remember that you can use the PlatformEffector2D component
+      so that the player can come up from under the platform."
+    descriptionSpanish: "Este componente permite hacer saltar a los objetos que colisionen
+      con el Collider del objeto. Desde el \xE1rea de los Tags puedes definir los
+      Tags de los objetos a los que se le aplicar\xE1 la fuerza para hacerlos saltar.\nLa
+      opci\xF3n de \"Jump only if object is falling\" te permite hacer saltar \xFAnicamente
+      a los objetos que est\xE9n cayendo. Esto puede ser \xFAtil, por ejemplo, en
+      los juegos de tipo Endless Jumper.\n\nNota: Si tu juego es 2D, recuerda que
+      puedes usar el componente de PlatformEffector2D para que el jugador pueda pasar
+      por debajo de la plataforma."
+    category: 7
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: daad6fd3249f6164d9e43beb70c5148c, type: 3}
+    description: This component allows you to activate or increase the amount of
+      uses of a random PowerUp when an action in the game occurs. With this component
+      you can select which PowerUps the player might obtain, and additionally you
+      can also activate an object when the player obtains a PowerUp, which can be
+      useful, for example, to display a message depending on whichever PowerUp is
+      obtained.
+    descriptionSpanish: "Este componente permite activar o incrementar la cantidad
+      de usos de un PowerUp aleatorio cuando ocurre una acci\xF3n en el juego. Con
+      este componente puedes seleccionar los PowerUps que el jugador puede obtener,
+      y opcionalmente tambi\xE9n puedes activar un objeto cuando el jugador obtiene
+      alguno de los PowerUps, lo cual puede ser de utilidad, por ejemplo, para mostrar
+      alg\xFAn mensaje dependiendo del PowerUp que se haya obtenido."
+    category: 9
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: f9087031c50ca13439dc5c611991fffe, type: 3}
+    description: This component allows you to send values of an enemy's states to
+      the parameters of the animator of an object. This component is normally used
+      to manage the values of the parameters for the animator of enemies.
+    descriptionSpanish: "Este componente te permite enviar los valores de los estados
+      de un enemigo a los par\xE1metros del Animator de alg\xFAn objeto. Este componente
+      es normalmente usado para gestionar los valores de los par\xE1metros del Animator
+      de un enemigo."
+    category: 2
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 88ab2f6e07d3a0343abd57ddd41d79bf, type: 3}
+    description: "This component allows you to give a brick a bouncing effect, much
+      like in Super Mario Bros. \n\nNote 1: This component must be added to a child
+      object of the object you'd like to move. On the \"Object To Move (Brick)\"
+      field you'll need to attach the parent object, so the brick (or object) you'd
+      like to give the moving effect to. \n\nNote 2: This component requires a collider
+      that must take up the area that will be used for the activation of the action."
+    descriptionSpanish: "Este componente te permite hacer el efecto de rebote de
+      ladrillo como en el juego de Super Mario Bros.\n\nNota 1: Este componente debe
+      ser agregado a un objeto hijo del objeto a mover. En el campo de \"Object to
+      move (Brick)\" debes adjuntar el objeto padre, es decir, el ladrillo (u objeto)
+      que deseas hacer mover.\n\nNota 2: Este componente requiere un Collider que
+      debe ocupar el \xE1rea que se usar\xE1 para activar la acci\xF3n."
+    category: 7
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 4b2d9dd779233774c9210a0ddd3a2660, type: 3}
+    description: "This component allows you to bring user interface elements to the
+      front when an object is activated on the scene. You can use this component,
+      for example, on a Game Over scene to keep other elements, such as images or
+      text, to be displayed upfront. \n\nNote 1: This component can be added to an
+      obejct on the user interface. \n\nNote 2: You must keep in mind that if you
+      have another canvas on the scene, the object won't be displayed over canvases
+      due to the \"Sort Order\" value assigned to the \"Canvas\" component. In cases
+      like these, you can increase the \"Sort Order\" value of the canvas so it is
+      displayed over other canvases."
+    descriptionSpanish: "Este componente permite traer al frente un elemento de la
+      interfaz de usuario cuando el objeto es activado en la escena. Puedes usar
+      este componente, por ejemplo, en la pantalla de Game Over para evitar que otros
+      elementos como im\xE1genes o textos aparezcan en frente.\n\nNota 1: Este componente
+      debe ser agregado a un objeto de la interfaz de usuario.\n\nNota 2: Debes tener
+      en cuenta que si tienes otros Canvas en la escena, el objeto puede no mostrarse
+      delante de los dem\xE1s Canvas debido al valor de \"Sort Order\" asignado en
+      el componente de Canvas. Recuerda que puedes incrementar el valor de \"Sort
+      Order\" en el Canvas para que se muestre delante de otros Canvas."
+    category: 17
+    isFavorite: 1
+  - script: {fileID: 11500000, guid: 979608cfc73b921488481c6741e93d43, type: 3}
+    description: This component allows you to define the parameters for a projectile,
+      such as velocity, what kind or projectile it is, max travel distance, etc...
+    descriptionSpanish: "Este componente permite definir los par\xE1metros para un
+      proyectil, tales como la velocidad, tipo de proyectil, distancia m\xE1xima,
+      etc..."
+    category: 13
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 64187d5768ff50444ac341ef8fa6c1e2, type: 3}
+    description: "This component allows you to increase the amount of projectiles
+      or attacks available for any weapon when an action occurs in-game. \n\nNote:
+      If you'd like to create a button to buy projectiles, use the BuyProjectilesButton
+      component."
+    descriptionSpanish: "Este componente permite incrementar la cantidad de proyectiles
+      o ataques disponibles de cualquier arma cuando una acci\xF3n ocurre en el juego.\nNota:
+      Si lo que quieres es crear un bot\xF3n para comprar proyectiles, usa el componente
+      de ProjectilesPurchaseButton."
+    category: 13
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 77dfd3bf0a5d5a84cab4cba9905f5984, type: 3}
+    description: "This component allows the player to obtain a weapon when an action
+      occurs in the game. \n\nNote 1: Remember that weapons can be created from the
+      \"Weapons\" window. \n\nNote 2: If what you'd like to do is create a button
+      to buy a weapon, use the BuyWeaponButton instead."
+    descriptionSpanish: "Este componente permite obtener un arma cuando una acci\xF3n
+      ocurre en el juego.\n\nNota 1: Recuerda que las armas son creadas desde la
+      ventana de \"Weapons\".\n\nNota 2: Si lo que quieres es crear un bot\xF3n para
+      comprar un arma, usa el componente de WeaponPurchaseButton."
+    category: 13
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 38a0bb7b478c5d74ba1cdb8dd8e3bbc6, type: 3}
+    description: "This component allows you to activate a PowerUp when a button on
+      the user interface is pressed. \n\nNote: This component must be added to the
+      button that will activate the PowerUp."
+    descriptionSpanish: "Este componente permite activar un PowerUp cuando se presiona
+      un bot\xF3n de la interfaz de usuario.\n\nNota: Este componente debe ser agregado
+      al bot\xF3n que activar\xE1 el PowerUp."
+    category: 9
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 30a3d3c58dc925a46828befe436d20eb, type: 3}
+    description: "This component allows you to activate or deactivate an object by
+      pressing a button. You can use this component, for example, to close a window
+      by clicking on a button. \n\nNote 1: You must keep in mind that the object
+      can be activated or deactivated every time the button is pressed. \n\nNote
+      2: This component must be added to a buton on the user interface."
+    descriptionSpanish: "Este componente permite activar o desactivar un objeto cuando
+      se presiona el bot\xF3n. Puedes usar este componente, por ejemplo, para cerrar
+      una ventana al hacer clic en el bot\xF3n.\n\nNota 1: Debes tener en cuenta
+      que el objeto puede ser activado o desactivado cada vez que se presiona el
+      bot\xF3n.\n\nNota 2: Este componente debe ser agregado a un bot\xF3n de la
+      interfaz de usuario."
+    category: 17
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: fb93eaffc22ffe84ca0373c52f87262b, type: 3}
+    description: "This component allows you to end the level by pressing a button.
+      \nYou can define whether the player will win or lose from the \"What To Do\"
+      field. \n This component is generally used for the \"Continue\" window, on
+      the button to end the game. \n\nNote: This component must be added to a button
+      on the user interface."
+    descriptionSpanish: "Este componente permite finalizar el nivel al presionar
+      el bot\xF3n.\nDesde el campo de \"What to do\" puedes definir si el jugador
+      perder\xE1 o ganar\xE1 el nivel.\nEste componente es generalmente usado en
+      la ventana de \"Continuar\", en el bot\xF3n para terminar el juego.\n\nNota:
+      Este componente debe ser agregado a un bot\xF3n de la interfaz de usuario."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 9725651ed0c532a45bedac95d6ae11ae, type: 3}
+    description: "This component allows you to disable all of the child objects of
+      an object, and then enable only one of them. \n\nYou can use this component,
+      for example, on an item select screen where you can select between different
+      item categories to view each corresponding set of items. In cases like these,
+      the items must be child obejcts of a parent object, which would be the corresponding
+      category, and on the \"Parent of objects\" field you'd assign the object containing
+      all of the categories. This way pressing the button will deactivate all of
+      the categories, and activate only the corresponding one."
+    descriptionSpanish: "Este componente permite deshabilitar todos los objetos hijo
+      de un objeto y luego habilitar solo uno de ellos.\n\nPuedes usar este componente,
+      por ejemplo, en un una escena de selecci\xF3n de items d\xF3nde se seleccionan
+      categor\xEDas para ver los items correspondientes. En un caso como este, los
+      items deben estar como hijos de un objeto padre que ser\xEDa la categor\xEDa,
+      y cada categor\xEDa debe ser hija de otro objeto padre principal. Luego, en
+      cada bot\xF3n para seleccionar la categor\xEDa deber\xEDas a\xF1adir este componente
+      y asignar en el campo de \"Object to enable\" el objeto de la categor\xEDa
+      correspondiente, y en el campo de \"Parent of objects\" asignar el objeto que
+      contiene todas las categor\xEDas. De esta manera, al presionar el bot\xF3n
+      se desactivar\xE1n todas las categor\xEDas y se activar\xE1 \xFAnicamente la
+      categor\xEDa correspondiente."
+    category: 17
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 078dfccbb539e6b468716c326378924e, type: 3}
+    description: "This component is used on the \"Continue\" window to revive the
+      player at the press of the button. \n\nNote 1: The character wiill continue
+      according to how the GameOverManager was configured. \n\nNote 2: This component
+      must be added to a button on the user interface."
+    descriptionSpanish: "Este componente es usado en la ventana de \"Continuar\"
+      y permite revivir al jugador al presionar el bot\xF3n.\n\nNota 1: El personaje
+      continuar\xE1 seg\xFAn como se haya configurado en el componente de GameOverManager.\n\nNota
+      2: Este componente debe agregarse a un bot\xF3n de la interfaz de usuario."
+    category: 10
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: b699e81b4e2092841b4922c8bea4715f, type: 3}
+    description: "This component allows you to buy projectiles, or an amount of uses
+      for attacks, when pressing a button. \n\nNote 1: Remember that you can create
+      weapons from the \"Weapons\" window. \n\nNote 2: This component must be added
+      to a button on the user interface."
+    descriptionSpanish: "Este componente permite comprar proyectiles o cantidad de
+      ataques para cualquier arma al presionar el bot\xF3n.\n\nNota 1: Recuerda que
+      las armas son creadas desde la ventana de \"Weapons\".\n\nNota 2: Este componente
+      debe ser agregado a un bot\xF3n de la interfaz de usuario."
+    category: 13
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: cd0ebd8cccb6d5f41a742dac1c0d2572, type: 3}
+    description: "This component allows you to purchase a character by pressing a
+      button. \n\nNote: This component must be added to a button on the user interface."
+    descriptionSpanish: "Este componente permite comprar un personaje al presionar
+      el bot\xF3n.\n\nNota: Este componente debe ser agregado a un bot\xF3n de la
+      interfaz de usuario."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 82e073e35ecfb9644ae941ff5711907c, type: 3}
+    description: "This component allows you to buy an item for the character (such
+      as a hat, mask, pants, or any other type of clothing article they might wear.)
+      \n\nNote 1: The items can be bought must be added to the \"Character Costumes\"
+      tab of the \"Characters Manager\" component. \n\nNote 2: Use the \"CostumeItemInstantiator\"
+      component to define the position of the items in a category. \n\nNote 3: This
+      component must be added to a button on the user interface."
+    descriptionSpanish: "Este componente permite comprar un item para el personaje
+      (como un sombrero, m\xE1scara, pantalones o cualquier tipo de art\xEDculo que
+      pueda ponerse sobre el jugador).\n\nNota 1: Los items que pueden comprarse
+      deben estar agregados en la pesta\xF1a \"Character Costumes\" de la ventana
+      \"Characters Manager\".\n\nNota 2: Usa el componente \"CostumeItemInstantiator\"
+      para definir la posici\xF3n de los items de una categor\xEDa.\n\nNota 3: Este
+      componente debe ser agregado a un bot\xF3n de la interfaz de usuario."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: ae572fd583c32b948a9328689b4e63e1, type: 3}
+    description: "This component allows you to buy an amount of uses for a PowerUp.
+      \n\nNote: This component must be added to a button on the user interface.agregado
+      a un bot\xF3n de la interfaz de usuario."
+    descriptionSpanish: "Este componente permite comprar una cantidad de usos para
+      un PowerUp.\n\nNota: Este componente debe ser agregado a un bot\xF3n de la
+      interfaz de usuario."
+    category: 9
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 97da5d753a591ed44a555c047426fe4d, type: 3}
+    description: "This component allows you to buy a weapon when pressing a button.
+      \n\nNote 1: Remember that you can create weapons from the \"Weapons\" window.
+      \n\nNote 2: This component needs to be added to a button on the user interface."
+    descriptionSpanish: "Este componente permite comprar un arma al presionar el
+      bot\xF3n.\n\nNota 1: Recuerda que las armas son creadas desde la ventana de
+      \"Weapons\".\n\nNota 2: Este componente debe ser agregado a un bot\xF3n de
+      la interfaz de usuario."
+    category: 13
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 2ac77efdcf11fac4f946452fbc36ca0b, type: 3}
+    description: This component allows you to activate a PowerUp, or increase its
+      amount of uses, when an action occurs within the game.
+    descriptionSpanish: "Este componente permite activar un PowerUp o incrementar
+      la cantidad de usos cuando ocurre una acci\xF3n en el juego."
+    category: 9
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 22b01006e919a65439c7a09b655e60a2, type: 3}
+    description: "This component is used for scenes where you need to activate objects
+      depending on wheter a character is locked, unlocked, or if it is currently
+      select, such as a character select or purchase scene. it can be used, for example,
+      to enable a button to purchase the character in case it is locked, and enable
+      a button to select it if it has already been unlocked. \n\nNote: All of the
+      objects defined with the \"Locked,\" \"Unlocked,\" and \"Selected\" states
+      are deactivated when switching scenes, with only the ones appropriate to the
+      character's current state activating."
+    descriptionSpanish: "Este componente es usado en escenas donde necesites activar
+      objetos si un personaje est\xE1 bloqueado, desbloqueado o seleccionado, como,
+      por ejemplo, en la escena de compra o selecci\xF3n de personajes. Puede ser
+      usado, por ejemplo, para habilitar un bot\xF3n para comprar el personaje en
+      caso de que est\xE9 bloqueado, y habilitar un bot\xF3n para seleccionarlo si
+      est\xE1 desbloqueado.\n\nNota: Todos los objetos definidos en los estados de
+      \"Locked\", \"Unlocked\" y \"Selected\", son desactivados al iniciar la escena
+      y se activan \xFAnicamente los objetos definidos para el estado actual del
+      personaje."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: cca5081eeca22a347a64a3487764e0e8, type: 3}
+    description: "This component instantiates the selected item for the player in
+      a specific category. the item is instantiated in the position of the object
+      with this component. \n\nNote 1: Remember that the position of the item is
+      relative for the pivot of its sprite. To change the position of the pivot of
+      the sprites of items, you can simply click on the \"Pivot Editor For Sprites.\"
+      \n\nNote2: Keep from moving the position of the object with this component,
+      and only change the pivot of the items to define their positions."
+    descriptionSpanish: "Este componente instancia el item seleccionado por el jugador
+      de una categor\xEDa espec\xEDfica. El item es instanciado en la posici\xF3n
+      del objeto con este componente.\n\nNota 1: Recuerda que la posici\xF3n del
+      item instanciado es relativa al pivote de su sprite. Para cambiar la posici\xF3n
+      del pivote de los sprites de los items, puedes hacerlo haciendo click en \"Pivot
+      Editor For Sprites\".\n\nNota 2: Evita mover la posici\xF3n del objeto con
+      este componente, cambia \xFAnicamente la posici\xF3n del pivote de los items
+      para definir sus posiciones."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 893fff1ad33860a49b2893fa3423a420, type: 3}
+    description: 'This component allows you to rotate an object on the X, Y or Z
+      axis, from the moment an action in the game is activated. It can be used so
+      that an object rotates constantly from the moment an action is activated, or
+      while an action is being executed. For example, while an object with a specific
+      tag is in contact with the object. '
+    descriptionSpanish: "Este componente permite rotar un objeto sobre el eje X,
+      Y o Z desde que una acci\xF3n en el juego es activada. Puede ser usado para
+      que un objeto rote constantemente desde que se activa una acci\xF3n o mientras
+      que una acci\xF3n es ejecutada, como por ejemplo, mientras un objeto con un
+      tag espec\xEDfico est\xE1 en contacto con el objeto."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 7060603036fec464ebd2f238d671ce59, type: 3}
+    description: "This component is mainly used for objects which have a high value
+      within the game, which need to be destroyed when loading the scene if they've
+      already been obtained before in another sesion of the game. For example, it
+      can be used for diamonds or special chests. \n\nNote: Don't use this component
+      for objects that are instantiated on the scene, since this component will verify
+      whether the object has been obtained before using the object's initial position,
+      the name of the current scene, and the name of the object."
+    descriptionSpanish: "Este componente es principalmente usado para objetos de
+      alto valor en el juego, los cuales deben ser destruidos al cargar la escena
+      si ya fueron obtenidos con anterioridad en otra sesi\xF3n de juego. Por ejemplo,
+      puede ser usado para Diamantes o cofres con muchas monedas.\n\nNota: Evite
+      usar este componente para objetos que son instanciados en la escena, debido
+      a que el componente verifica si el objeto ya fue obtenido antes dependiendo
+      de la posici\xF3n inicial del objeto, del nombre de la escena actual y del
+      nombre del objeto."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 2bf066b1ca5c6244e857c56e718bc162, type: 3}
+    description: "This component is necessary in order for the player to be able
+      to get off the mount. When adding this component you'll be able to choose which
+      input will be used for the player to dismount. \n\nNote: Add this component
+      to the mount or one of its child objects."
+    descriptionSpanish: "Este componente es necesario para desmontar el jugador cuando
+      est\xE1 sobre una montura. Al agregar este componente puedes seleccionar un
+      Input con el cual el jugador puede desmontarse (salir) de la montura.\n\nNota:
+      Agrega este componente a la montura o a uno de sus objetos hijo."
+    category: 6
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 3e36820898e85054fa1bca48af3c31ba, type: 3}
+    description: This component allows you to define an object as an enemy. This
+      component basically manages the states of the enemy, and it allows you to use
+      other components for animation, sound, health, A.I., etc...
+    descriptionSpanish: "Este componente te permite definir un objeto como un enemigo.
+      B\xE1sicamente, este componente gestiona los estados del enemigo y te permite
+      usar otros componentes como los de animaci\xF3n, sonido, salud, inteligencia
+      artificial, etc..."
+    category: 15
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: bc318525d500b4c48b08edac63481b5b, type: 3}
+    description: With this component you can define the health of the enemy, and
+      you can also optionally define UI elements where the enemy's current health
+      will be displayed.
+    descriptionSpanish: "Con este componente puedes definir la salud que tendr\xE1
+      el enemigo y opcionalmente tambi\xE9n puedes definir los elementos de la interfaz
+      de usuario d\xF3nde se mostrar\xE1 la salud actual."
+    category: 15
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 449d3a92578e23e4baa6428e87dc32fa, type: 3}
+    description: This component allows you to reduce the enemy's health when an action
+      occurs. Like, for example, when an object collides with the enemy.
+    descriptionSpanish: "Este componente permite reducir la salud de un enemigo cuando
+      ocurre una acci\xF3n, como por ejemplo, cuando el objeto colisiona con el enemigo."
+    category: 15
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 5083c3a9a3af2714c8a8de25e499d0c6, type: 3}
+    description: "This component allows you to define the sounds that need to be
+      played when a specific condition is met regarding an enemy's state. \n\nNote:
+      The obejcts with this component can be saved as prefabs, and the \"AudioSource\"
+      reference on the scene won't be lost."
+    descriptionSpanish: "Este componente te permite definir los sonidos que deben
+      reproducirse cuando se cumple una condici\xF3n definida por los estados de
+      un enemigo.\n\nNota: Los objetos con este componente pueden ser guardados como
+      prefab y no se perder\xE1 la referencia del AudioSource en la escena."
+    category: 3
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: f57612226f0225342846637feaf01fd7, type: 3}
+    description: "This component allows you to define the objects of the user interface
+      that will be enabled when the player wins or loses. You can define whether
+      the player can continue after dying or not, and you can also define the components
+      that will be deactivated when the player wins or loses. \n\nNote: This component
+      must be added to all the level scenes."
+    descriptionSpanish: "Con este componente puedes definir los objetos de la interfaz
+      de usuario que se habilitar\xE1n cuando el jugador gana o pierde el nivel,
+      puedes definir si el jugador puede continuar luego de morir, y tambi\xE9n puedes
+      definir los componentes que se deben desactivar en el jugador cuando gana o
+      pierde.\n\nNota: Este componente debe ser agregado en todas las escenas de
+      nivel."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 8a650b5bf34abac4990df635a33c0fab, type: 3}
+    description: "This component allows you to set a time limit for the player to
+      beat the level. \nFrom the \"What to do if time ends\" field you can define
+      whether the player will win or lose, and if a portion of their health will
+      be deducted. \nOptionally you can also save the time as a score, and that way
+      display the best completion time of each stage. \n\nNote 1: If you'd like to
+      use a progressive time score, you can use the ProgressiveTimeScore component.
+      \n\nNote 2: Remember that you can use the ShowScore component to display the
+      corresponding score."
+    descriptionSpanish: "Este componente te permite limitar el tiempo de juego para
+      el jugador.\nDesde el campo de \"What to do if time ends\" puedes definir si
+      el jugador ganar\xE1, perder\xE1, o si s\xF3lo se reducir\xE1 una parte de
+      la salud.\nAdem\xE1s, opcionalmente tambi\xE9n puedes guardar el tiempo como
+      una puntuaci\xF3n, y de esta manera puedes mostrar el mejor tiempo obtenido
+      en el nivel.\n\nNota 1: Si deseas usar una cuenta progresiva, puedes usar el
+      componente ProgressiveTimeScore.\n\nNota 2: Recuerda que puedes usar el componente
+      ShowScore para mostrar la puntuaci\xF3n correspondiente."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 9306f44d277a7264eb97ed575b8a735e, type: 3}
+    description: "This component allows you to increase the time left on the GameCountdown
+      component when an action occurs. \nYou can use this component to give the player
+      a time bonus."
+    descriptionSpanish: "Este componente permite incrementar el tiempo del componente
+      GameCountdown cuando ocurre una acci\xF3n.\nPuedes usar este componente para
+      darle una bonificaci\xF3n de tiempo al jugador."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: f892e976b0cc46d449aaff9d1fa7fc01, type: 3}
+    description: "This component allows you to add a progressive time count up to
+      the level. This time can be used as a score to display the best completion
+      time of the level. \nTime starts at 0 from the moment the specified condition
+      is met, and it pauses while another specific condition is met. \n\nNote 1:
+      You must keep in mind that while the condition to pause the timer isn't being
+      met, the timer will continue to count up normally. For example, the \"Player
+      Has Finished The Level\" and \"Player Has Lost The Level\" states are true
+      when the player loses the level, but are back to being false as soon as the
+      player continues and revives. \n\nNote 2: Remember that you cna use the ShowScore
+      component to display the corresponding score. \n\nNote 3: If you'd like to
+      add a regresive countdown to the level, use the GameCountdown component. "
+    descriptionSpanish: "Este componente permite agregar una cuenta progresiva en
+      el nivel. Esta cuenta progresiva puede ser usada para guardar el tiempo como
+      un score y mostrar el mejor tiempo obtenido en el nivel.\nEl tiempo inicia
+      desde 0 desde que una condici\xF3n se cumple, y se pausa mientras una condici\xF3n
+      se cumple.\n\nNota 1: Debes tener en cuenta que mientras la condici\xF3n para
+      pausar el contador no se cumple, el contador seguir\xE1 contando normalmente.
+      Por ejemplo, los estados \"Player Has Finished The Level\" y \"Player Has Lost
+      The Level\" son verdaderos cuando el jugador pierde el nivel, pero vuelven
+      a ponerse falsos cuando el jugador contin\xFAa y revive.\n\nNota 2: Recuerda
+      que puedes usar el componente ShowScore para mostrar la puntuaci\xF3n correspondiente.\n\nNota
+      3: si lo que quieres es agregar una cuenta regresiva al nivel, usa el componente
+      GameCountdown."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 61d9918d7e213a14ca22f055dd6b9e0f, type: 3}
+    description: "This component allows you to define the movement for an enemy in
+      a platform game. With this component you can make the enemy move constantly,
+      chase after an objective, jump or turn around after detecting an obstacle,
+      and more. \n\nNote 1: You can see the actions the enemy will take depending
+      on how you configure the component on the \"Current Algorithm\" area. \n\nNote
+      2: If the enemy is going to chase an objective, it'll need the \"TargetDetector\"
+      component in order to detect it. The \"TargetDetector\" component looks for
+      objectives in a specific layer, so you'll need to make sure that the objective
+      is a part of the specified layer."
+    descriptionSpanish: "Este componente te permite definir c\xF3mo ser\xE1 el movimiento
+      de un enemigo para un juego de tipo side-scrolling. Con este componente puedes
+      hacer que el enemigo camine constantemente, que persiga un objetivo, que salte
+      o se devuelva al detectar obst\xE1culos y m\xE1s.\n\nNota 1: Desde el \xE1rea
+      de \"Current Algorithm\" puedes ver las acciones que realizar\xE1 el enemigo
+      dependiendo de c\xF3mo configures el componente.\n\nNota 2: Si el enemigo va
+      a perseguir alg\xFAn objetivo, es necesario agregar el componente TargetDetector,
+      el cual permite detectar un objetivo. El componente TargetDetector busca los
+      objetivos dependiendo de su Layer, as\xED que debes asegurarte de que el objetivo
+      tenga el Layer especificado."
+    category: 15
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 144c5d3d27033af4c88879da15813cd7, type: 3}
+    description: "This component allows you to configure an enemy so it'll chase
+      after an objective. \n\nNote 1: If the enemy is going to chase an objective,
+      it'll need the \"TargetDetector\" component in order to detect it. The \"TargetDetector\"
+      component looks for objectives in a specific layer, so you'll need to make
+      sure that the objective is a part of the specified layer. \n\nNote 2: This
+      component won't detect obstacles of any kind, so only use it if you'd like
+      to make ghost-type enemies that are able to go through colliders. \n\nNote
+      3: If you'd like to make a ghost enemy that CAN detect and evade obstacles,
+      use the EnemyPathFindingAI component."
+    descriptionSpanish: "Este componente te permite configurar un enemigo para que
+      persiga alg\xFAn objetivo.\n\nNota 1: Para usar este componente es necesario
+      agregar el componente TargetDetector, el cual permite detectar un objetivo.
+      El componente TargetDetector busca los objetivos dependiendo de su Layer, as\xED
+      que debes asegurarte de que el objetivo tenga el Layer especificado.\n\nNota
+      2: Este componente no detecta obst\xE1culos de ning\xFAn tipo, usa este componente
+      \xFAnicamente si deseas hacer enemigos tipo fantasma que puedan atravesar Colliders.\n\nNota
+      3: Si deseas hacer un enemigo fantasma que pueda detectar y evadir obst\xE1culos,
+      usa el componente EnemyPathfindingAI."
+    category: 15
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 4813668544023aa47bb2791499469ff1, type: 3}
+    description: This component allows an object to ignore collisions between the
+      object that has this component and objects in specific layers or with specific
+      tags. It can be used, for example, so that the player and enemies don't collide.
+    descriptionSpanish: "Este componente permite que un objeto ignore las colisiones
+      entre el objeto al que se le agrega el componente y una lista de Tags o Layers
+      espec\xEDficos. Puede ser usado, por ejemplo, para que el jugador y los enemigos
+      no colisionen entre s\xED."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: d06f77c5388afa043a83d2a9e5272806, type: 3}
+    description: "This component allows objects with a Rigidbody2D to move more slowly
+      while within the collider's area. Also, if the player or mount has the PlayerJump
+      component, the \"Unlimited Jumps\" option will be automatically enabled while
+      the object is within the collider. \n\nNote: If you'd like to make objects
+      float, you must use the BuoyancyEffector2D component. \n\nNote 2: If you'd
+      like to create 2D water that reacts with physics, you can use the Water2D component."
+    descriptionSpanish: "Este componente permite que los objetos con un Rigidbody2D
+      se muevan m\xE1s lento mientras est\xE1n dentro del \xE1rea del Collider. Adem\xE1s,
+      si el jugador o una montura tienen el componente de PlayerJump, se habilitar\xE1
+      la opci\xF3n de \"Unlimited Jumps\" mientras el objeto est\xE1 dentro del Collider.\n\nNota
+      1: Si deseas hacer que los objetos floten, debes usar el componente de BuoyancyEffector2D\n\nNota
+      2: Si deseas crear agua 2D que reaccione a las f\xEDsicas, puedes usar el componente
+      de Water2D."
+    category: 12
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: d93816c556d49894bbfa97f503722d95, type: 3}
+    description: With this component you can instantiate GameObjects on the scene
+      when or while the player presses an input, as well as when an object with a
+      specific tag is colliding with the object, and the player presses an input. 
+      You can also define for how long an object will remain on the scene, and the
+      maximum amount of objects which can be instantiated.
+    descriptionSpanish: "Con este componente puedes instanciar GameObjects en la
+      escena cuando/mientras el jugador presiona un input, o mientras un objeto con
+      un Tag espec\xEDfico est\xE1 colisionando con el objeto y el jugador presiona
+      un input. Adem\xE1s, puedes definir el tiempo que pueden permanecer los objetos
+      en la escena y la cantidad m\xE1xima de objetos que se pueden instanciar."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: cb840b45faa254f4e9de666112617b68, type: 3}
+    description: "This component is used for scenes where you need to activate objects
+      depending on if an item for the character is locked, unlocked or is currently
+      selected, such as an item selection or purchase scene. You can use it, for
+      example, to enable a button to purchase the item in case it's locked, and enable
+      a button to select it once it has been unlocked. \n\nNote 1: All of the objects
+      defined with the \"Locked,\" \"Unlocked\" and \"Selected\" states will be disabled
+      at the start of the scene, with only the ones appropriate to the item's current
+      status being enabled. \n\nNote 2: This component only works for items defined
+      on the \"Costume Items\" tab of the \"Characters Manager\" window. To manage
+      objects depending on the state of a weapon, you can use the \"WeaponsBox\"
+      component."
+    descriptionSpanish: "Este componente es usado en escenas donde necesites activar
+      objetos si un item del personaje est\xE1 bloqueado, desbloqueado o seleccionado,
+      como, por ejemplo, en la escena de compra o selecci\xF3n de items. Puede ser
+      usado, por ejemplo, para habilitar un bot\xF3n para comprar el item en caso
+      de que est\xE9 bloqueado, y habilitar un bot\xF3n para seleccionarlo si est\xE1
+      desbloqueado.\n\nNota 1: Todos los objetos definidos en los estados de \"Locked\",
+      \"Unlocked\" y \"Selected\", son desactivados al iniciar la escena y se activan
+      \xFAnicamente los objetos definidos para el estado actual del item.\n\nNota
+      2: Este componente funciona \xFAnicamente para los items definidos en la pesta\xF1a
+      \"Costume Items\" de la ventana \"Characters Manager\". Para gestionar objetos
+      seg\xFAn el estado de un arma, puedes usar el componente \"WeaponBox\"."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 6de938872fd789547ab2762ad84ecfc2, type: 3}
+    description: This component is added or eliminated automatically from the character
+      while they use the "Jetpack" PowerUp. But it must be added manually if you'd
+      like the character to fly as if they were using a jetpack.
+    descriptionSpanish: "Este componente es agregado o eliminado autom\xE1ticamente
+      del personaje cuando usa el PowerUp de Jetpack, pero puede ser agregado manualmente
+      si deseas que el personaje vuele como si usara un Jetpack."
+    category: 9
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: c4a239a4fd0bbb6469d799b33b29253e, type: 3}
+    description: "This component allows the player to move over the area of the collider
+      while in contact with the object. \n\nNote: It needs to be a \"Trigger\" type
+      collider."
+    descriptionSpanish: "Este componente permite que el jugador pueda moverse por
+      el \xE1rea del Collider mientras est\xE1 en contacto con el objeto.\n\nNota:
+      El Collider debe ser de tipo Trigger."
+    category: 7
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 619a9fe0c12f3014585667b34e94a313, type: 3}
+    description: "This component is used for scenes where you need to activate objects
+      according to the current state of a level, like for example, a level select
+      screen. This component allowsy ou to define the objects which will be activated
+      when a specific level is locked, unlocked, or if has been beaten before. \n\nNote:
+      All of the objects defined with the \"Locked,\" \"Unlocked,\" and \"Cleared\"
+      states will be deactivated at at the start of the scene, with only the ones
+      appropriate to the current state of the level activating."
+    descriptionSpanish: "Este componente es usado en escenas donde necesites activar
+      objetos seg\xFAn el estado actual de un nivel, como, por ejemplo, en la escena
+      de selecci\xF3n de nivel. Este componente permite definir los objetos que se
+      activar\xE1n cuando un nivel espec\xEDfico est\xE1 bloqueado, desbloqueado
+      o ganado.\n\nNota: Todos los objetos definidos en los estados de \"Locked\",
+      \"Unlocked\", y \"Cleared\", son desactivados al iniciar la escena y se activan
+      \xFAnicamente los objetos definidos para el estado actual del nivel."
+    category: 11
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 00ef61afd39d3dd408b0e1aafc04d627, type: 3}
+    description: This component allows you to display the current trajectory of any
+      object on the scene with a vertical or horizontal line on the user interface.
+      You can use this component, for example, to display the player's trayectory
+      on the level.
+    descriptionSpanish: Este componente te permite mostrar el recorrido actual de
+      cualquier objeto en la escena en una linea vertical u horizontal de la interfaz
+      de usuario. Puedes usar este componente, por ejemplo, para mostrar el trayecto
+      del jugador en el nivel.
+    category: 17
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 8853ce5e42d115644a57ffa567c577ef, type: 3}
+    description: "This component allows you to load a level or scene when a button
+      is pressed. \n\nNote: This component must be added to a button on the user
+      interface."
+    descriptionSpanish: "Este componente permite cargar un nivel o escena cuando
+      el bot\xF3n es presionado.\n\nNota: Este componente debe agregarse a un bot\xF3n
+      de la interfaz de usuario."
+    category: 11
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 42f338fd29ee1c641ab6c22bb5188e05, type: 3}
+    description: "This component allows an object to rotate toward a specific objective.
+      \n\nNote: To use this component, the TargetDetector component is also needed,
+      which allows the object to detect another object. The TargetDetector component
+      looks for objectives depending on their layer, so you'll have to make sure
+      that the objective is in the specified layer."
+    descriptionSpanish: "Este componente permite que un objeto rote hacia un objetivo
+      espec\xEDfico.\n\nNota: Para usar este componente es necesario agregar el componente
+      TargetDetector, el cual permite detectar un objetivo. El componente TargetDetector
+      busca los objetivos dependiendo de su Layer, as\xED que debes asegurarte de
+      que el objetivo tenga el Layer especificado."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 2984529ee16c6aa4a9daf8be0365e31e, type: 3}
+    description: "This component allows you to activate an input when a button is
+      pressed. \n\nNote: This component must be added to a button on the user interface."
+    descriptionSpanish: "Este componente permite activar un Input cuando se presiona
+      el bot\xF3n.\n\nNota: Este componente debe ser agregado a un bot\xF3n de la
+      interfaz de usuario."
+    category: 17
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: fe9073328e5a88748a443cde59dc603e, type: 3}
+    description: This component allows you to define a GameObject as a mount for
+      the player.
+    descriptionSpanish: Este componente permite definir un GameObject como una montura
+      para el jugador.
+    category: 6
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 5186c000429fa0c42b6b556f78f8834c, type: 3}
+    description: "This component allows you to define the health of a mount and the
+      user interface where it'll be displayed. \n\nNote: If the mount loses all its
+      health, the player will automatically dismount."
+    descriptionSpanish: "Este componente permite definir la salud de una montura
+      y la interfaz de usuario donde se mostrar\xE1.\n\nNota: Si la montura pierde
+      toda su salud, el jugador ser\xE1 desmontado autom\xE1ticamente."
+    category: 6
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 427051263cb833043afa774deec8810a, type: 3}
+    description: "Add this component to moving platforms. This component allows you
+      to make  that objects ontop of the platform stay on it. \n\nNote 1: Keep in
+      mind that this component will only work to keep objects from falling from the
+      moving platform. In order to make a moving platform in the first place, you
+      can use the PathFollower component. \n\nNote 2: If you have a 2D game, remember
+      that you can use the PlatformEffector2D component so that the player can go
+      up through the bottom of the platform."
+    descriptionSpanish: "Agrega este componente a las plataformas m\xF3viles. Este
+      componente te permite mantener sobre la plataforma a los objetos que se paran
+      sobre ella.\n\nNota 1: Debes tener en cuenta que este componente sirve \xFAnicamente
+      para evitar que los objetos caigan de la plataforma mientras est\xE1 en movimiento.
+      Para hacer una plataforma m\xF3vil puedes usar el componente de PathFollower.\n\nNota
+      2: Si tu juego es 2D, recuerda que puedes usar el componente de PlatformEffector2D
+      para que el jugador pueda pasar por debajo de la plataforma."
+    category: 7
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 9d8b7d6925519f8408b27768b4848f99, type: 3}
+    description: This component allows you to detect colliders (3D) and is solely
+      used for the PlatformerEnemyMovementAI component, in order for it to detect
+      obstacles.
+    descriptionSpanish: "Este componente le permite detectar Colliders (3D) y es
+      usado \xFAnicamente por el componente SideScrollingEnemyMovementAI para detectar
+      obst\xE1culos."
+    category: 15
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 96448c4cdef9d884aa8323e7e85af9d6, type: 3}
+    description: "This component allows the player to stick to a collider, as if
+      jumping off a wall. This compnent adds a forze on the X and/or Y axis when
+      the jump input is pressed. You can also define the speed with which the character
+      will slide down the collider. \n\nNote: To use this component, you'll first
+      need to give the player the PlayerJump component."
+    descriptionSpanish: "Este componente permite que el jugador pueda saltar sobre
+      un Collider al estilo parkour. Este componente agrega una fuerza sobre el eje
+      X y/o Y cuando se presiona el Input para salto. Adem\xE1s, puedes definir la
+      velocidad con la que el personaje puede deslizarse por el Collider.\n\nNota:
+      Para usar este componente es necesario que el jugador tenga el componente de
+      PlayerJump."
+    category: 7
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 31e8f20c5eeac5c44bbf9744c6634711, type: 3}
+    description: "This component allows you to define points on the scene to create
+      a route with straight or curved lines, so that one or multilple objects may
+      follow said route. This component offers multiple options to define diferent
+      characteristics of the objects moving along the route. For example, you can
+      define the speed of the object, you can make it to rotate and face the next
+      point it needs to go to,  or make it rotate depenidng on the curve of the line.
+      You can also decide when the movement of the objects will trigger, for example:
+      when the game starts, while a colision occurs, while the player is in contact
+      with the object, while an input is being pressed, or even with a score condition.
+      \n\nNote: If you'd like to mamabge objects depenind on the state of the objects
+      on the route, you can use the HandleObjectsWithPathFollowerStates component."
+    descriptionSpanish: "Este componente te permite definir puntos en la escena para
+      crear una ruta de seguimiento con l\xEDneas rectas o curvas, para que uno o
+      m\xFAltiples objetos sigan el camino especificado. Este componente te ofrece
+      m\xFAltiples opciones para que puedas definir diferentes caracter\xEDsticas
+      para los objetos que se mover\xE1n por la ruta. Por ejemplo, puedes definir
+      la velocidad, puedes definir si deseas que el objeto rote para que mire hacia
+      el siguiente punto o si quieres que rote seg\xFAn la curvatura de la l\xEDnea.
+      Adem\xE1s, puedes definir en qu\xE9 momento se activar\xE1 el movimiento de
+      los objetos, por ejemplo: Desde que inicia el juego, cuando ocurre una colisi\xF3n,
+      mientras el jugador permanece en contacto con el objeto, cuando se presiona
+      un input, o incluso con una condici\xF3n de puntuaci\xF3n.\n\nNota: si deseas
+      gestionar objetos dependiendo del estado de alguno de los objetos en la ruta,
+      puedes usar el componente de HandleObjectsWithPathFollowerStates."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 2a420ff8fe4c67a42b7d0e9841ea3584, type: 3}
+    description: "This component allows you to add speed to objects in contact with
+      this object's collider. From the \"Tags\" area you can define the tags of the
+      objects which will be affected by this platform. \n\nNote: If you're creating
+      a platform game, it's recommeneded that you use this component instead of the
+      SurfaceEffector2D component, since the SpeedPlatform component is designed
+      to work correctly with the rest of the UGame Studio components."
+    descriptionSpanish: "Este componente permite agregar velocidad a los objetos
+      que est\xE9n en contacto con el Collider del objeto. Desde el \xE1rea de los
+      Tags puedes definir los tags de los objetos a los que se les aplicar\xE1 la
+      velocidad.\n\nNota: Si est\xE1s creando un juego de plataformas, es recomendable
+      usar este componente en vez del SurfaceEffector2D, ya que el componente de
+      SpeedPlatform est\xE1 dise\xF1ado para funcionar correctamente con los dem\xE1s
+      componentes de UGame Studio."
+    category: 7
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 4dd61054fddcabe44b923e7109791e1d, type: 3}
+    description: This component allows you to increase the max health points or lives
+      of the player when a specific action occurs, such as when the player collides
+      with the object.
+    descriptionSpanish: "Este componente permite incrementar la salud o las vidas
+      del jugador cuando ocurre una acci\xF3n, como por ejemplo, cuando el jugador
+      colisiona con el objeto."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: c3f2ea8efc51336478de50c0b684d707, type: 3}
+    description: This component allows you to reduce the player's health when an
+      action occurs, such as when the player collides with the object.
+    descriptionSpanish: "Este componente permite reducir la salud del jugador cuando
+      ocurre una acci\xF3n, como por ejemplo, cuando el jugador colisiona con el
+      objeto."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: f2a5dd60154293143b53ab06ecf22da6, type: 3}
+    description: This component allows you to activate a PowerUp for a whole level,
+      from beginning to end.
+    descriptionSpanish: Este componente permite activar un PowerUp durante todo el
+      nivel, desde que el nivel inicia.
+    category: 9
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 1e9154567be6ada43a0f088a99690758, type: 3}
+    description: "This component pushes the button to which this component was added
+      when an input is activated by the player. This component is generally used
+      to activate buttons on the used interface with the keyboard. \n\nNote: This
+      component must be added to a button on the user interface."
+    descriptionSpanish: "Este componente \"presiona\" el bot\xF3n al que se le a\xF1ade
+      este componente cuando un Input es activado por el jugador. Este componente
+      es generalmente usado para activar botones de la interfaz de usuario con el
+      teclado.\n\nNota: Este componente debe ser agregado a un bot\xF3n de la interfaz
+      de usuario."
+    category: 17
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 706b83ebdf308624f8de3e589e5d41f1, type: 3}
+    description: This component allows you to increase the player's score when an
+      action occurs. You can increase the player's score when a collision occurs,
+      with the press of an input while the player is within a collider, when an enemy
+      dies, when an object with the ObjectHealth component is destroyed, or by clicking
+      on the object.
+    descriptionSpanish: "Este componente permite incrementar la puntuaci\xF3n del
+      jugador cuando ocurre una acci\xF3n. Puedes incrementar la puntuaci\xF3n del
+      jugador cuando ocurre una colisi\xF3n, presionando un input mientras el jugador
+      est\xE1 dentro del collider, cuando un enemigo muere, cuando un objeto con
+      el componente de ObjectHealth es destruido, o al hacer clic en el objeto."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 305626a76b2de244182de53eaa8b926d, type: 3}
+    description: "This component allows you to define the action of the player riding
+      the mount. \n\nNote 1: This component must be added to a child object of the
+      mount. \n\nNote 2: The position of the object with this component is the position
+      where the player will be riding the mount."
+    descriptionSpanish: "Este componente te permite definir la acci\xF3n de c\xF3mo
+      el jugador subir\xE1 sobre la montura.\n\nNota 1: Este componente debe ser
+      agregado a un objeto hijo de la montura.\n\nNota 2: La posici\xF3n del objeto
+      con este componente es la posici\xF3n d\xF3nde se posicionar\xE1 el jugador."
+    category: 6
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: ade3d114b4bbcba4894c1cce4e188295, type: 3}
+    description: "This component allows you to define an object as a save point,
+      which will subsequently be used as a spawn point for the player to continue
+      from after dying. From the \"How To Save\" field you can define the method
+      with which the player will be able to save. \n\nNote: To use this component
+      you'll need to select the \"Continue From Save Point\" option on the GameOverManager
+      component.  "
+    descriptionSpanish: "Este componente permite definir un objeto como un punto
+      de guardado, que posteriormente ser\xE1 usado para hacer aparecer al jugador
+      en este punto cuando contin\xFAe luego de morir. Desde el campo de \"How to
+      save\" debes definir el m\xE9todo con el que el jugador podr\xE1 guardar el
+      punto.\n\nNota: Para usar este componente, debes haber seleccionado la opci\xF3n
+      de \"Continue From Save Point\" desde el componente de GameOverManager."
+    category: 10
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: dd8fb671058272240b7c219c0215fde5, type: 3}
+    description: "This component allows you to rotate the texture assigned to the
+      RawImage component (of the user interface.) With this component you can rotate
+      the texture constantly, depending on the position of the character, or depending
+      on the movement of the camera. \n\nNote: In order for the texture to be able
+      to scroll, you'll need to select the \"Repeat\" option for the texture on the
+      Wrap Mode field. \n\nNote 2: If you'd like to make backgrounds with the Parallax
+      Scrolling effect, it's recommended that you use the ScrollTexture component,
+      since this component only works with the RawImage component of the user interface.
+      Use this component (ScrollRawImage) only if you'd like to scroll a texture
+      from the user interface."
+    descriptionSpanish: "Este componente permite rotar la textura asignada en el
+      componente de RawImage (de la interfaz de usuario). Con este componente puedes
+      hacer rotar la textura constantemente, dependiendo de la posici\xF3n del personaje
+      o dependiendo del movimiento de la c\xE1mara.\n\nNota: Para que la textura
+      pueda hacer scroll, debes seleccionar en las opciones de la Textura la opci\xF3n
+      de Repeat en el campo de Wrap Mode.\n\nNota 2: si deseas hacer fondos con efecto
+      Parallax Scrolling es recomendable usar el componente de TextureScroller, debido
+      a que este componente \xFAnicamente funciona en el componente de RawImage de
+      la interfaz de usuario. Usa este componente (RawImageScroller) \xFAnicamente
+      en caso de que quieras hacer scroll a una textura de la interfaz de usuario."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: a0d49b83d8158f24fa09c3bb7e7ce7c3, type: 3}
+    description: "This component allows you to select a character by pressing a button.
+      \n\nNote 1: Keep in mind that you must use the \"PlayerActivator\" component
+      to instantiate the character when the scene starts. \n\nNote 2: This component
+      must be added to a button on the user interface."
+    descriptionSpanish: "Este componente permite seleccionar un personaje al presionar
+      el bot\xF3n.\n\nNota 1: Recuerda que debes usar el componente \"PlayerActivator\"
+      para instanciar el personaje correspondiente cuando la escena inicia.\n\nNota
+      2: Este componente debe ser agregado a un bot\xF3n de la interfaz de usuario."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 2f2dcee2f46946449a5fde0403afd252, type: 3}
+    description: "This component allows you to select one or various items to press
+      by pressing a button. \n\nNote 1: This componet only works for items defined
+      on the \"Costume Items\" tab of  the \"Characters Manager\" tab. \n\nNote 2:
+      This component must be added to a button on the user interface."
+    descriptionSpanish: "Este componente permite seleccionar uno o varios items al
+      presionar el bot\xF3n.\n\nNota 1: Este componente funciona \xFAnicamente para
+      los items definidos en la pesta\xF1a \"Costume Items\" de la ventana \"Characters
+      Manager\".\n\nNota 2: Este componente debe ser agregado a un bot\xF3n de la
+      interfaz de usuario."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 934e30aa590f7cb4e95ac48da421cefc, type: 3}
+    description: "This component allows you to select a weapon when pressing a button.
+      \n\nNote: This component needs to be added to a button on the user interface."
+    descriptionSpanish: "Este componente permite seleccionar un arma al presionar
+      el bot\xF3n.\n\nNota: Este componente debe ser agregado a un bot\xF3n de la
+      interfaz de usuario."
+    category: 13
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: cbf6da6d2f5e8a14bbe38adc204d354c, type: 3}
+    description: "This component allows you to display text on the user interface
+      to display the PowerUp's max use time to the player. This component is mainly
+      used for the PowerUp enhancing scene, where the player is able to enhance their
+      PowerUps. \n\nNote 1: Remember that this component must be added to an object
+      with the \"Text\" component on the user interface. \n\nNote 2: You must keep
+      in mind that this component won't show the PowerUp's remaining use time while
+      you're using it. To display this value you'll need to use the PlayerPowerUpsManager
+      component."
+    descriptionSpanish: "Este componente permite mostrar en un Texto de la interfaz
+      de usuario el tiempo m\xE1ximo por el que puede usarse un PowerUp. Este componente
+      es principalmente usado para la escena d\xF3nde se mejora el tiempo de uso
+      de los PowerUps.\n\nNota 1: Recuerda que este componente debe agregarse a un
+      objeto con el componente de Text en la interfaz de usuario.\n\nNota 2: Debes
+      tener en cuenta que este componente no muestra el tiempo restante del PowerUp
+      que el jugador est\xE1 usando. Para mostrar el tiempo restante de un PowerUp,
+      debes hacerlo desde el componente PlayerPowerUpsManager."
+    category: 9
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 7b8ba4982b1620744bc8660bc4b34fef, type: 3}
+    description: "This component can be used to display simple messages when an action
+      is activated. For example, when a collision with an object happens, or while
+      an object is in contact with this one. \n\nNote: If you'd like to create a
+      system of dialogues, or use more complete actions, use the DialogueManager
+      component."
+    descriptionSpanish: "Este componente puede ser usado para mostrar mensajes simples
+      cuando una acci\xF3n es activada, como por ejemplo cuando se activa una colisi\xF3n
+      con un objeto, o mientras un objeto permanece en contacto con este.\n\nNota:
+      si deseas crear un sistema de di\xE1logos o usar acciones m\xE1s completas,
+      usa el componente DialogueManager."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 471a0e886f9406244a16d4eeeaff2ac9, type: 3}
+    description: This component allows you to enable, disable, or destroy an object,
+      depending on the platform the game is running in. For example, it can be used
+      to enable an object only for Android and iOS, but not for other platforms.
+    descriptionSpanish: "Este componente permite habilitar, deshabilitar o destruir
+      un objeto dependiendo de la plataforma en que se est\xE1 ejecutando el juego.
+      Por ejemplo, puedes usarlo para habilitar un objeto \xFAnicamente en Android
+      y iOS, pero no en el resto de las plataformas."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 0ccc6d435fdc663408fc82de2fd6bcfb, type: 3}
+    description: This component allows you to display the player's current score,
+      the best score for a level, or the total score (for a score such as coins.)
+      It can also enable objects depending on the player's score, such as stars that
+      light up when reaching certain score thresholds.
+    descriptionSpanish: "Este componente permite mostrar la puntuaci\xF3n actual,
+      la mejor puntuaci\xF3n o el total acumulado de una puntuaci\xF3n (como las
+      monedas). Tambi\xE9n permite habilitar objetos dependiendo de una puntuaci\xF3n,
+      por ejemplo para habilitar estrellas dependiendo de la puntuaci\xF3n obtenida
+      en el nivel."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: f6f49e370c80acd47b01b3105a31a50f, type: 3}
+    description: "This component allows you to enable objects depending on the weapons
+      the player has unlocked. This component can be used, for example, to create
+      a weapon selection function in the game that only works for weapons that have
+      been unlocked. \n\nNote 1: On the \"Weapons To Show\" area you'll need to add
+      all of the player's weapons, and the corresponding object to activate if the
+      weapon is unlocked. \n\nNote 2: To arrange the items that'll be activated,
+      you can use the GridLayoutGroup and ContentSizeFitter components."
+    descriptionSpanish: "Este componente permite habilitar objetos dependiendo de
+      las armas que el jugador tiene desbloqueadas. Este componente puede ser usado,
+      por ejemplo, para crear una selecci\xF3n de armas en el juego d\xF3nde aparecen
+      \xFAnicamente las armas desbloqueadas.\n\nNota 1: En el \xE1rea de \"Weapons
+      to show\" debes agregar todas las armas del jugador y su objeto correspondiente
+      a activar si el arma est\xE1 desbloqueada.\n\nNota 2: Para ordenar los objetos
+      que se activan, puedes usar los componentes de GridLayoutGroup y ContentSizeFitter."
+    category: 13
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 4b6877c96a8bbd347bc059a2bd9dbd6c, type: 3}
+    description: "This component modifies the \"Stop Speed\" and \"Start Speed\"
+      fields on the \"PlatformerPlayerMovement\" and \"PlatformerEnemyMovementAI\"
+      components. This is used to cause a sliding effect while characters or enemies
+      are in contact with the platform. The movement component will return to its
+      original default values as soon as the character exits the platform. \n\nNote:
+      If you're making a 2D game, remember that you can use the PlatformEffector2D
+      component to make allow the player to come up from under the platform."
+    descriptionSpanish: "Este componente modifica los campos de \"Stop Speed\" y
+      \"Start Speed\" en los componentes de \"SideScrollingPlayerMovement\" (Para
+      el Jugador o Monturas) y \"SideScrollingEnemyMovementAI\" (Para Enemigos).
+      Esto es especialmente usado para hacer el efecto de deslizamiento mientras
+      los personajes est\xE1n en contacto con la plataforma. El componente de movimiento
+      retornar\xE1 a sus valores por defecto cuando el personaje sale de la plataforma.\n\nNota:
+      Si tu juego es 2D, recuerda que puedes usar el componente de PlatformEffector2D
+      para que el jugador pueda pasar por debajo de la plataforma."
+    category: 7
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 8db319a66456c4d49905d2ff4260dc80, type: 3}
+    description: This component allows you activate, deactivate, destroy or instantiate
+      an object or component when a specific action happens. For example, when there
+      is a collision with the object, when the object is clicked, or when the player
+      presses an input.
+    descriptionSpanish: "Este componente permite activar, desactivar, destruir o
+      instanciar un objeto o componente cuando una acci\xF3n espec\xEDfica ocurre.
+      Por ejemplo, cuando ocurre una colisi\xF3n con el objeto, cuando se hace clic
+      en el objeto, \xF3 cuando el jugador presiona un Input."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 933f27ed8a5cf43359d7caf0a5f5e732, type: 3}
+    description: "This component allows you to detect objective in a radious from
+      0 to 360 degrees, and it allows you to define obstacles (in a specific layer,)
+      to keep it from detecting objectives outside the detector's view. \nThis component
+      is mainly used by other components that require detecting objectives."
+    descriptionSpanish: "Este componente permite detectar objetivos en un radio de
+      0 a 360 grados y permite definir obst\xE1culos (de un Layer espec\xEDfico)
+      para evitar detectar objetivos que no est\xE9n a la vista del detector.\nEste
+      componente es principalmente usado por otros componentes que requieren detectar
+      objetivos."
+    category: 15
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 01450b63bb8c9f74aa7aac59e9277154, type: 3}
+    description: This component allows teleporting objects with a specific tag to
+      another position.
+    descriptionSpanish: "Este componente permite teletransportar objetos con un tag
+      espec\xEDfico a otra posici\xF3n."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: e0376111d5f65e0498aa9ca4b82c4615, type: 3}
+    description: This component allows you to change the game's timescale while an
+      object with a specific tag is colliding with the object. You can use this component
+      to create slow-mo camera effects, as well as sped-up camera effects, while
+      an object is within the area of the collider.
+    descriptionSpanish: "Este componente permite cambiar la escala de tiempo del
+      juego mientras un objeto con un Tag espec\xEDfico est\xE1 colisionando con
+      el objeto. Puedes usar este componente para hacer efectos de c\xE1mara lenta
+      o r\xE1pida mientras un objeto est\xE1 dentro del \xE1rea del Collider."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 2ab28f5b2598f0240abf57cde9ea296f, type: 3}
+    description: "This component allows you to increase a PowerUps time limit in
+      exchange for coins, or whichever type of in-game currency or points is being
+      implemented. \n\nNote: This component must be added to a button on the user
+      interface."
+    descriptionSpanish: "Este componente permite incrementar el l\xEDmite de tiempo
+      de uso de un PowerUp a cambio de monedas o cualquier puntuaci\xF3n de tipo
+      acumulativa.\n\nNota: Este componente debe ser agregado a un bot\xF3n de la
+      interfaz de usuario."
+    category: 9
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 0ac14b99873191a4ab95e4153e4ee51f, type: 3}
+    description: This component allows an object to follow the position of another
+      object on the X, Y or Z axes. It also gives you the option of copying the rotation
+      of the object.
+    descriptionSpanish: "Este componente permite que un objeto siga la posici\xF3n
+      de otro objeto en los ejes X, Y o Z. Tambi\xE9n tienes la opci\xF3n para copiar
+      la rotaci\xF3n del objeto."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 97548fb1feb16c34fae743b7aa0499b2, type: 3}
+    description: This component allows the player, a mount, or an enemy to use one
+      of the weapons that have been created on the "Weapons" window.
+    descriptionSpanish: Este componente permite que el Jugador, una Montura o un
+      Enemigo usen un arma de las creadas en la ventana de "Weapons".
+    category: 13
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 139ffab46061fb14ea3e57e07db909d9, type: 3}
+    description: 'This component allows the player (or mount) to invert its velocity
+      when colliding. This component only works with the movement components with
+      the "Constant Movement" option enabled. The "Constant Movement" option is available
+      with the following components: SideScrollingPlayerMovement, VerticalPlayerMovement,
+      TopDownMovement, ForwardMovement.'
+    descriptionSpanish: "Este componente permite que el jugador (o una montura) invierta
+      su velocidad al colisionar. Este componente solo funciona con los componentes
+      de movimiento con la opci\xF3n de \"Constant Movement\" habilitada. La opci\xF3n
+      de \"Constant Movement\" est\xE1 disponible en los siguientes componentes:
+      SideScrollingPlayerMovement, VerticalPlayerMovement, TopDownMovement y ForwardMovement."
+    category: 7
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: ecadb8ea815095140b249734a6eb1b82, type: 3}
+    description: "With this component you'll be able to create a joystick on the
+      user interface for mobile games. \n\nTo create a joystick, add this component
+      to a GameObject with the \"Image\" component on the user interface, and then
+      create a child object of the \"Image\" component (smaller than the parent object.)
+      This way the child obejct will move around the parent object. \n\nNote 1: If
+      you have issues creating a joystick with this component, you can simply open
+      the \"Cross-Platform Inputs Manager\" window, activate the \"Use On-screen
+      controls\" option, and click \"Add New Joystick\" to create an example joystick.
+      \n\nNote 2: You must define the axes of the joystick you'll use on this component,
+      and you'll need to assign the corresponding input which will activate when
+      the joystick moves to each of its axes. \nFrom the \"Joystick dead zone\" field
+      you can define a value between 0 and 1 which will correspond to the area of
+      the joystick which won't activate any inputs."
+    descriptionSpanish: "Con este componente puedes crear un Joystick en la interfaz
+      de usuario para juegos m\xF3viles.\n\nPara crear un Joystick, agregue este
+      componente a un GameObject con el componente \"Image\" de la interfaz de usuario,
+      y luego, cree un objeto hijo con el componente \"Image\" (m\xE1s peque\xF1o
+      que el objeto padre). De esta manera, el objeto hijo se mover\xE1 alrededor
+      del objeto padre.\n\nNota 1: Si tienes problemas al crear un Joystick con este
+      componente, puedes simplemente ir a la ventana de Cross-Platform Inputs Manager,
+      activar la opci\xF3n de \"Use On-screen controls\" y hacer clic en \"Add New
+      Joystick\" para crear un Joystick de ejemplo.\n\nNota 2: En este componente
+      debes definir los ejes del Joystick que usar\xE1s y debes asignar el Input
+      correspondiente que se activar\xE1 cuando el Joystick se mueve al eje correspondiente.\nDesde
+      el campo de \"Joystick dead zone\" puedes definir un valor entre 0 y 1 correspondiente
+      al \xE1rea del Joystick que no activar\xE1 ning\xFAn input."
+    category: 17
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: fce86bec1fc5582428c0853b49b0ad13, type: 3}
+    description: "This component allows you to create a 2D mesh which will simulate
+      the movement of water when other objects with a Rigidbody2D enter into contact
+      with it. \n\nNote 1: This component could require too many resources to be
+      executed on mobile devices, so for such devices it's recommended to use water
+      sprites instead. \n\nNote 2: If you'd like objects to move more slowly while
+      inside the water, use the WaterPhysics2D component. If you'd like objects to
+      float, you must use the BuoyancyEffector2D component."
+    descriptionSpanish: "Este componente te permite crear una malla en 2D que simula
+      el movimiento del agua cuando otros objetos con un Rigidbody2D entran en contacto
+      con la malla.\n\nNota 1: Este componente podr\xEDa requerir de muchos recursos
+      para ejecutarse en juegos m\xF3viles, por lo que es recomendable usar sprites
+      para el agua en vez de este componente.\n\nNota 2: Si deseas que los objetos
+      se muevan m\xE1s lento mientras est\xE1n en el agua, usa el componente WaterPhysics2D,
+      o si deseas hacer que los objetos floten, debes usar el componente BuoyancyEffector2D."
+    category: 12
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: a02a78e2b07fc594c94acb36e677f777, type: 3}
+    description: "This component is used in scenes where there's a need for objects
+      to be activated depending on the state of a weapon, such as a weapon select
+      or a weapon shop scene. This component allows you to define objects that will
+      activate depending on whether the weapon is locked, unlocked, or if it is currently
+      selected. You can use it, for example, to enable a button to purchase the weapon,
+      if it hasn't been unlocked already, and enable a button to select it if it's
+      already been unlocked. \n\nNote: All of the objects defined with the state
+      \"It's not in inventory,\" \"It's in inventory,\" and \"Selected (Using it)\"
+      will be deactivated at the start of the scene, with only the objects appropriate
+      to the weapon's current state activating."
+    descriptionSpanish: "Este componente es usado en escenas donde necesites activar
+      objetos seg\xFAn el estado actual de un arma, como, por ejemplo, en la escena
+      de compra o selecci\xF3n de armas. Este componente permite definir los objetos
+      que se activar\xE1n cuando un arma est\xE1 bloqueada, desbloqueada o seleccionada.
+      Puede ser usado, por ejemplo, para habilitar un bot\xF3n para comprar el arma
+      en caso de que est\xE9 bloqueada, y habilitar un bot\xF3n para seleccionarla
+      si est\xE1 desbloqueada.\n\nNota: Todos los objetos definidos en los estados
+      de \"It's not in inventory\", \"It's in inventory\", y \"Selected (Using it)\",
+      son desactivados al iniciar la escena y se activan \xFAnicamente los objetos
+      definidos para el estado actual del arma."
+    category: 13
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 0415d8b2b1a24094382892599b313823, type: 3}
+    description: "With this component you'll be able to define the method with which
+      the player will be able to beat a level. You can select multiple posibilitied
+      depending on the type of game you're creating. For example, you can make it
+      so the player beats the level by getting a certain score, colliding with the
+      object, or by requiring to reach a certain score before reaching the goal.
+      \n\nNote: If you'd like the player to beat the level after a certain time has
+      passed, you'll have to use the GameCountdown component."
+    descriptionSpanish: "Con este componente puedes definir el m\xE9todo con el que
+      el jugador puede ganar el nivel. Puedes seleccionar entre m\xFAltiples posibilidades
+      dependiendo del tipo de juego que est\xE9s creando, por ejemplo puedes hacer
+      que el jugador gane el nivel al conseguir cierta puntuaci\xF3n, al colisionar
+      con el objeto, o requerir cierta puntuaci\xF3n cuando llegue a la meta.\n\nNota:
+      Si quieres que el jugador gane el nivel cuando haya pasado cierto tiempo, debes
+      usar el componente GameCountdown."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 3e9b40629978bbc45857fc389bd574d8, type: 3}
+    description: "This component allows you to play a sound when an action occurs
+      in the game. It can be used, for example, to play a sound when the player collides
+      with a coin. \n\nNote 1: Thiscomponent works with \"Trigger\" type colliders
+      as well. \n\nNote 2: The objects with this component can be saved as prefabs,
+      and the \"AudioSource\" reference on the scene won't be lost."
+    descriptionSpanish: "Este componente permite reproducir un sonido cuando ocurre
+      una acci\xF3n en el juego. Puede ser usado, por ejemplo, para reproducir un
+      sonido cuando el jugador colisiona con una moneda.\n\nNota 1: Este componente
+      funciona tambi\xE9n con Colliders de tipo Trigger.\n\nNota 2: Los objetos con
+      este componente pueden ser guardados como prefab y no se perder\xE1 la referencia
+      del AudioSource en la escena."
+    category: 3
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 51901503dfd014c4b8a976d22c008bf6, type: 3}
+    description: "This component allows you to play a sound when a button on the
+      user interface is pressed. \n\nNote 1: This component must be added to a button
+      on the user interface for it to work. \n\nNote 2: The objects with this component
+      can be saved as prefabs and the \"AudioSource\" reference on the scene won't
+      be lost."
+    descriptionSpanish: "Este componente permite reproducir un sonido al presionar
+      un bot\xF3n de la interfaz de usuario.\n\nNota 1: Este componente debe ser
+      agregado a un bot\xF3n de la interfaz de usuario para que funcione.\n\nNota
+      2: Los objetos con este componente pueden ser guardados como prefab y no se
+      perder\xE1 la referencia del AudioSource en la escena."
+    category: 3
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 54b66f45b9590a546a349f6021a9ff26, type: 3}
+    description: "This component allows you to display the amount of levels that
+      have been beaten in a specific world. \n\nNote: This component must be added
+      to an object with the \"Text\" component on the user interface."
+    descriptionSpanish: "Este componente permite mostrar la cantidad de niveles ganados
+      en un mundo espec\xEDfico o el total de niveles ganados.\n\nNota: Este componente
+      debe ser agregado a un objeto con el componente Text de la interfaz de usuario."
+    category: 11
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 09544d3fb100bc647b4048e19604b459, type: 3}
+    description: "This component looks through all of the LevelBoxes on the scene,
+      and moved the object toward the LevelBox with the level the player is currently
+      on. \nThis component can be used, for example, to focus the map on the player's
+      current level (To do this, you'll need to activate the \"Move To Inverse Position\"
+      option.)"
+    descriptionSpanish: "Este componente busca todos LevelBox de la escena y mueve
+      el objeto hacia el LevelBox que tenga seleccionado el nivel actual del jugador.\nEste
+      componente puede ser usado, por ejemplo, para enfocar el mapa en el nivel actual
+      del jugador (Para esto debes activar la opci\xF3n de \"Move to Inverse Position\".)."
+    category: 11
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: bfb204941ead56943bad487f11d6ab8d, type: 3}
+    description: "This component allows you to rotate the texture of a sprite or
+      of a 3D model. With this component you can select the have the texture rotate
+      constantly, depending on the position of the character, or depending on the
+      position of the camera. This component is perfect to create backgrounds with
+      a parallax scrolling effect. \n\nNote 1: In order for the texture to be scrolled,
+      you must select the \"Repeat\" option on the \"Wrap Mode\" field of the texture's
+      options. \n\nNote 2: If you'd like the texture to rotate parallel to the movement
+      of the character, andyou're using the CameraMovement component for the movement
+      of the camera, it's recommended that you select the \"Camera Position\" option
+      on the \"Position To Follow\" field for more precise results."
+    descriptionSpanish: "Este componente permite hacer rotar la Textura de un Sprite
+      o de un modelo 3D. Con este componente puedes hacer rotar la textura constantemente,
+      dependiendo de la posici\xF3n del personaje o dependiendo del movimiento de
+      la c\xE1mara. Este componente es perfecto para hacer fondos con efecto Parallax
+      Scrolling.\n\nNota 1: Para que la textura pueda hacer scroll, debes seleccionar
+      en las opciones de la Textura la opci\xF3n de Repeat en el campo de Wrap Mode.\n\nNota
+      2: si deseas que la textura rote seg\xFAn el movimiento del personaje, y en
+      tu juego est\xE1 usando el componente de CameraMovement para el movimiento
+      de la c\xE1mara, es recomendable que en el campo de \"Position To Follow\"
+      selecciones la opci\xF3n de \"Camera Position\" para un resultado m\xE1s preciso."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 68cc9ff0638bc31439d02169adfac75f, type: 3}
+    description: "This component allows an object to have a contant speed toward
+      a direction when a specific action is activated. \n\nNote 1: This component
+      required a Rigidbody or Rigidbody2D. In case you don't want to use gravity,
+      you can simply assign a value of 0 to the \"Gravity Scale\" field. \n\nNote
+      2: The rotation of the object affects the rection in which the speed is applied.
+      If you don't want the rotation to be affected by collisions with other objects,
+      you can activate the \"Freeze Rotation\" field on the Ridigbody."
+    descriptionSpanish: "Este componente permite que un objeto tenga una velocidad
+      constante hacia una direcci\xF3n desde que una acci\xF3n es activada.\n\nNota
+      1: Este componente requiere un Rigidbody o Rigidbody2D. En caso de que no quieras
+      usar la gravedad, puedes simplemente asignar el valor de 0 en el campo de \"Gravity
+      Scale\" (Recomendable).\n\nNota 2: La rotaci\xF3n del objeto afecta la direcci\xF3n
+      en que se aplica la velocidad. si no quieres que la rotaci\xF3n se vea afectada
+      por las colisiones con otros objetos, puedes activar los campos de \"Freeze
+      Rotation\" en el Rigidbody."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 54bfbfc9c887adb4cb6c73e55eb89309, type: 3}
+    description: "This component allows you to pause the game when pressing a button.
+      \n\nNote: This component must be added to an object with the \"Button\" component
+      on the user interface."
+    descriptionSpanish: "Este componente permite pausar el juego al presionar el
+      bot\xF3n.\n\nNota: Este componente debe ser agregado a un objeto con el componente
+      Button de la interfaz de usuario."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 4b7fb7ed5ad574c4c8b8beea41f68a12, type: 3}
+    description: "This component allows you to define the tags of the objects which
+      will be attracted when the \"Objects Magnet\" PowerUp is activated. \n\nNote:
+      This component must be added to a child object of the player, and it'll need
+      to be in a different layer than the player. \n\nNote2: This component requires
+      a collider to define the area in which the objects will be attracted, and it
+      also required a Rigidbody or a Rigidbody2D, preferably of the kinematic type."
+    descriptionSpanish: "Este componente te permite definir los Tags de los objetos
+      que pueden ser atra\xEDdos cuando el PowerUp de Objects Magnet es activado.\n\nNota
+      1: Este componente debe ser agregado a un objeto hijo del jugador y debe tener
+      seleccionado un Layer diferente al del jugador. Recuerda que el Layer (Capa)
+      se selecciona desde la parte superior derecha del Inspector.\n\nNota 2: Este
+      componente requiere de un Collider para definir desde qu\xE9 \xE1rea ser\xE1n
+      atra\xEDdos los objetos, y tambi\xE9n requiere de un Rigidbody o Rigidbody2D
+      preferiblemente de tipo Kinematic."
+    category: 9
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 23ba8df23dda801459857378224076ca, type: 3}
+    description: "This component allows you to display the remaining uses of a PowerUp
+      the player has. \n\nNote: This component must be added to an object with the
+      \"Text\" component on the user interface."
+    descriptionSpanish: 'Este componente permite mostrar la cantidad de usos restantes
+      de un PowerUp en un texto de la interfaz de usuario.
+
+
+      Nota: Este componente
+      debe ser agregado a un objeto con el componente de Text en la interfaz de usuario.'
+    category: 9
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: b887ea280c6d4284c8a5f567477e3721, type: 3}
+    description: "Adding this component to an object will make it so it is not destroyed
+      when loading the next scene. This component can be useful, for example, to
+      maintian the same background music througout menu scenes without having to
+      reset it every time a new one is loaded. \n\nNote: If you reload the same scene
+      this component was in, the object will be duplicated. To keep this from happening,
+      you must define how the duplicate object will be destroyed on the \"How to
+      destroy duplicate\" field. "
+    descriptionSpanish: "Al agregar este componente a un objeto, este no se destruir\xE1
+      al cargar las siguientes escenas. Este componente puede ser \xFAtil, por ejemplo,
+      para mantener la misma m\xFAsica de fondo en las escenas del men\xFA sin que
+      esta se reinicie cuando se carga una nueva escena.\n\nNota: Al cargar la misma
+      escena d\xF3nde estaba el objeto con este componente, quedar\xE1 duplicado
+      el objeto. Para evitar esto, define como se destruir\xE1 el objeto duplicado
+      desde el campo de \"How to destroy duplicate\"."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 58e0abcdcdf6a334b85a9f8dc2b29f2b, type: 3}
+    description: "This component allows you to add audio configurations to the scene.
+      With this component you'll be able to manage the AudioSources, and define their
+      default and max volumes. You'll also be able to define a button on the user
+      interface to activate or deactivate audio, or a slider to turn the volume up
+      or down on a specific category of audios. \n\nNote 1: You must keep in mind
+      that when the player changes the value of a slider to turn the volume up or
+      down on a specific category of audios, those values will be automatically saved,
+      and that also applies if they're activated or deactivated when pressing a button.
+      \n\nNote 2: It's recommended to have this component on the first scene of the
+      game so the game's audio configurations will be automatically loaded as soon
+      as the game starts (Even if the main scene doesn't have audio configuration
+      options for the user.) \n\nNote 3: Activate the \"This is a scene with settings\"
+      options on scenes where you'll have audio congif settings for the player. You
+      can simply not have this component on scenes where you don't have sound configurations
+      (except for the game's main scene.) \n\nRecommendation: You can activate the
+      \"Keep object in other scenes\" option so that the object won't be destroyed
+      when switching scenes. This way, every time the scene is switched, the component
+      will look for the new scene's AudioSources and apply the assigned configurations.
+      \n\nNote 4: If you've got the \"Keep object in other scenes\" option enabled,
+      and you load the same scene again, or a load a scene with the same component,
+      the object will be automatically destroyed to maintain only one instance of
+      the component on the scene."
+    descriptionSpanish: "Este componente te permite agregar configuraciones de audio
+      en la escena. Con este componente puedes administrar los AudioSources y definir
+      su volumen predeterminado y su volumen m\xE1ximo. Adem\xE1s, puedes definir
+      un bot\xF3n en la interfaz de usuario para activar/desactivar el audio, o un
+      Slider para subir o bajar el volumen de cierta categor\xEDa de audios.\n\nNota
+      1: Debes tener en cuenta que cuando el jugador cambia el valor de un Slider
+      para subir o bajar el volumen de una categor\xEDa de sonidos, los valores ser\xE1n
+      guardados autom\xE1ticamente, al igual que cuando activa o desactiva el sonido
+      al presionar un bot\xF3n.\n\nNota 2: Es recomendable tener este componente
+      en la primera escena del juego para que se carguen las configuraciones autom\xE1ticamente
+      cuando inicia el juego (Incluso si en la escena principal no est\xE1n las configuraciones
+      de sonido para el usuario).\n\nNota 3: Activa la opci\xF3n de \"This is a scene
+      with settings\" en las escenas d\xF3nde tengas configuraciones de sonido. En
+      las escenas donde no tienes configuraciones de sonido puedes simplemente no
+      tener este componente (A menos de que sea la escena principal).\n\nRecomendaci\xF3n:
+      Puedes activar la opci\xF3n de \"Keep object in other scenes\" para que el
+      objeto no sea destru\xEDdo al cambiar de escena. De esta manera, cada vez que
+      se cambie de escena, el componente buscar\xE1 los AudioSources con los nombres
+      correspondientes y aplicar\xE1 las configuraciones asignadas.\n\nNota 4: Si
+      tienes la opci\xF3n de \"Keep object in other scenes\" activada y cargas nuevamente
+      la misma escena o cargas otra escena con el mismo componente, el objeto se
+      destruir\xE1 autom\xE1ticamente para mantener solo una instancia del componente
+      en la escena."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 0e844e225296a5d4caa887957d43a869, type: 3}
+    description: "This component allows you to activate, deactivate or destroy component
+      or objects on the scene when a \"Toggle\" (from the user interface) is activate
+      or deactivated by the player. \n\nNote: If you'd like to create sound settings,
+      you can use the GameAudioSetting component."
+    descriptionSpanish: 'Este componente permite activar, desactivar o destruir componentes
+      u objetos de la escena cuando un Toggle (de la interfaz de usuario) es activado
+      o desactivado por el jugador.
+
+
+      Nota: Si deseas crear configuraciones
+      de sonido, usa el componente GameAudioSettings.'
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: d378cb6db734413478bbd4c7716dece6, type: 3}
+    description: "This component allows you to display the icon of the player's currently
+      selected character on an image on the user interface, or on a sprite. \n\nNote:
+      To use this component you must activate the \"Enable character icon\" option
+      on the \"Characters Manager\" window, and assign the corresponding icon of
+      each character."
+    descriptionSpanish: "Este componente te permite mostrar el \xEDcono del personaje
+      actual del jugador en una imagen de la interfaz de usuario o en un sprite.\n\nNota:
+      Para usar este componente debes activar la opci\xF3n \"Enable character icon\"
+      en la ventana \"Characters Manager\" y asignar el \xEDcono correspondiente
+      de cada personaje."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 7163a3fe8088d88468acac5d3f16a7b6, type: 3}
+    description: "This component shows you the remaining time to obtain a life as
+      text on the user interface. \n\nNote: To use this component you'll need to
+      enable the \"The player can get lives per time\" option on the \"Characters
+      Manager\" window."
+    descriptionSpanish: "Este componente muestra el tiempo restante para obtener
+      una vida en un texto de la interfaz de usuario.\n\nNota: Para usar este componente
+      es necesario habilitar la opci\xF3n \"The player can get lives per time\" en
+      la ventana \"Characters Manager\"."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 3163ceeb71c5fa64c9b8bf41694f3394, type: 3}
+    description: "This component allows you to display the health points or current
+      lives of the player on the user interface. \nFrom the \"Type\" field you can
+      select how you'd like to display health or lives. \nThe \"Image Filling\" option
+      allows you to display health by filling a \"Filled\" type image on the user
+      interface. \nThe \"Text\" option allows you to display health as text on the
+      user interface. \nThe \"Icons Counter\" option allows you to display icons
+      (such as hearts, for example,) depending on how much health or how many lives
+      the player has. To use this option you'll have to create an obejct with the
+      corresponding sprite, save it on your project as a prefab, and assign it to
+      the \"Icon (Prefab)\" field. Since all icons are instantiated as child objects
+      of an object, you'll have to use the GridLayoutGroup component to arrange the
+      icons that will be instantiated."
+    descriptionSpanish: "Este componente permite mostrar la salud o las vidas actuales
+      del jugador en la interfaz de usuario.\nDesde el campo de Type puedes seleccionar
+      como deseas mostrar la salud o las vidas.\nLa opci\xF3n \"Image Filling\" te
+      permite mostrar la salud llenando una imagen de tipo \"Filled\" de la interfaz
+      de usuario.\nLa opci\xF3n de \"Text\" te permite mostrar la salud en un texto
+      de la interfaz de usuario.\nLa opci\xF3n \"Icons Counter\" permite mostrar
+      \xEDconos (como corazones, por ejemplo) seg\xFAn la cantidad de salud o vidas
+      del jugador. Para esta opci\xF3n debes crear un objeto con el sprite correspondiente,
+      guardarlo en tu proyecto como un prefab y asignarlo en el campo de \"Icon (Prefab)\".
+      Debido a que los \xEDconos se instancian como hijos de un objeto, debes usar
+      el componente GridLayoutGroup para ordenar los \xEDconos que se instancian."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: d2cbdc079274bee4097f5c1ebfce5341, type: 3}
+    description: This component allows you to activate or deactivate objects depending
+      on the amount of lifes of health the player has left.
+    descriptionSpanish: Este componente permite activar o desactivar objetos dependiendo
+      de la cantidad de vidas o de la salud actual del jugador.
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 8126c349b43cf86458e03de7be5f48ff, type: 3}
+    description: "This component allows you to manage the values of the parameters
+      of the animator depending on the collisions that ocurr with this object's collider.
+      It can be used to activate a parameter in the animator when an object with
+      a specific tag enters in contact with the collider, when it leaves the collider,
+      or while it is within the collider. \n\nNote: This component can be used for
+      normal collisions as well as \"Trigger\" type collisions."
+    descriptionSpanish: "Este componente te permite gestionar los valores de los
+      par\xE1metros del Animator dependiendo de las colisiones que ocurren con el
+      collider del objeto. Puede ser usado para activar un par\xE1metro del Animator
+      cuando un objeto con un Tag espec\xEDfico entra en contacto con el collider,
+      cuando abandona el collider, o mientras est\xE1 en contacto con el collider
+      del objeto.\n\nNota: Este componente puede ser usado tanto con colisiones normales
+      como con colisiones de tipo Trigger."
+    category: 2
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: b8efe69ea91e3424495c2b8aa51c7201, type: 3}
+    description: "This component allows you to pause the game when an action occurs
+      within the game. You can select whether you'd like the game to be paused when
+      a collision with another object occurs, or when the area in the object's collider
+      is clicked. This component is used in cases such as when a dialogue or tutuorial
+      is started for the player, so the game pauses. \n\nNote 1: To resume the game,
+      use the ResumeButton component. (Which must be added to a button on the user
+      interface.) \n\nNote 2: If you'd like to pause the game by pressing an input,
+      use the PauseButton component."
+    descriptionSpanish: "Este componente permite pausar el juego cuando ocurre una
+      acci\xF3n. Puedes seleccionar si deseas que se pause el juego cuando ocurre
+      una colisi\xF3n con otro objeto o cuando se hace clic en el \xE1rea del collider
+      del objeto. Este componente es usado, por ejemplo, en los casos donde se inicia
+      un di\xE1logo o tutorial para el jugador y se pausa el juego.\n\nNota 1: Para
+      despausar el juego usa el componente de ResumeButton (Que debe ser agregado
+      a un bot\xF3n de la interfaz de usuario). \n\nNota 2: si quieres pausar el
+      juego al presionar un bot\xF3n, usa el componente de PauseButton."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: f886d860c5994de44bda0d51d3182bee, type: 3}
+    description: "This component allows you to draw straight or curved lines on the
+      scene from the editor in Unity. This can serve to show the route a platform
+      will be moving in, by drawing a line from one point to another. \n\nNote: This
+      component is simply an extension of Unity's LineRenderer. With the LineDrawer
+      component you can draw curved lines more easily. "
+    descriptionSpanish: "Este componente permite dibujar l\xEDneas rectas o curvas
+      en la escena desde el editor de Unity. Esto puede servir por ejemplo para mostrar
+      la ruta de una plataforma que se mueve de un punto a otro.\n\nNota: Este componente
+      es simplemente una extensi\xF3n del componente LineRenderer de Unity. Con el
+      componente de LineDrawer puedes dibujar l\xEDneas curvas con m\xE1s facilidad."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: e2081bf1fdc75454eb9f091231809850, type: 3}
+    description: "This component allows you to manage and define the languages that
+      will be available for your game. With this component you can also define the
+      corresponding translation images, text, and objects on the scene. \n\nRecommendation:
+      Add this component as a GameObject on each of the scenes that need to be translated.
+      \n\nNote: If you'd like to implement a button to switch languages in game,
+      you can use the LanguageChangeButton on a button on the user interface."
+    descriptionSpanish: "Este componente te permite gestionar y definir los lenguajes
+      en que estar\xE1 disponible tu juego. Con este componente puedes definir tambi\xE9n
+      las traducciones correspondientes para las im\xE1genes, textos u objetos de
+      la escena. \n\nRecomendaci\xF3n: Agrega este componente a solo un GameObject
+      en cada una de las escenas que requieran traducci\xF3n.\n\nNota: si quieres
+      implementar un bot\xF3n para cambio de idioma, puedes usar el componente LanguageChangeButton
+      en un bot\xF3n de la interfaz de usuario."
+    category: 4
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: ba6bdf636cd11aa4da81151c9bdbebc8, type: 3}
+    description: This component is used in order to pause the game. You can defint
+      eh object on the user interface which will activate when pausing the game using
+      this component, and it also optionally allows you to define the input with
+      which the game will be paused. It also allows you to decide whether the AudioSources
+      on the scene will be paused too, or if they'll continue emitting sound while
+      the game is paused.
+    descriptionSpanish: "Este componente es necesario en las escenas de juego para
+      poder pausar el juego. En este componente puedes definir el objeto de la interfaz
+      de usuario que se activar\xE1 cuando el juego es pausado y tambi\xE9n permite
+      opcionalmente definir el Input con el que se pausar\xE1 el juego. Adem\xE1s,
+      puedes decidir si se pausar\xE1n los AudioSources de la escena o si continuar\xE1n
+      emitiendo sonidos mientras el juego est\xE1 pausado."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 3eee456171e824142b95a7eb3ae53299, type: 3}
+    description: "This component allows you to open a URL when pressing the button.
+      \n\nNote: This component must be added to a button on the user interface."
+    descriptionSpanish: "Este componente permite abrir una URL cuando se presiona
+      el bot\xF3n.\n\nNota: Este componente debe ser agregado a un bot\xF3n de la
+      interfaz de usuario."
+    category: 17
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 20810db0118409c4fbca55eddb225dbf, type: 3}
+    description: "This component allows you to define the objects which will activate
+      when a bonus level is locked, unlocked, or if it has already been cleared.\nYou'll
+      have to define the level required to unlock the bonus level on the \"Required
+      Level To Unlock\" \n\nNote: All of the objects defined with the \"Locked,\"
+      \"Unlocked,\" and \"Cleared\" states will be deactivated at at the start of
+      the scene, with only the ones appropriate to the current state of the bonus
+      level activating."
+    descriptionSpanish: "Este componente permite definir los objetos que se activar\xE1n
+      cuando un nivel de bonus est\xE1 bloqueado, desbloqueado o ganado.\nDesde el
+      campo de \"Level Required To Unlock\" debes definir el nivel requerido para
+      que se active el estado de \"Unlocked\", este estado solo se activa si el nivel
+      seleccionado es ganado.\n\nNota: Todos los objetos definidos en los estados
+      de \"Locked\", \"Unlocked\", y \"Cleared\", son desactivados al iniciar la
+      escena y se activan \xFAnicamente los objetos definidos para el estado actual
+      del nivel de bonus."
+    category: 11
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: a2efb2e989c2f964c847556e18437821, type: 3}
+    description: "This component allows you to resume the game by pressing a button.
+      You can use this component, for example, on the \"Play\" button of the pause
+      window. \n\nNote: This component must be added to an object with the \"Button\"
+      component on the user interface."
+    descriptionSpanish: "Este componente permite reanudar el juego al presionar el
+      bot\xF3n. Puedes usar este componente, por ejemplo, en el bot\xF3n de Play
+      de la ventana de pausa.\n\nNota: Este componente debe ser agregado a un objeto
+      con el componente Button de la interfaz de usuario."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 6f707bfae47ce4548916ddc1772ed205, type: 3}
+    description: 'This component allows you to delete the last point saved by the
+      player when pressing the button. This component is normally used on the button
+      to restart the level, or on the button to quit the game in the "Continue" window,
+      thus preventing the player from continuing on a previously saved point.
+
+
+      Note:
+      You should be aware that the last saved point is automatically deleted when
+      the player finishes the maximum number of attempts to continue. The last saved
+      point will also be deleted if the player loses all lives and if the "Delete
+      Saved Point of current level" option is activated in the "Characters Manager"
+      window. '
+    descriptionSpanish: "Este componente permite eliminar el \xFAltimo punto guardado
+      por el jugador al presionar el bot\xF3n. Este componente es normalmente usado
+      en el bot\xF3n para reiniciar el nivel, o en el bot\xF3n para abandonar el
+      juego en la ventana de \"Continuar\", de esta manera se evita que el jugador
+      pueda continuar en un punto guardado anteriormente.\n\nNota: Debes tener en
+      cuenta que el \xFAltimo punto guardado es eliminado autom\xE1ticamente cuando
+      el jugador termina el n\xFAmero m\xE1ximo de intentos para continuar. Tambi\xE9n
+      se eliminar\xE1 el \xFAltimo punto guardado si el jugador pierde todas las
+      vidas y si est\xE1 activada la opci\xF3n de \"Delete Saved Point of current
+      level\" en la ventana de \"Characters Manager\"."
+    category: 10
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 38c821dfe617c54498290ddcd46a698f, type: 3}
+    description: "Use this component to save the last save point obtained by the
+      player. Normally this component is used on a window asking the player if they'd
+      like to save. \n Remember that, from the \"SavePoint\" component you have the
+      option of asking the player if they'd really like to save. \n\nNote: This component
+      must be added to a button on the user interface."
+    descriptionSpanish: "Usa este componente para guardar el \xFAltimo punto de guardado
+      obtenido por el jugador. Normalmente, este componente es usado en la ventana
+      que pregunta al jugador si desea guardar el punto de guardado.\nRecuerda que
+      desde el componente de \"SavePoint\" tienes la opci\xF3n para preguntar al
+      jugador si realmente desea guardar el punto actual.\n\nNota: Este componente
+      debe ser agregado a un bot\xF3n de la interfaz de usuario."
+    category: 10
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 309a4b1a219e5dc49940942d89f1c3e3, type: 3}
+    description: With this object you can enable, disable, instanciate or destroy
+      objects depending on the player's states. It can be used, for example, to enable
+      an object while the player's using one of UGame Studio's default PowerUps.
+    descriptionSpanish: Con este componente puedes habilitar, deshabilitar, instanciar
+      o destruir objetos dependiendo de los estados del jugador. Puede ser usado,
+      por ejemplo, para habilitar un objeto mientras el jugador tiene activado uno
+      de los PowerUps por defecto de UGame Studio.
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 139ffab46061fb14ea3e57e07db909d9, type: 3}
+    description: 'This component allows the player (or mount) to invert its velocity
+      when colliding. This component only works with the movement components with
+      the "Constant Movement" option enabled. The "Constant Movement" option is available
+      with the following components: SideScrollingPlayerMovement, VerticalPlayerMovement,
+      TopDownMovement, ForwardMovement.'
+    descriptionSpanish: "Este componente permite que el jugador (o una montura) invierta
+      su velocidad al colisionar. Este componente solo funciona con los componentes
+      de movimiento con la opci\xF3n de \"Constant Movement\" habilitada. La opci\xF3n
+      de \"Constant Movement\" est\xE1 disponible en los siguientes componentes:
+      SideScrollingPlayerMovement, VerticalPlayerMovement, TopDownMovement y ForwardMovement."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 07f22d1e641aa264492b5f6bdf9ba03b, type: 3}
+    description: 'This component allows you to change the language of the game when
+      pressing the button.
+
+
+      Note 1: Remember that the languages that will
+      be available for your game can be defined on the LanguageManager component,
+      on the "Global Values" area.
+
+
+      Note 2: This component must be added to
+      a button on the user interface in order to work.'
+    descriptionSpanish: "Este componente permite cambiar el idioma del juego al presionar
+      el bot\xF3n.\n\nNota: Recuerda que los idiomas en que estar\xE1 disponible
+      tu juego puedes definirlos desde el componente LanguageManager en el \xE1rea
+      de \"Global Values\".\n\nNota 2: Este componente debe ser agregado a un bot\xF3n
+      de la interfaz de usuario para que funcione."
+    category: 4
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 3d5f6e55a8dea5548b96bd6654bab315, type: 3}
+    description: "This component allows you to load a level or scene when an action
+      occurs in the game. \n\nNote: If you'd like to load a level by pressing a button,
+      use the LoadLevelButton component."
+    descriptionSpanish: "Este componente permite cargar un nivel o escena cuando
+      una acci\xF3n ocurre en el juego.\n\nNota: Si deseas cargar un nivel al presionar
+      un bot\xF3n, usa el componente LoadLevelButton."
+    category: 11
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 9de2d04ef540b5a49bbb1f0dfd88269f, type: 3}
+    description: This component allows you to activate, deactivate, instantiate or
+      destroy objects when a specific condition is met, defined by the player's score.
+      You can also use this object to activate objects when a better score is reached
+      for any type of points.
+    descriptionSpanish: "Este componente te permite activar, desactivar, instanciar
+      o destruir objetos cuando se cumple una condici\xF3n definida por la puntuaci\xF3n
+      del jugador. Adem\xE1s, tambi\xE9n puedes usar este componente para activar
+      objetos cuando se alcanza una mejor puntuaci\xF3n en alg\xFAn tipo de score."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: e1128968c3dff0e49be0e11621113fd3, type: 3}
+    description: "With this component you can instantiate objects at a determined
+      drop tate when an enemy dies. It can be very useful, for example, if you'd
+      like to make coins appear, or certain items with specific drop rates, upon
+      an enemies' death. \n\nNote: This component must be added to the enemy."
+    descriptionSpanish: "Con este componente puedes instanciar objetos con determinada
+      probabilidad cuando un enemigo muere. Puede ser muy \xFAtil, por ejemplo, si
+      quieres instanciar monedas o cualquier item con cierta probabilidad cuando
+      el enemigo muere. \n\nNota: Este componente debe ser agregado al enemigo."
+    category: 15
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 394a90344d8e2a441bb42ef6d12e462e, type: 3}
+    description: "This component allows you to measure the distance travelled by
+      the player on the level, and save it as a score. \n\nNote 1: To display the
+      best distance achieved by the player, you must use the ShowScore component.
+      \n\nNote 2: If you're creating an \"Endless\" type game, and your character
+      stays in a single position on the screen, you must use the ProgressiveTimeScore
+      component to simulate the measuring of distance based on the amount of time
+      transpired."
+    descriptionSpanish: "Este componente permite contar la distancia recorrida por
+      el jugador en el nivel y guardarla como una puntuaci\xF3n.\n\nNota 1: Para
+      mostrar la mejor distancia obtenida por el jugador debes usar el componente
+      ShowScore.\n\nNota 2: Si est\xE1s creando un juego de tipo \"Endless\" (Sin
+      fin), y tu personaje no se mueve de una posici\xF3n en la escena, debes usar
+      el componente ProgressiveTimeScore para simular el conteo de distancia basado
+      en el tiempo transcurrido."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 43467835376e7d24492858766b493173, type: 3}
+    description: "This component allows you to generate a list of \"level parts\"
+      in a specfic order or at random. The level parts are generated any time the
+      player goes past each \"level part,\" and they're eliminated according to the
+      current amount of \"level parts\" currently on the level. If you enable the
+      \"It is Carousel Type\" option, all the level parts will move with the speed
+      specified on each game difficulty. This option is perfect if you'd like the
+      levels to be generated in a single point of the scene, while the player on
+      the same position. \n This component is very recommended for \"Endless Jumper\"
+      type games, or any kind of game that is generated horizontally or vertically.
+      \nThis component can also have different levels of difficulty, which can activate
+      if a condition is met. \n\nNote: The level parts need to be created directly
+      from this component by pressing the \"Create New Level Part\" button. All of
+      the objects that'll be on that level part will need to be child objects of
+      it. Once you've defined all of the objects and positions within the level part,
+      you can click the \"Save And Finish Editing\" button to apply your changes."
+    descriptionSpanish: "Este componente permite generar una lista de \"partes de
+      nivel\" en orden o aleatorio. Las partes de nivel se generan cada vez que el
+      jugador sobrepasa la posici\xF3n de cada \"parte de nivel\", y se eliminan
+      seg\xFAn la cantidad de partes de nivel actuales en la escena. Si habilitas
+      la opci\xF3n \"It is Carousel type\", todas las partes del nivel se mover\xE1n
+      con la velocidad especificada en cada dificultad. Esta opci\xF3n es perfecta
+      si quieres que los niveles se generen en un mismo punto mientras el jugador
+      permanece en la misma posici\xF3n.\nEste componente es bastante recomendado
+      para juegos de tipo Endless Runner, Endless Jumper o cualquier tipo de juego
+      que se genere de forma horizontal o vertical.\nEste componente tambi\xE9n permite
+      tener diferentes niveles de dificultad que se activan cuando una condici\xF3n
+      se cumple.\n\nNota: Las partes de nivel deben ser creadas directamente desde
+      este componente presionando el bot\xF3n de \"Create new Level Part\". Todos
+      los objetos que vayan a quedar en esa parte de nivel, deben estar como hijos
+      del objeto. Una vez termines de definir todos los objetos y posiciones dentro
+      de la parte de nivel, puedes hacer clic el bot\xF3n de \"Save and finish editing\"
+      para aplicar los cambios."
+    category: 5
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: f8b268496952ee946af9a1f98ffe0126, type: 3}
+    description: This component allows you to generate "static level parts" randomly,
+      or in a specific order, within a defined area on the scene. The level parts
+      will be generated any time a condition is met, or when an action occurs. This
+      component can be used in games where objects or whole levels need to be rendered
+      at a specific time within a specific area of the scene.
+    descriptionSpanish: "Este componente permite generar \"partes de nivel est\xE1ticas\"
+      de forma aleatoria o en orden, dentro de un \xE1rea definida en la escena.
+      Las partes de nivel se generan cada vez que se cumple una condici\xF3n o cuando
+      ocurre una acci\xF3n. Este componente puede ser usado en juegos d\xF3nde se
+      deben generar objetos o niveles completos cada cierto tiempo dentro de un \xE1rea
+      espec\xEDfica en la escena."
+    category: 5
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 6fce64372d0908643a7dc0c37ba40ce7, type: 3}
+    description: "This component allows you to generate objects in specific or random
+      positions on the scene, each time a specific condition is met, or when an action
+      occurs. With this component you can define a set amount of objects to be generated,
+      their static position (or a random one) and the max amount of objects that
+      can have the same position. This component also lets your define different
+      difficulty levels which can activate when a condition is met. \n A example
+      of this component can be found in \"Whack-A-Mole\" type games, or in game like
+      \"Don't Touch The Spikes\" by Ketchapp Games, where the tips of the spikes
+      are generated the moment the player collides with the wall."
+    descriptionSpanish: "Este componente permite generar objetos en posiciones espec\xEDficas
+      o aleatorias en la escena cada vez que se cumple una condici\xF3n o cuando
+      ocurre una acci\xF3n. Con este componente puedes definir una cantidad fija
+      o aleatoria de objetos a generar, su posici\xF3n (fija o aleatoria) y la cantidad
+      m\xE1xima de objetos que puede tener cada posici\xF3n. Este componente tambi\xE9n
+      te permite definir diferentes niveles de dificultad que se activan cuando se
+      cumple una condici\xF3n.\nUn ejemplo de uso de este componente es en juegos
+      de tipo \"Whack-A-Mole\", o en juegos como \"Don't touch the spikes\" de Ketchapp
+      Games, en d\xF3nde se generan de forma aleatoria las puntas del lado contrario
+      cada vez que el jugador colisiona con la pared."
+    category: 5
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 9fb3aacfe41773443a4688a234257288, type: 3}
+    description: "This component allows you to generate a list of objects in a specific
+      order in different points, or randomly, according to the distance their distance
+      to the player. Objects are rendered while the player moves through the level,
+      and are eliminated when the player goes past their predetermined distance.
+      You can also set different difficulty levels which will activate when a condition
+      is met. This component can be used for gameswhere objects are generated randomly
+      in different points on the scene while the player is running. \n\nNote 1: The
+      green line represents the position that will be used as a reference to move
+      the objects generator (When the player goes past this line, the generator will
+      move,) and the red line is the farthest the objects will be (When objects generated
+      by this are over the red line, they'll be destroyed,) and lastly, from the
+      purple dot you'll be able to fedine the positions where the objects will be
+      generated. \n\nNote 2: You can use the ObjectSpawner or StaticLevelGenerator
+      components as complements to this component to define the initial objects on
+      the scene randomly, since the GenerateObjectsByDistance component will only
+      generate objects after having travelled a certain distance. \n\nNote 3: If
+      your objects is to make an \"Endless\" type game, and you'd like to generate
+      levels with less randomness or with more specific characteristics, you can
+      use the LevelPartsGenerator component."
+    descriptionSpanish: "Este componente permite generar una lista de objetos de
+      forma aleatoria o en orden en diferentes puntos, seg\xFAn la distancia que
+      haya con el jugador. Los objetos se generan mientras el jugador se desplaza
+      por el nivel, y se eliminan cuando superan una distancia establecida. Tambi\xE9n
+      puedes tener diferentes niveles de dificultad que se activan cuando una condici\xF3n
+      se cumple. Este componente puede ser usado para los juegos en los que se generan
+      objetos de forma aleatoria en diferentes puntos mientras el jugador est\xE1
+      corriendo.\n\nNota 1: La l\xEDnea verde representa la posici\xF3n que ser\xE1
+      usada como referencia para mover el generador de objetos (Cuando el jugador
+      sobrepasa esta l\xEDnea, el generador se mover\xE1), la l\xEDnea roja es la
+      posici\xF3n m\xE1xima de los objetos (Cuando los objetos generados sobrepasan
+      esta l\xEDnea, ser\xE1n destruidos), y por \xFAltimo, desde el punto p\xFArpura
+      ser\xE1 donde puedes definir las posiciones en las que se generar\xE1n los
+      objetos.\n\nNota 2: Como complemento de este componente, puedes usar el componente
+      de ObjectSpawner o StaticLevelGenerator para definir los objetos iniciales
+      en la escena de forma aleatoria, ya que el componente de GenerateObjectsByDistance
+      solo generar\xE1 los objetos despu\xE9s de haber sobrepasado cierta distancia.\n\nNota
+      3: si tu objetivo es hacer un juego tipo Endless (Sin fin), y quieres generar
+      niveles con menos aleatoriedad o con caracter\xEDsticas m\xE1s espec\xEDficas,
+      puedes usar el componente de LevelPartsGenerator."
+    category: 5
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: d0abd2811eaa722459f14c371a3ccb4c, type: 3}
+    description: "With this component you can define health points for any object
+      in the game. For example, if you'd like a box to be destroyed after 3 hits,
+      you can give it this component and set it to be destroyed upong losing 3 health
+      points (HP). You can also select whether you'd like to enable, disable, or
+      instantiate an object depending on the object's current health points, and
+      you can also send the object's current health points to a parameter in the
+      animator, to animate the object in different ways dependant on its HP (or to
+      change its sprite.) \n\nNote: Use the ObjectHealthReducer component to reduce
+      the HP of objects with the ObjectHealth component."
+    descriptionSpanish: "Con este componente puedes definir puntos de salud para
+      cualquier objeto. Por ejemplo, si deseas destruir una caja con 3 golpes puedes
+      agregarle este componente para que se destruya cuando pierda los 3 puntos de
+      vida. Tambi\xE9n puedes definir si quieres habilitar, deshabilitar, instanciar
+      o destruir un objeto dependiendo de los puntos de salud del objeto, y adem\xE1s
+      tambi\xE9n puedes enviar los puntos de salud actuales del objeto a alg\xFAn
+      par\xE1metro del Animator para animar el objeto (o para cambiar el sprite).\n\nNota:
+      Usa el componente de ObjectHealthReducer para reducir la salud de los objetos
+      con el componente de ObjectHealth."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 57106f987fe288c4db0068c9d3aa9c94, type: 3}
+    description: Use this component to reduce the HP of any object using the ObjectHealth
+      component.
+    descriptionSpanish: Usa este componente para reducir la vida de cualquier objeto
+      con el componente ObjectHealth.
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 6c98bf6ee1347644ebe501d50151f0d1, type: 3}
+    description: "This component allows you to display the current amount of projectiles,
+      or uses for an attack, the player has left. \n\nNote: This component needs
+      to be added to an object with a \"Text\" component on the user interface."
+    descriptionSpanish: 'Este componente permite mostrar la cantidad actual de proyectiles
+      o ataques disponibles de un arma.
+
+
+      Nota: Este componente debe ser agregado
+      a un objeto con el componente Text de la interfaz de usuario.'
+    category: 13
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: f314c7155ab2ebe46b55e86928d95691, type: 3}
+    description: 'This component allows you to grab objects and drop them when the
+      player activates an Input.
+
+
+      Note: This component must be added to the
+      player.'
+    descriptionSpanish: "Este componente permite agarrar objetos y dejarlos caer
+      cuando el jugador activa un Input. \n\nNota: Este componente debe agregarse
+      en el jugador."
+    category: 18
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: f116342b053d21b44bf66d30851b1224, type: 3}
+    description: This component allows you to instantiate objects in a specific or
+      random position at specific times. You also have the option of setting different
+      difficulty levels which will activate when a condition is met. This component
+      can be used, for example, to constantly instantiate enemies at certain time
+      intervals, in specific positions..
+    descriptionSpanish: "Este componente permite instanciar objetos en una posici\xF3n
+      espec\xEDfica o aleatoria en la escena cada cierto tiempo. Adem\xE1s, puedes
+      tener diferentes niveles de dificultad que se activan cuando una condici\xF3n
+      se cumple. Este componente puede ser usado, por ejemplo, para instanciar enemigos
+      constantemente cada cierto tiempo en posiciones espec\xEDficas."
+    category: 5
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: c4c74651753faa243843a98fb221bcf3, type: 3}
+    description: This component allows you to change the gravity of the level when
+      a specific condition is met or an action occurs within the game.
+    descriptionSpanish: "Este componente permite cambiar la gravedad del nivel actual
+      cuando ocurre una acci\xF3n o cuando se cumple una condici\xF3n."
+    category: 19
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 80bf7ef7ee8faf54d89145ad3f3d12ee, type: 3}
+    description: This component allows you to send the values of the level's current
+      gravity to the animator's parameters.
+    descriptionSpanish: "Este componente te permite enviar los valores de la gravedad
+      actual del nivel a los par\xE1metros del animator."
+    category: 19
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 76dcbcc9e56683443825cb408d1cdff7, type: 3}
+    description: "This component allows you to configure the vertical movement of
+      a player or mount. It can be used for games where the player only moves through
+      the Y axis. For example, it is used in games where the player must move upwards
+      or downwards to dodge obstacles or enemies. \n\nNote 1: This component requires
+      a Ridigbody or Rigidbody2D, and it's recommeneded that they have a gravity
+      of 0 for the component to function better. \n\nNote 2: It's recommended to
+      have a value that's higher than 0 on the Linear Drag value of the Rigidbody,
+      to keep the object from moving infinitely. The \"Linear Drag\" field on the
+      Rigidbody allows you to define how quickly the object will slow down its movement
+      when said movement ends."
+    descriptionSpanish: "Este componente te permite configurar el movimiento vertical
+      para el jugador o una montura. Puede ser usado en juegos donde el personaje
+      se mueve \xFAnicamente a trav\xE9s del eje Y, como por ejemplo, en juegos donde
+      el jugador debe moverse hacia arriba o abajo para esquivar obst\xE1culos o
+      enemigos.\n\nNota 1: Este componente requiere de un Rigidbody o Rigidbody2D,
+      recomendablemente con 0 gravedad para tener un mejor funcionamiento.\n\nNota
+      2: Es recomendable tener un valor mayor a 0 en el campo de Linear Drag del
+      Rigidbody para evitar que el objeto se mueva infinitamente. El campo de Linear
+      Drag en el Rigidbody permite definir qu\xE9 tan r\xE1pido frenar\xE1 el objeto
+      cuando el movimiento termina."
+    category: 8
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 65a4befc2f12d194385d1791236a7836, type: 3}
+    description: This component allows you to define different points through which
+      an object can move when an input is activated. Normally, this component is
+      used for the movement of the player, but it can also be used for other objects.
+      This component cab useful, for example, for any game where the player moves
+      left and right with a "swipe" of the finger, such as the "Endless Runner 3D"
+      games.
+    descriptionSpanish: "Este componente te permite definir diferentes puntos a los
+      cuales un objeto puede moverse cuando se activa un Input. Normalmente este
+      componente es usado para el movimiento del jugador, pero puede ser usado tambi\xE9n
+      con otros objetos. Este componente puede ser \xFAtil, por ejemplo, para los
+      juegos donde el jugador se mueve a la derecha o izquierda cuando se hace \"swipe\",
+      tal como en los juegos Endless Runner 3D."
+    category: 8
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: c4d73e3622644434baea26944684a125, type: 3}
+    description: "This component allows you to rotate an object by clicking or touching
+      the screen of a mobile device. This component is normally used to make the
+      player rotate to the position where the mouse is, or wherever the player clicked,
+      but it can also be used to make other objects rotate. \n\nNote: On the \"Object
+      Direction\" field you're able to define the direction where the object  is
+      currently facing. This serves to show us the angle in which the object will
+      rotate."
+    descriptionSpanish: "Este componente permite rotar un objeto al hacer click o
+      al tocar la pantalla de un dispositivo m\xF3vil. Este componente es normalmente
+      usado para hacer rotar al jugador hacia la posici\xF3n del mouse o d\xF3nde
+      se hizo click, pero puede ser usado tambi\xE9n para rotar otros objetos.\n\nNota:
+      En el campo de \"Object Direction\" debes definir la direcci\xF3n a la que
+      est\xE1 mirando actualmente el objeto. Esto servir\xE1 para saber a qu\xE9
+      \xE1ngulo se rotar\xE1 el objeto."
+    category: 8
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 62d3fcc2b0af7d44a9f5e69c871286dc, type: 3}
+    description: This component allows you to make an object move by clicking on
+      it, or by touching the screen of a mobile device. This component is normally
+      used to move the player to the mouse's position, or to whever the player clicked,
+      but it can also be used to move other objects.
+    descriptionSpanish: "Este componente permite mover un objeto al hacer click o
+      al tocar la pantalla de un dispositivo m\xF3vil. Este componente es normalmente
+      usado para mover al jugador hacia la posici\xF3n del mouse o d\xF3nde se hizo
+      click, pero puede ser usado tambi\xE9n para mover otros objetos."
+    category: 8
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 7463c64a4bbfb464a85bc336bd2de1ce, type: 3}
+    description: This component allows you to define up to 4 angles in which you'll
+      be able to rotate the player or an object when pressing an input. The rotation
+      to each of these angles can also be deactivated with a different input.
+    descriptionSpanish: "Este componente te permite definir hasta 4 \xE1ngulos a
+      los que puede rotar el jugador o un objeto al activar un Input. La rotaci\xF3n
+      a cada uno de los \xE1ngulos puede activarse con un Input diferente."
+    category: 8
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 7a0554b4d7e998a458048c93ca1fb5e2, type: 3}
+    description: "This component allows you to configure the movement for the player,
+      or any other object, based on the inclination of the device. \n This component
+      can be used, for example, in a game about ships or planes, where the player
+      is moved according to the inclination of the moving object."
+    descriptionSpanish: "Este componente te permite configurar el movimiento para
+      el jugador o cualquier objeto, basado en la inclinaci\xF3n del dispositivo.\nEste
+      componente puede ser usado, por ejemplo, en un juego de naves o aviones d\xF3nde
+      el personaje es movido seg\xFAn la inclinaci\xF3n del dispositivo m\xF3vil."
+    category: 8
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 3f2a42d0e471ce44189ba2a9b871d380, type: 3}
+    description: "This component allows you to configure the rotation of the player,
+      or that of any other object, based on the inclination of the device the game
+      is being played on. \n This composte componente te permite configurar la rotaci\xF3n
+      para el jugador o cualquier objeto, basado en la inclinaci\xF3n del dispositivo.\nThis
+      component can be used, for example, in a game about ships or planes, where
+      the player is moved according to the inclination of the moving object."
+    descriptionSpanish: "Este componente te permite configurar la rotaci\xF3n para
+      el jugador o cualquier objeto, basado en la inclinaci\xF3n del dispositivo.\nEste
+      componente puede ser usado, por ejemplo, en un juego de naves o aviones d\xF3nde
+      el personaje rota seg\xFAn la inclinaci\xF3n del dispositivo m\xF3vil."
+    category: 8
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 2fbfe192044897a418b548aa24c35d8d, type: 3}
+    description: "With this component you can make the player, or an object, rotate
+      with a specific input. \n\nNote 1: This component required a Rigidbody2D or
+      a Rigidbody3D. If you're using a Rigidbody2D the object will only rotate on
+      the Z axis, but if you're using a Rigidbody3D you'll be able to select the
+      axis you'd like the object to rotate on. \n\nNote 2: Use the \"Angular Drag\"
+      field on the Rigidbody to define how quickly the object's rotation will end."
+    descriptionSpanish: "Con este componente puedes hacer rotar el jugador o un objeto
+      mientra se se activa un Input.\n\nNota 1: Este componente requiere de un Rigidbody2D
+      o Rigidbody3D. Si est\xE1s usando un Rigidbody2D, el objeto rotar\xE1 \xFAnicamente
+      sobre el eje Z, pero si est\xE1s usando un Rigidbody3D podr\xE1s elegir el
+      eje sobre el cual deseas que rote el objeto.\n\nNota 2: Usa el campo de Angular
+      Drag en el Rigidbody para definir qu\xE9 tan r\xE1pido terminar\xE1 la rotaci\xF3n."
+    category: 8
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: e31bfdf3927520047a1e0ad92fac4437, type: 3}
+    description: "With this component you can move the player, or a mount, with a
+      \"Top-down\" type movement. You can move the character in any direction (Up,
+      down, right, left, and even to intercardinals.) \n\nNote 1: This component
+      requires a Ridigbody or Rigidbody2D, and it's recommeneded that they have a
+      gravity of 0 for the component to function better. \n\nNote 2: It's recommended
+      to have a value that's higher than 0 on the Linear Drag value of the Rigidbody,
+      to keep the object from moving infinitely. The \"Linear Drag\" field on the
+      Rigidbody allows you to define how quickly the object will slow down its movement
+      when said movement ends."
+    descriptionSpanish: "Con este componente puedes mover el jugador o una montura
+      con un movimiento de tipo Top-Down. Puedes mover el personaje hacia cualquier
+      direcci\xF3n (Arriba, abajo, derecha, izquierda e incluso hac\xEDa las esquinas.)\n\nNota
+      1: Este componente requiere de un Rigidbody o Rigidbody2D, recomendablemente
+      con 0 gravedad para tener un mejor funcionamiento.\n\nNota 2: Es recomendable
+      tener un valor mayor a 0 en el campo de Linear Drag del Rigidbody para evitar
+      que el objeto se mueva infinitamente. El campo de Linear Drag en el Rigidbody
+      permite definir qu\xE9 tan r\xE1pido frenar\xE1 el objeto cuando el movimiento
+      termina."
+    category: 8
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: e2631cc0c4d949c40827d991b0f9f236, type: 3}
+    description: "This component allows you to move the player, or any other object,
+      forward or back. The character will advance toward the specified axis, keeping
+      in mind the current rotation of the object. \nYou can define the object's max
+      speed, as well as its acceleration speed, deacceleration speed, and even set
+      an input to stop. \nIn case you need the object to maintain constant movement,
+      you can activate this from the \"Constant Movement\" option. \n\nNote 1: This
+      component required a Rigidbody or a Rigidbody2d, preferably with a gravity
+      of 0, in order for it to function better. \n\nNote 2: It's recommended to have
+      a value higher than 0 on the \"Linear Drag\" field of the Rigidbody in order
+      for the component to function correctly."
+    descriptionSpanish: "Este componente te permite mover al jugador o cualquier
+      objeto hacia adelante y/o hacia atr\xE1s. El personaje avanzar\xE1 hacia el
+      eje especificado, tomando en cuenta tambi\xE9n la rotaci\xF3n actual del objeto.\nEn
+      este componente puedes definir la velocidad m\xE1xima del objeto y puedes definir
+      opcionalmente la velocidad de aceleraci\xF3n, velocidad de desaceleraci\xF3n,
+      y tambi\xE9n puedes definir un Input para frenar.\nEn caso de que necesites
+      que el objeto tenga un movimiento constante, tambi\xE9n puedes activarlo desde
+      la opci\xF3n de \"Constant Movement\".\n\nNota 1: Este componente requiere
+      de un Rigidbody o Rigidbody2D, recomendablemente con 0 gravedad para tener
+      un mejor funcionamiento.\n\nNota 2: Es recomendable tener un valor mayor a
+      0 en el campo de Linear Drag del Rigidbody para que el componente funcione
+      correctamente."
+    category: 8
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: d6d565f6ab0e7694281b599957753554, type: 3}
+    description: "This component adds AI to en enemy, in order for it to follow an
+      objective while dodging obstacles and finding the shortest route. This component
+      is mainly designed for top-down perspective games. \n\nNote: To use this component
+      you'll need to have an object on the scene with the PathFindingGrid component."
+    descriptionSpanish: "Este componente a\xF1ade una inteligencia artificial al
+      enemigo para seguir un objetivo, evitando obst\xE1culos y encontrando el camino
+      m\xE1s corto. Este componente est\xE1 dise\xF1ado principalmente para juegos
+      con vista top-down.\n\nNota: Para usar este componente es necesario tener un
+      objeto en la escena con el componente PathfindingGrid."
+    category: 15
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: c56322ad9a32c3549af40bf29d080b2a, type: 3}
+    description: "This component allows you to define the layers of the obstacles
+      on the scene for enemies with the EnemyPathFindingAI component. \nRemember
+      that all of the colliders in the layer you specify on the \"Unwalkable Layer\"
+      field will be marked as obstacles. \nFrom the Walkable Terrains area you can
+      optionally define layers in which the enemy will move more slowly."
+    descriptionSpanish: "Este componente te permite definir las capas de los obst\xE1culos
+      de la escena para los enemigos con el componente EnemyPathfindingAI.\nRecuerda
+      que se marcar\xE1n como obstaculos todos los Colliders con el Layer que selecciones
+      en Unwalkable Layer.\nDesde el \xE1rea de Walkable Terrains puedes definir
+      opcionalmente las capas d\xF3nde el enemigo debe moverse m\xE1s lento."
+    category: 15
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 9ed2d8a3014973148a79be1de20e4f9f, type: 3}
+    description: "This component allows you to define the movement of a camera with
+      a \"Perspective\" type projection. \n\nNote: This component can also be used
+      on an \"Ortographic\" type camera, but in that case it's recommended that we
+      use the \"CameraMovement\" component."
+    descriptionSpanish: "Este componente te permite definir el movimiento para una
+      c\xE1mara con proyecci\xF3n de tipo \"Perspective\"\n\nNota: Este componente
+      tambi\xE9n puede ser usado en una c\xE1mara de tipo \"Orthographic\", pero
+      en ese caso, es recomendable usar el componente de \"CameraMovement\"."
+    category: 14
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 0cd467a79af7cda45ae7d84f8a61a13b, type: 3}
+    description: This component allows you to create complex or simple dialogue,
+      with multiple answers to respond with, or actions.
+    descriptionSpanish: "Este componente te permite crear di\xE1logos complejos o
+      simples con m\xFAltiples respuestas y acciones."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 916471c3baf7c734bb4886224a300c44, type: 3}
+    description: "This component allows you to manage the values of the parameters
+      of the animator depending on the player's score. For example, this component
+      can be used to manage the animations of an object depending on the player's
+      current coins, or on the amount of enemies they've defeated. \n\nNote: If you'd
+      simply like to activate or deactivate objects depending on the player's score, 
+      use the HandleObjectsWithScore component."
+    descriptionSpanish: "Este componente te permite gestionar los valores de los
+      par\xE1metros del Animator dependiendo de la puntuaci\xF3n del jugador. Este
+      componente puede ser usado, por ejemplo, para gestionar las animaciones de
+      un objeto dependiendo de las monedas actuales del jugador o dependiendo de
+      la cantidad de enemigos que ha matado.\n\nNota: si deseas simplemente activar
+      o desactivar objetos dependiendo de la puntuaci\xF3n del jugador, usa el componente
+      de HandleObjectsWithScore."
+    category: 2
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: b2abda1cea073184792737291922ee24, type: 3}
+    description: "This component allows you to activate parameters in the animator
+      of an obejct when the player uses an input. This component can be used for
+      when the player presses an input, when they let it go, or while they're holding
+      it down. \n\nNote: Remember that the input list is managed from the Cross-Platform
+      Inputs Manager window."
+    descriptionSpanish: "Este componente permite activar par\xE1metros en el Animator
+      de un objeto cuando el jugador usa un Input. Este componente puede ser usado
+      para cuando el jugador presiona, suelta o deja presionado un Input.\n\nNota:
+      Recuerda que la lista de Inputs es gestionada desde la ventana Cross-Platform
+      Inputs Manager."
+    category: 2
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 1a06dbe44b8d1b1439f4d60ffc86bd71, type: 3}
+    description: This component allows objects with a Rigidbody (3D) to move slower
+      while inside the Collider area. Also, if the player or mount has the PlayerJump
+      component, the "Unlimited Jumps" option will be enabled while the object is
+      inside the Collider.
+    descriptionSpanish: "Este componente permite que los objetos con un Rigidbody
+      (3D) se muevan m\xE1s lento mientras est\xE1n dentro del \xE1rea del Collider.
+      Adem\xE1s, si el jugador o una montura tienen el componente de PlayerJump,
+      se habilitar\xE1 la opci\xF3n de \"Unlimited Jumps\" mientras el objeto est\xE1
+      dentro del Collider."
+    category: 12
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: e643d66a7bc9d054f9035d6d04588c3b, type: 3}
+    description: This component allows you to detect 2D colliders, and is solely
+      used for the PlatformerEnemyMovementAI to detect obstacles.
+    descriptionSpanish: "Este componente le permite detectar Colliders 2D y es usado
+      \xFAnicamente por el componente SideScrollingEnemyMovementAI para detectar
+      obst\xE1culos."
+    category: 15
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: cdd44b27e3793a0458db49e0df0abedc, type: 3}
+    description: "This component allows you to display the icon of the player's currently
+      equipped weapon, or any other specific weapon. \n\nNote: This component needs
+      to be added to an object with an \"Image\" component on the user interface."
+    descriptionSpanish: "Este componente permite mostrar el \xEDcono del arma actual
+      del jugador \xF3 de un arma espec\xEDfica.\n\nNota: Este componente debe ser
+      agregado a un objeto con el componente Image de la interfaz de usuario."
+    category: 13
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 0cb226651895d284483f05d1a8da73fb, type: 3}
+    description: "This component allows you to display the icon of the player's weapon's
+      current projectile, or that of any other specific weapon. \n\nNote: This component
+      needs to be added to an object with an \"Image\" component on the user interface."
+    descriptionSpanish: "Este componente permite mostrar el \xEDcono del proyectil
+      del arma actual del jugador \xF3 de un arma espec\xEDfica.\n\nNota: Este componente
+      debe ser agregado a un objeto con el componente Image de la interfaz de usuario."
+    category: 13
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: fb93eaffc22ffe84ca0373c52f87262b, type: 3}
+    description: "This component allows you to end the level by pressing a button.
+      \nYou can define whether the player will win or lose from the \"What To Do\"
+      field. \n This component is generally used for the \"Continue\" window, on
+      the button to end the game. \n\nNote: This component must be added to a button
+      on the user interface."
+    descriptionSpanish: "Este componente permite finalizar el nivel al presionar
+      el bot\xF3n.\nDesde el campo de \"What to do\" puedes definir si el jugador
+      perder\xE1 o ganar\xE1 el nivel.\nEste componente es generalmente usado en
+      la ventana de \"Continuar\", en el bot\xF3n para terminar el juego.\n\nNota:
+      Este componente debe ser agregado a un bot\xF3n de la interfaz de usuario."
+    category: 10
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: b8efe69ea91e3424495c2b8aa51c7201, type: 3}
+    description: "This component allows you to pause the game when an action occurs
+      within the game. You can select whether you'd like the game to be paused when
+      a collision with another object occurs, or when the area in the object's collider
+      is clicked. This component is used in cases such as when a dialogue or tutuorial
+      is started for the player, so the game pauses. \n\nNote 1: To resume the game,
+      use the ResumeButton component. (Which must be added to a button on the user
+      interface.) \n\nNote 2: If you'd like to pause the game by pressing an input,
+      use the PauseButton component."
+    descriptionSpanish: "Este componente permite pausar el juego cuando ocurre una
+      acci\xF3n. Puedes seleccionar si deseas que se pause el juego cuando ocurre
+      una colisi\xF3n con otro objeto o cuando se hace clic en el \xE1rea del collider
+      del objeto. Este componente es usado, por ejemplo, en los casos donde se inicia
+      un di\xE1logo o tutorial para el jugador y se pausa el juego.\n\nNota 1: Para
+      despausar el juego usa el componente de ResumeButton (Que debe ser agregado
+      a un bot\xF3n de la interfaz de usuario). \n\nNota 2: si quieres pausar el
+      juego al presionar un bot\xF3n, usa el componente de PauseButton."
+    category: 16
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 6de938872fd789547ab2762ad84ecfc2, type: 3}
+    description: This component is added or eliminated automatically from the character
+      while they use the "Jetpack" PowerUp. But it must be added manually if you'd
+      like the character to fly as if they were using a jetpack.
+    descriptionSpanish: "Este componente es agregado o eliminado autom\xE1ticamente
+      del personaje cuando usa el PowerUp de Jetpack, pero puede ser agregado manualmente
+      si deseas que el personaje vuele como si usara un Jetpack."
+    category: 8
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 3fe36e37d04839f4da8368e0b138b4a7, type: 3}
+    description: "This component will allow you to create a credits scene. From the
+      \"Credits Type\" window you'll be able to select between two types of credits:
+      \"Rolling Credits\" or \"Credits Appear One By One.\" The \"Rolling Credits\"
+      option allows you to move an object from its original position to a specific
+      position at a predefined speed. In this case, all of the elements that make
+      up the credits must be child objects of a main object which will be moving.
+      You can use this option, for example, to display credits that appear from the
+      upper or lower part of the sceen, and are shown little by little. \n The \"Credits
+      Appear One By One\" option allows you to display obejcts one at a time at specific
+      time intervals. On the \"Object To Enable\" field you'll be able to define
+      the object which will be activated, from the \"Intermediate Time\" field you'll
+      have to define for how long there'll be nothing on the screen, in the time
+      between two different objects, and on \"Delay to load next object\" you'll
+      be able to define a delay time before activating the next object. "
+    descriptionSpanish: "Este componente te facilita la creaci\xF3n de una escena
+      de cr\xE9ditos. Desde el campo de \"Credits Type\" puedes definir entre dos
+      tipos de cr\xE9ditos: \"Rolling Credits\" o \"Appears One By One\".\nLa opci\xF3n
+      de \"Rolling Credits\" te permite mover un objeto desde su posici\xF3n original
+      hasta cierta posici\xF3n a la velocidad definida. En este caso, todos los elementos
+      que hacen parte de los cr\xE9ditos deben ser hijos de un objeto principal que
+      ser\xE1 el objeto que se mover\xE1. Puedes usar esta opci\xF3n, por ejemplo,
+      para mostrar cr\xE9ditos que aparecen desde la parte superior o inferior de
+      la pantalla y que se muestran poco a poco.\nLa opci\xF3n de \"Credits Appear
+      One By One\" permite mostrar objetos uno por uno cada cierto tiempo. En el
+      campo de \"Object to enable\" debes definir el objeto que se activar\xE1, desde
+      el campo de \"Intermediate Time\" debes definir un tiempo en el cual ning\xFAn
+      objeto estar\xE1 activado, y desde el campo de \"Delay to load next object\"
+      debes definir el tiempo de retraso para activar el siguiente objeto."
+    category: 17
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 3deecf3e86e09a4488d1075dc04d9fa1, type: 3}
+    description: "This component allows the player o share a screenshot of their
+      game, along with a message, to their social networks. \nOptionally, you can
+      also include the player's score in case it is in the level's scene. \n\nNote
+      1: This component must be added to a button on the user interface. \n\nNote
+      2: This component only works for Android and iOS compatible devices."
+    descriptionSpanish: "Este componente permite al jugador compartir una captura
+      de pantalla del juego con un mensaje para redes sociales.\nOpcionalmente tambi\xE9n
+      puedes incluir la puntuaci\xF3n actual del jugador en caso de que est\xE9 en
+      una escena de nivel.\n\nNota 1: Este componente debe ser agregarlo a un bot\xF3n
+      de la interfaz de usuario.\n\nNota 2: Este componente solo funciona para Android
+      y iOS."
+    category: 20
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 9d6b50d826a2fc64d9519a8998365df7, type: 3}
+    description: This component allows you to display a window asking the player
+      if they's like to rate the game.
+    descriptionSpanish: Este componente te permite mostrar la ventana para preguntar
+      al jugador si desea calificar el juego.
+    category: 20
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: ec552cecf832faf4e8bbc9eaf2f8a9df, type: 3}
+    description: "This component allows you to define the achievements and scoreboards
+      of the game for Google Play Games. \n\nNote 1: Remember that Google Play Games
+      only works with Android compatible devices. If you'd like to define achievements
+      and scoreboard for iOS devices, use the GameCenterManager component. \n\nNote
+      2: If you're creating a game for Android and iOS, you can use both components
+      (GPGManager and GameCenterManager,) and each will work independently depending
+      on which platform the game is being run in.\n\nNote 3: It's very important
+      that this component only be in the first scene of the game. The object with
+      this component won't be destroyed when switching scenes, and will remain there
+      to verify achievements and scoreboards. \n\nNote 4: The values for the \"Achievement
+      ID\" and the \"Leaderboard ID\" need to coincide exactly with the IDs for achievements
+      and leaderboards you created for this game on your Google Play developer account.\n\nNote
+      5: It's possible for achievements and scoreboard not to work until your application
+      is published in its alpha, beta, or production version from Google Play. Also
+      remember to define the testers of the application from Google Play to try out
+      the achievements and scoreboards in case your game isn't published."
+    descriptionSpanish: "Este componente te permite definir los logros y tablas de
+      clasificaci\xF3n para Google Play Games.\n\nNota 1: Recuerda que Google Play
+      Games funciona \xFAnicamente para Android. Si deseas definir los logros y tablas
+      de clasificaci\xF3n para iOS usa el componente GameCenterManager.\n\nNota 2:
+      Si est\xE1s creando un juego para Android y iOS, puedes usar ambos componentes
+      (GPGManager y GameCenterManager), cada componente funcionar\xE1 de forma independiente
+      seg\xFAn la plataforma en que se est\xE1 ejecutando el juego.\n\nNota 3: Es
+      muy importante que tengas este componente \xFAnicamente en la primera escena
+      del juego. El objeto con este componente no se destruir\xE1 y permanecer\xE1
+      en todas las escenas para verificar los logros y tablas de clasificaci\xF3n.\n\nNota
+      4: Recuerda que los valores de \"Achievement ID\" y \"Leaderboard ID\" deben
+      coincidir exactamente con los ID de logros y tablas de clasificaci\xF3n creadas
+      para este juego desde tu cuenta de desarrollador de Google Play.\n\nNota 5:
+      Es posible que los logros y tablas de clasificaci\xF3n no funcionen hasta que
+      tu aplicaci\xF3n est\xE9 publicada en versi\xF3n alfa, beta o producci\xF3n
+      desde Google Play. Recuerda tambi\xE9n definir los Testers de la aplicaci\xF3n
+      desde Google Play para probar los logros y tablas de clasificaci\xF3n en caso
+      de que tu juego a\xFAn no est\xE9 publicado."
+    category: 20
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 32c1c2d6ee6268c42aa1aebc59e84a81, type: 3}
+    description: "This component allows the player to log into Google Play Games
+      by pressing a button. \n\nNote 1: This component is optional, and is not necessary
+      if the \"Log In Automatically\" option was selected on the \"GPGManager\" component,
+      on the \"How To Log In\" field. \n\nNote 2: The \"ShowGPGAchievementsButton\"
+      and \"ShowGPGLeaderboardsButton\" also allow you to automatically log in when
+      pressing the button, in case the user hadn't logged in already. \n\nNote 3:
+      Remember that you must have the \"GPGManager\" object on an object on the game's
+      first scene. \n\nNote 4: This component has the same function as the \"LoginToGooglePlayButton.\"
+      You can use either of the two components. \n\nNote 5: This component must be
+      added to a button on the user interface."
+    descriptionSpanish: "Este componente permite al jugador iniciar sesi\xF3n en
+      Google Play Games al presionar el bot\xF3n.\n\nNota 1: Este componente es opcional
+      y no es necesario usarlo si en el componente \"GPGManager\" est\xE1 seleccionada
+      la opci\xF3n de \"Login Automatically\" en el campo de \"How To Log In\".\n\nNota
+      2: Los componentes \"ShowGPGAchievementsButton\" y \"ShowGPGLeaderboardsButton\"
+      tambi\xE9n permiten iniciar sesi\xF3n autom\xE1ticamente al presionar el bot\xF3n
+      en caso de que el usuario no haya iniciado sesi\xF3n anteriormente.\n\nNota
+      3: Recuerda que debes tener el componente \"GPGManager\" en alg\xFAn objeto
+      de la primera escena del juego.\n\nNota 4: Este componente hace la misma funci\xF3n
+      que el componente \"LogInToGooglePlayButton\". Puedes usar cualquiera de los
+      dos componentes.\n\nNota 5: Este componente debe ser agregado a un bot\xF3n
+      de la interfaz de usuario."
+    category: 20
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: c85d1c3a0b874da4fa11bc6ba86a153f, type: 3}
+    description: "This component allows you to open the Google Play Games user interface
+      to display achievements. \n\nNote 1: Remember that you must have the \"GPGManager\"
+      component on an object on the first scene of the game. \n\nNote 2: This component
+      must be added to a button on the user interface."
+    descriptionSpanish: "Este componente permite abrir la interfaz de usuario de
+      Google Play Games para mostrar los logros.\n\nNota 1: Recuerda que debes tener
+      el componente \"GPGManager\" en alg\xFAn objeto de la primera escena del juego.\n\nNota
+      2: Este componente debe ser agregado a un bot\xF3n de la interfaz de usuario."
+    category: 20
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 90252c8ac863da443a49d41f1ce55736, type: 3}
+    description: "This component allows you to open the Google Play Games user interface
+      to display the Leaderboards. \n\nNote 1: Remember that you must have the \"GPGManager\"
+      component on an object on the first scene of the game. \n\nNote 2: This component
+      must be added to a button on the user interface."
+    descriptionSpanish: "Este componente permite abrir la interfaz de usuario de
+      Google Play Games para mostrar las tablas de clasificaci\xF3n.\n\nNota 1: Recuerda
+      que debes tener el componente \"GPGManager\" en alg\xFAn objeto de la primera
+      escena del juego.\n\nNota 2: Este componente debe ser agregado a un bot\xF3n
+      de la interfaz de usuario."
+    category: 20
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: ce88b250e2e772c438e81b044b72778c, type: 3}
+    description: "This component allows you to save all of the user's game information
+      on the Google Play Games Cloud. \n\nNote 1: To use this component your game
+      will need to have been added \"Game Services\" area on your Google Play developer
+      account, and you'll have to activate the \"Saved games\" option on the \"Game
+      information\" tab. \n\nNote 2: Remember that Google Play Games only works for
+      Android. If you'd like to configure saving to the cloud on iOS, use the \"iCloudSaveManager\"
+      component. \n\nNote 3: If you're creating a game for Android or iOS, you can
+      use both components (GPSavedGamesManager and iCloudSaveManager,) and each component
+      will work independently according to whichever platform the game is being executed
+      in. \n\nNote 4: It's very important that you only have this component on the
+      first scene of the game."
+    descriptionSpanish: "Este componente permite guardar toda la informaci\xF3n del
+      juego del usuario en la nube de Google Play Games.\n\nNota 1: Para usar este
+      componente es necesario que tengas tu juego agregado en el \xE1rea de \"Servicios
+      para juegos\" en tu cuenta de desarrollador de Google Play y que actives la
+      opci\xF3n de \"Juegos guardados\" desde la pesta\xF1a \"Informaci\xF3n del
+      juego\".\n\nNota 2: Recuerda que Google Play Games funciona \xFAnicamente para
+      Android. Si deseas configurar el guardado en la nube para iOS usa el componente
+      \"iCloudSaveManager\".\n\nNota 3: Si est\xE1s creando un juego para Android
+      y iOS, puedes usar ambos componentes (GPSavedGamesManager y iCloudSaveManager),
+      cada componente funcionar\xE1 de forma independiente seg\xFAn la plataforma
+      en que se est\xE1 ejecutando el juego.\n\nNota 4: Es muy importante que tengas
+      este componente \xFAnicamente en la primera escena del juego."
+    category: 21
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 39ebe207a09dce74ea8ba4ced77f8698, type: 3}
+    description: "This component allows the player to log into Google Play Games
+      by pressing a button. \n\nNote 1: This component is optional, and is not necessary
+      if the \"Log In Automatically\" option was selected on the \"GPGManager\" component,
+      on the \"How To Log In\" field. \n\nNote 2: The \"ShowGPGAchievementsButton\"
+      and \"ShowGPGLeaderboardsButton\" also allow you to automatically log in when
+      pressing the button, in case the user hadn't logged in already. \n\nNote 3:
+      Remember that you must have the \"GPGManager\" object on an object on the game's
+      first scene. \n\nNote 4: This component has the same function as the \"LogInToGPGButton.\"
+      You can use either of the two components. \n\nNote 5: This component must be
+      added to a button on the user interface."
+    descriptionSpanish: "Este componente permite al jugador iniciar sesi\xF3n en
+      Google Play Games al presionar el bot\xF3n.\n\nNota 1: Este componente es opcional
+      y no es necesario usarlo si en el componente \"GPSavedGamesManager\" est\xE1
+      seleccionada la opci\xF3n de \"Login Automatically\" en el campo de \"How To
+      Log In\".\n\nNota 3: Recuerda que debes tener el componente \"GPSavedGamesManager\"
+      en alg\xFAn objeto de la primera escena del juego.\n\nNota 4: Este componente
+      hace la misma funci\xF3n que el componente \"LoginToGPGButton\". Puedes usar
+      cualquiera de los dos componentes.\n\nNota 5: Este componente debe ser agregado
+      a un bot\xF3n de la interfaz de usuario."
+    category: 21
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: fa2305b176d80f84ebd30b0ea6bda08c, type: 3}
+    description: "This component allows you to save all of the user\u2019s game information
+      to the iCloud. \n\nNote 1: After exporting your game for iOS, you\u2019ll need
+      to activate \"iCloud\" and \"Keychain Sharing\" from the Xcode project on the
+      \"Capabilities\" tab. It\u2019s also important that you validate that, on the
+      \"General\" tab, \"Security\" and \"CloudKit\" are added to the \"Linked Frameworks
+      and Libraries\" (In case they haven\u2019t been added you\u2019ll have to add
+      them by clicking on the \"+\" button.) \n\nNote 2: The player\u2019s information
+      is persistent between their devices, since the information is loaded from the
+      user\u2019s iCloud account. \n\nNote 3: Remember that iCloud only works with
+      iOS compatible devices. If you\u2019d like to configure cloud saving for Android,
+      you\u2019ll need to use the \"GPSavedGamesManager\" component. \n\nNote 4:
+      If you're creating a game for Android or iOS, you can use both components (GPSavedGamesManager
+      and iCloudSaveManager,) and each component will work independently according
+      to whichever platform the game is being executed in. \n\nNote 5: It's very
+      important that you only have this component on the first scene of the game.
+      \n\nNote6: With this component on the scene, the player will not need to log
+      in, since the player\u2019s iCloud account is used by default."
+    descriptionSpanish: "Este componente permite guardar toda la informaci\xF3n del
+      juego del usuario en la nube de iCloud.\n\nNota 1: Despu\xE9s de exportar el
+      juego para iOS, es necesario que desde el proyecto de Xcode actives \"iCloud\"
+      y \"Keychain Sharing\" desde la pesta\xF1a de \"Capabilities\". Tambi\xE9n
+      es importante que valides en la pesta\xF1a de \"General\" desde el \xE1rea
+      de \"Linked Frameworks and Libraries\" que est\xE9n agregados los frameworks
+      de \"Security\" y \"CloudKit\" (En caso de que no est\xE9n agregados, debes
+      agregarlos haciendo clic en el bot\xF3n de \"+\").\n\nNota 2: La informaci\xF3n
+      del jugador es persistente entre dispositivos ya que la informaci\xF3n es cargada
+      desde la cuenta de iCloud del usuario.\n\nNota 3: Recuerda que iCloud funciona
+      \xFAnicamente para iOS. Si deseas configurar el guardado en la nube para Android
+      usa el componente \"GPSavedGamesManager\".\n\nNota 4: Si est\xE1s creando un
+      juego para Android y iOS, puedes usar ambos componentes (GPSavedGamesManager
+      y iCloudSaveManager), cada componente funcionar\xE1 de forma independiente
+      seg\xFAn la plataforma en que se est\xE1 ejecutando el juego.\n\nNota 5: Es
+      muy importante que tengas este componente \xFAnicamente en la primera escena
+      del juego.\n\nNota 6: Con este componente no es necesario que el jugador inicie
+      sesi\xF3n ya que se usa por defecto la cuenta de iCloud del dispositivo."
+    category: 21
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: b61d2334a8d83204fa22a966da5b47ff, type: 3}
+    description: "This component allows you to define the achievements and scoreboards
+      of the game for Game Center. \n\nNote 1: Remember that Game Center only works
+      with iOS compatible devices. If you'd like to define achievements and scoreboards
+      for Android devices, use the GPGManager component. \n\nNote 2: If you're creating
+      a game for Android and iOS, you can use both components (GPGManager and GameCenterManager,)
+      and each will work independently depending on which platform the game is being
+      run in.\n\nNote 3: It's very important that this component only be in the first
+      scene of the game. The object with this component won't be destroyed when switching
+      scenes, and will remain there to verify achievements and scoreboards. \n\nNote
+      4: The values for the \"Achievement ID\" and the \"Leaderboard ID\" need to
+      coincide exactly with the IDs for achievements and leaderboards you created
+      for this game on your Apple developer account.\n\nNote 5: To rest your achievements
+      and leaderboards you\u2019ll need to have uploaded a version of your game to
+      TestFlight from your AppStore developer account, or you\u2019ll have to wait
+      until you\u2019ve published your game on the AppStore. Remember that you can
+      also define Testers for the application from the TestFlight area to try out
+      the achievements and leaderboards in case your game hasn\u2019t been published.."
+    descriptionSpanish: "Este componente te permite definir los logros y tablas de
+      clasificaci\xF3n para Game Center.\n\nNota 1: Recuerda que Game Center funciona
+      \xFAnicamente para iOS. Si deseas definir los logros y tablas de clasificaci\xF3n
+      para Android usa el componente \"GPGManager\".\n\nNota 2: Si est\xE1s creando
+      un juego para Android y iOS, puedes usar ambos componentes (GPGManager y GameCenterManager),
+      cada componente funcionar\xE1 de forma independiente seg\xFAn la plataforma
+      en que se est\xE1 ejecutando el juego.\n\nNota 3: Es muy importante que tengas
+      este componente \xFAnicamente en la primera escena del juego. El objeto con
+      este componente no se destruir\xE1 y permanecer\xE1 en todas las escenas para
+      verificar los logros y tablas de clasificaci\xF3n.\n\nNota 4: Recuerda que
+      los valores de \"Achievement ID\" y \"Leaderboard ID\" deben coincidir exactamente
+      con los ID de logros y tablas de clasificaci\xF3n creadas para este juego en
+      tu cuenta de desarrollador de Apple.\n\nNota 5: Para probar los logros y tablas
+      de clasificaci\xF3n debes haber subido una versi\xF3n de tu juego a TestFlight
+      desde tu cuenta de desarrollador de AppStore o hasta que hayas publicado el
+      juego en AppStore. Recuerda tambi\xE9n definir los Testers de la aplicaci\xF3n
+      desde el \xE1rea de TestFlight para probar los logros y tablas de clasificaci\xF3n
+      en caso de que tu juego a\xFAn no est\xE9 publicado."
+    category: 20
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: df401e65398f7eb4a8b1ff58b7ddf21d, type: 3}
+    description: "This component allows the player to log into the Game Center by
+      pressing a button. \n\nNote 1: This component is optional, and is not necessary
+      if the \"Log In Automatically\" option was selected on the \"GameCenterManager\"
+      component, on the \"How To Log In\" field. \n\nNote 2: The \"ShowGameCenterAchievementsButton\"
+      and \"ShowGameCenterLeaderboardsButton\" also allow you to automatically log
+      in when pressing the button, in case the user hadn't logged in already. \n\nNote
+      3: Remember that you must have the \"GameCenterManager\" component on an object
+      on the game's first scene. \n\nNote 4: This component must be added to a button
+      on the user interface."
+    descriptionSpanish: "Este componente permite al jugador iniciar sesi\xF3n en
+      Game Center al presionar el bot\xF3n.\n\nNota 1: Este componente es opcional
+      y no es necesario usarlo si en el componente \"GameCenterManager\" est\xE1
+      seleccionada la opci\xF3n de \"Login Automatically\" en el campo de \"How To
+      Log In\".\n\nNota 2: Los componentes \"ShowGameCenterAchievementsButton\" y
+      \"ShowGameCenterLeaderboardsButton\" tambi\xE9n permiten iniciar sesi\xF3n
+      autom\xE1ticamente al presionar el bot\xF3n en caso de que el usuario no haya
+      iniciado sesi\xF3n anteriormente.\n\nNota 3: Recuerda que debes tener el componente
+      \"GameCenterManager\" en alg\xFAn objeto de la primera escena del juego.\n\nNota
+      4: Este componente debe ser agregado a un bot\xF3n de la interfaz de usuario."
+    category: 20
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 8450406fe49eb7b4fa8f9a44214a5ff3, type: 3}
+    description: "This component allows you to open the Game Center user interface
+      to display achievements. \n\nNote 1: Remember that you must have the \"GameCenterManager\"
+      component on an object on the first scene of the game. \n\nNote 2: This component
+      must be added to a button on the user interface."
+    descriptionSpanish: "Este componente permite abrir la interfaz de usuario de
+      Game Center para mostrar los logros.\n\nNota 1: Recuerda que debes tener el
+      componente \"GameCenterManager\" en alg\xFAn objeto de la primera escena del
+      juego.\n\nNota 2: Este componente debe ser agregado a un bot\xF3n de la interfaz
+      de usuario."
+    category: 20
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 5be45b43dc0a84942955ad9906b9aab4, type: 3}
+    description: "This component allows you to open the Game Center user interface
+      to display the Leaderboards. \n\nNote 1: Remember that you must have the \"GameCenterManager\"
+      component on an object on the first scene of the game. \n\nNote 2: This component
+      must be added to a button on the user interface."
+    descriptionSpanish: "Este componente permite abrir la interfaz de usuario de
+      Game Center para mostrar las tablas de clasificaci\xF3n.\n\nNota 1: Recuerda
+      que debes tener el componente \"GameCenterManager\" en alg\xFAn objeto de la
+      primera escena del juego.\n\nNota 2: Este componente debe ser agregado a un
+      bot\xF3n de la interfaz de usuario."
+    category: 20
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: da998128e5a79e842bdba543ed59ed24, type: 3}
+    description: "This component allows you to reset the player's achivements on
+      the Game Center. \n\nNote 1: This component only works for the Game Center
+      and iOS, since Google Play currently doesn't offer such an option for published
+      games. \n\nNote 2: This component must be added to a button on the user interface."
+    descriptionSpanish: "Este componente permite resetear los logros del jugador
+      en Game Center.\n\nNota 1: Este componente funciona \xFAnicamente con Game
+      Center para iOS, actualmente Google Play Games no ofrece esta opci\xF3n para
+      juegos ya publicados.\n\nNota 2: Este componente debe ser agregado a un bot\xF3n
+      de la interfaz de usuario."
+    category: 20
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: e7e0a2a6d52a2054085f3c934f3b1434, type: 3}
+    description: "This component allows you to load information on products from
+      the app store when the component starts the scene. It is recommended to only
+      use this component on the first scene of the game so this information is loaded
+      immediately when at the start of the game. \n\nNote: You'll need to keep in
+      mind that if you don't use this component, then the \"UGameStudioIAPButton\"
+      component will load the information of the products when the scene starts,
+      but the process might take a few seconds. Because of this, it's recommended
+      to use this component on the first scene of the game to speed up the loading
+      process."
+    descriptionSpanish: "Este componente permite cargar la informaci\xF3n de los
+      productos de la tienda de aplicaciones cuando el componente inicia en la escena.
+      Es recomendable agregar este componente en la primera escena del juego para
+      que la informaci\xF3n de los productos cargue inmediatamente cuando el juego
+      inicia.\n\nNota: Debes tener en cuenta que si no usas este componente, entonces
+      el componente de \"UGameStudioIAPButton\" cargar\xE1 la informaci\xF3n de los
+      productos cuando la escena inicia, pero este proceso puede tardar un par de
+      segundos. Debido a esto, es recomendable usar este componente en la primera
+      escena del juego para agilizar la carga de la informaci\xF3n."
+    category: 22
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: bae47222a3d4c0748a47809ebbd969b2, type: 3}
+    description: "This component allows you to initiate the purchase of a product
+      in your game when a button is pressed. \nYou\u2019ll also be define the texts
+      on the user interface for the title, description, and price assigned from the
+      app store, from this component. If the player doesn\u2019t have an internet
+      connection, the information assigned to the \"IAP Products Manager\" window
+      will be loaded, you can open this window from \"Tools -> Window > UgameStudio
+      IAP Products Manager.\" \n\nNote 1: From the \"Button Action\" field you\u2019ll
+      be able to define if the button will also work to reload the player\u2019s
+      previous purchases, but you\u2019ll need to keep in mind that this particular
+      function only works on iOS platforms. On Android, this button isn\u2019t necessary,
+      since purchases are restored automatically. \n\nNote 2: To add new products,
+      you can go to \"Tools -> Window -> UGame Studio IAP Products Manager.\" From
+      this window you can define the products and goods which will be given to the
+      player once the purchase is finished."
+    descriptionSpanish: "Este componente permite iniciar la compra de un producto
+      de tu juego cuando se hace clic en el bot\xF3n.\nDesde este componente tambi\xE9n
+      puedes definir los textos de la interfaz de usuario para mostrar el t\xEDtulo,
+      descripci\xF3n y precio asignado desde la tienda de aplicaciones. En caso de
+      que el jugador no tenga conexi\xF3n a internet se cargar\xE1 la informaci\xF3n
+      asignada en la ventana \"IAP Products Manager\" que puedes abrir desde la pesta\xF1a
+      \"Tools -> Window -> UGame Studio IAP Products Manager\".\n\nNota 1: Desde
+      el campo de \"Button Action\" puedes definir tambi\xE9n si el bot\xF3n servir\xE1
+      para restaurar las compras del usuario, pero debes tener en cuenta que esta
+      funci\xF3n s\xF3lo funciona en algunas plataformas como iOS. En plataformas
+      como Android este bot\xF3n no es necesario ya que las compras son restauradas
+      autom\xE1ticamente.\n\nNota 2: Para agregar nuevos productos puedes hacerlo
+      desde la pesta\xF1a \"Tools -> Window -> UGame Studio IAP Products Manager\".
+      Desde esta ventana puedes definir todos los productos y los bienes que se le
+      dar\xE1n al jugador cuando la compra es finalizada con \xE9xito."
+    category: 22
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 0bc25055066e2494da8ede8bf1d11f13, type: 3}
+    description: "This component allows you to define the corresponding configurations
+      to display ads with Unity Ads. From the \"Show ads with button\" area you can
+      define with how many clicks the ads will be displayed, and from the \"Show
+      ads with condition\" area you'll be able to define which conditions will dictate
+      whether an ad will appear or not, based on the player's state. \n\nNote 1:
+      To display ads when pressing a button, use the \"ShowUnityAdsOnButtonPress\"
+      component (Which uses the frequency defined on the \"Show ads with button\"
+      field of this component.) \n\nNote 2: It's very important that you only have
+      this component on the first scene of the game. The object with this component
+      won't be destroyed and it'll remain throughout the rest of the scenes to display
+      ads when the conditions for the display of said ads are met."
+    descriptionSpanish: "Este componente te permite definir las configuraciones correspondientes
+      para mostrar anuncios con Unity Ads. Desde el \xE1rea de \"Show Ads with button\"
+      puedes definir cada cuantos clics en el bot\xF3n se mostrar\xE1n los anuncios,
+      y desde el \xE1rea de \"Show Ads with condition\" puedes definir condiciones
+      basadas en los estados del jugador para mostrar anuncios.\n\nNota 1: Para mostrar
+      anuncios al presionar un bot\xF3n, usa el componente \"ShowUnityAdsOnButtonPress\"
+      (Recuerda que se tiene en cuenta la frecuencia definida en el \xE1rea de \"Show
+      Ads with button\" de este componente).\n\nNota 2: Es muy importante que tengas
+      este componente \xFAnicamente en la primera escena del juego. El objeto con
+      este componente no se destruir\xE1 y permanecer\xE1 en todas las escenas para
+      mostrar los anuncios cuando se cumplan las condiciones o cuando se presione
+      el bot\xF3n para mostrar un anuncio."
+    category: 22
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: ac8cac6693c42344bbd7bd605c31c724, type: 3}
+    description: "This component allows you to display an ad from Unity Ads when
+      a button is pressed. \nWith this component you can define whether you'd like
+      an ad to appear every time a button is pressed, or if it should look up how
+      often as defined on the \"AdsManagerForUnityAds\" component. \n\nNote: This
+      component must be added to a button on the user interface."
+    descriptionSpanish: "Este componente te permite mostrar un anuncio de Unity Ads
+      cuando se presiona el bot\xF3n.\nCon este componente puedes definir si deseas
+      mostrar el anuncio cada vez que se presiona el bot\xF3n o si se tiene en cuenta
+      la frecuencia definida en el componente \"AdsManagerForUnityAds\".\n\nNota:
+      Este componente debe ser agregado a un bot\xF3n de la interfaz de usuario."
+    category: 22
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 3c89ca0e4d0ec354895adb20a83f00c0, type: 3}
+    description: "This component allows you to activate a \"Bool\" type parameter
+      while a TargetDetector is detecting an object. \n\nNote: To use this component,
+      a TargetDetector component is needed, which is able to detect an object. The
+      TargetDetector component looks for objectives depending on their layer, so
+      you must make sure that the objective has a specific layer."
+    descriptionSpanish: "Este componente permite activar un par\xE1metro de tipo
+      Bool mientras el TargetDetector tiene un objetivo detectado.\n\nNota: Para
+      usar este componente es necesario agregar el componente TargetDetector, el
+      cual permite detectar un objetivo. El componente TargetDetector busca los objetivos
+      dependiendo de su Layer, asi que debes asegurarte de que el objetivo tenga
+      el Layer especificado."
+    category: 2
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: b2169d2ed5faa934e8d13a8379ff1851, type: 3}
+    description: This component needs to be added to the camera in order to use the
+      CameraShakeActivator component, which allows you to shake the camera when a
+      condition is met, or when an action occurs.
+    descriptionSpanish: "Este componente debe agregarse a la c\xE1mara para poder
+      usar el componente CameraShakeActivator, el cual permite agitar la c\xE1mara
+      cuando se cumple una condici\xF3n o cuando ocurre una acci\xF3n."
+    category: 14
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: eaa0c53eff7300d418543ae1eae3b1ea, type: 3}
+    description: "This component allows you to shake the camera when a certain condition
+      is met, or when an action occurs. \n\nNote: Adding the \"CameraShakeManager\"
+      component to the camera is necessary in order to use this component."
+    descriptionSpanish: "Este componente permite agitar la c\xE1mara cuando se cumple
+      condici\xF3n o cuando ocurre una acci\xF3n.\n\nNota: Para usar este componente
+      es necesario agregar el componente CameraShakeManager a la c\xE1mara."
+    category: 14
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 15c9ef754c49f2c46a4a995b8a867a83, type: 3}
+    description: "This component allows you to manage the values of the animator's
+      paremeters depending on the state of the objects moving with the PathFollower
+      component. \n\nNote: In order to use this component you'll need to define the
+      object with the PathFollower component."
+    descriptionSpanish: "Este componente te permite gestionar los valores de los
+      par\xE1metros del Animator dependiendo del estado de los objetos en movimiento
+      en el componente de PathFollower.\n\nPara usar este componente es necesario
+      definir el objeto con el componente de PathFollower."
+    category: 2
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: c7e77cfd817119049afa36763c4b6a50, type: 3}
+    description: With this component you can enable, disable, or instantiate object
+      depending on the states of an enemy.
+    descriptionSpanish: Con este componente puedes habilitar, deshabilitar, instanciar
+      o destruir objetos dependiendo de los estados de un enemigo.
+    category: 15
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 500b7248297a797429feb2495f2b463c, type: 3}
+    description: 'This component allows you to change the language of the game using
+      the options of a Dropdown of the user interface
+
+
+      Note 1: Remember that
+      the languages that will be available for your game can be defined on the LanguageManager
+      component, on the "Global Values" area. '
+    descriptionSpanish: "Este componente permite cambiar el idioma del juego utilizando
+      las opciones de un Dropdown de la interfaz de usuario.\n\nNota: Recuerda que
+      los idiomas en que estar\xE1 disponible tu juego puedes definirlos desde el
+      componente LanguageManager en el \xE1rea de \"Global Values\"."
+    category: 4
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: 309a4b1a219e5dc49940942d89f1c3e3, type: 3}
+    description: With this component you can enable, disable, instantiate or destroy
+      objects depending on the player's state. It can be used, for example, to enable
+      an object while the player has one of UGame Studio's default PowerUps activated.
+    descriptionSpanish: Con este componente puedes habilitar, deshabilitar, instanciar
+      o destruir objetos dependiendo de los estados del jugador. Puede ser usado,
+      por ejemplo, para habilitar un objeto mientras el jugador tiene activado uno
+      de los PowerUps por defecto de UGame Studio.
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: ac150231e0ef96940b50c5da79f5aa2f, type: 3}
+    description: 'This component allows you to activate, deactivate, instanciate
+      or destroy objects when a predefined condition is met by the current state
+      of the objects in movement with the PathFollower component.   Note: In order
+      to use this component it is necessary to define the object with the PathFollower
+      component.'
+    descriptionSpanish: "Este componente te permite activar, desactivar, instanciar
+      o destruir objetos cuando se cumple una condici\xF3n definida por el estado
+      actual de los objetos en movimiento en el componente de PathFollower.  Nota:
+      Para usar este componente es necesario definir el objeto con el componente
+      de PathFollower."
+    category: 1
+    isFavorite: 0
+  - script: {fileID: 11500000, guid: c7e77cfd817119049afa36763c4b6a50, type: 3}
+    description: With this component you can enable, disable, or instantiate object
+      depending on the states of an enemy.
+    descriptionSpanish: Con este componente puedes habilitar, deshabilitar, instanciar
+      o destruir objetos dependiendo de los estados de un enemigo.
+    category: 1
+    isFavorite: 0
+  categories:
+  - name_eng: All
+    name_sp: Todo
+    icon: {fileID: 2800000, guid: 9f97ea24ac30d8d4fa7f4c7465436a69, type: 3}
+  - name_eng: Utilities (Object Actions and more)
+    name_sp: "Utilidades (acciones de objetos y m\xE1s)"
+    icon: {fileID: 2800000, guid: cb058baed07659b4398c693bad2e5904, type: 3}
+  - name_eng: Animator Managers
+    name_sp: Gestores de animaciones
+    icon: {fileID: 2800000, guid: 1467b770b48864246af4b0ba7b5803f9, type: 3}
+  - name_eng: Sound Managers
+    name_sp: Gestores de sonidos
+    icon: {fileID: 2800000, guid: c7bab485a52ea494494232611cdcd75a, type: 3}
+  - name_eng: Language Manager
+    name_sp: "Gesti\xF3n de Idiomas"
+    icon: {fileID: 2800000, guid: fff44ed58dcebc743902faf5cea87de6, type: 3}
+  - name_eng: Level and Object Generators
+    name_sp: 'Generadores de niveles y objetos '
+    icon: {fileID: 2800000, guid: 4bd035e0b1029d544bea22dbf2c65f3e, type: 3}
+  - name_eng: Mount Components
+    name_sp: Componentes de Monturas
+    icon: {fileID: 2800000, guid: 041749e216b9ce64783ce6f259b29098, type: 3}
+  - name_eng: Platform Actions
+    name_sp: Acciones de Plataformas
+    icon: {fileID: 2800000, guid: a72be5378ba2f60499d8ede1261dc4ac, type: 3}
+  - name_eng: Player Movements
+    name_sp: Movimientos del jugador
+    icon: {fileID: 2800000, guid: d718aae5b91a8404cb03aecd7ac8ba12, type: 3}
+  - name_eng: Power-Up Components
+    name_sp: Componentes para Power-Ups
+    icon: {fileID: 2800000, guid: 5b007ba83698db74ab31b27c6fdfea27, type: 3}
+  - name_eng: Check Points
+    name_sp: Puntos de control
+    icon: {fileID: 2800000, guid: 9f303a469538f494abb6d017662e6b68, type: 3}
+  - name_eng: Level Selection
+    name_sp: "Selecci\xF3n de nivel"
+    icon: {fileID: 2800000, guid: 1eff3ecde8ac4ae45bf37d2545c32463, type: 3}
+  - name_eng: Water Components
+    name_sp: Componentes del agua
+    icon: {fileID: 2800000, guid: eccad17c38717184ab0f5cfe0fbde417, type: 3}
+  - name_eng: Weapon Components
+    name_sp: Componentes de armas
+    icon: {fileID: 2800000, guid: 2fee93dcea3462f48b0c8d14d43d3d53, type: 3}
+  - name_eng: Camera Movements
+    name_sp: "Movimientos de c\xE1mara"
+    icon: {fileID: 2800000, guid: 1e4c2479aecf72d4395bc5527737b752, type: 3}
+  - name_eng: Entity Components
+    name_sp: Componentes de enemigos
+    icon: {fileID: 2800000, guid: f6e5c21129a789b459e7165ecfd324bd, type: 3}
+  - name_eng: Game Controllers (GameValues, Game Over, Pause, Settings and more)
+    name_sp: "Controladores de juego (puntuaciones, fin del juego, pausa, configuraci\xF3n
+      y m\xE1s)"
+    icon: {fileID: 2800000, guid: 2fdffc52211ce00498f3058228314d40, type: 3}
+  - name_eng: Other UI Utilities
+    name_sp: Otras utilidades de interfaz de usuario
+    icon: {fileID: 2800000, guid: d5a889f9c807930458583835854da939, type: 3}
+  - name_eng: Player Components
+    name_sp: Componentes del jugador
+    icon: {fileID: 2800000, guid: fe8bae0154ebf734786bc38bd340bced, type: 3}
+  - name_eng: Gravity
+    name_sp: Gravedad
+    icon: {fileID: 2800000, guid: 1be76daca5496b84ca08befc1145e542, type: 3}
+  - name_eng: Social
+    name_sp: Social
+    icon: {fileID: 2800000, guid: f0bb0ca5ea4c1d344ab621f71ce434be, type: 3}
+  - name_eng: Cloud Save
+    name_sp: Guardado en la nube
+    icon: {fileID: 2800000, guid: 8b6d477bfa1e8f74da91d070512754d3, type: 3}
+  - name_eng: Monetization
+    name_sp: "Monetizaci\xF3n"
+    icon: {fileID: 2800000, guid: 72ec7d2cca46ed34b8bf244626870126, type: 3}
+  _language: 1

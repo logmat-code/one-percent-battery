@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a9efc5ae5525847a164e5a2b91b6cf, type: 3}
+  m_Name: IAPProductsManager
+  m_EditorClassIdentifier: 
+  productsInfo:
+  - icon: {fileID: 21300000, guid: 6365495a312b94e46aed1b8a28c912cd, type: 3}
+    productID: exampleofplatformgame.500coins
+    goodsToGetOnCompletePurchase:
+    - type: 0
+      productID: 0
+      costumeCategory: 0
+      floatQuantity: 500
+      intQuantity: 0
+    productType: 1
+    offlineTitle: 500 Coins offline
+    offlineDescription: 500 Coins to purchase more things! offline
+    offlinePrice: $0.99
+    textIfSuccessful: 'Purchase successful: 500 Coins'
+    textIfFail: 'The purchase has failed. This is the reason: '
+    iHaveADifferentProductIDForEachStore: 1
+    override_productID_AppleAppstore: com.ugs.exampleofplatformgame.500coins
+    override_productID_GooglePlay: 
+    override_productID_FacebookStore: 
+    override_productID_SamsungApps: 
+    override_productID_AmazonApps: 
+    override_productID_MacAppStore: 
+    override_productID_TizenStore: 
+    override_productID_WindowsStore: 
+    override_productID_MoolahAppStore: 
+    override_productID_XiaomiMiPay: 
+    override_productID_UDP: 
+  - icon: {fileID: 21300000, guid: 0d5f335b6868fbf4db74f3c80e461678, type: 3}
+    productID: exampleofplatformgame.character8
+    goodsToGetOnCompletePurchase:
+    - type: 4
+      productID: 7
+      costumeCategory: 0
+      floatQuantity: 0
+      intQuantity: 0
+    productType: 0
+    offlineTitle: Character 8 offline
+    offlineDescription: character description offline
+    offlinePrice: $2.99
+    textIfSuccessful: Purchase successful.
+    textIfFail: 'The purchase has failed. This is the reason: '
+    iHaveADifferentProductIDForEachStore: 1
+    override_productID_AppleAppstore: com.ugs.ExampleOfPlatformGame.Character8
+    override_productID_GooglePlay: 
+    override_productID_FacebookStore: 
+    override_productID_SamsungApps: 
+    override_productID_AmazonApps: 
+    override_productID_MacAppStore: 
+    override_productID_TizenStore: 
+    override_productID_WindowsStore: 
+    override_productID_MoolahAppStore: 
+    override_productID_XiaomiMiPay: 
+    override_productID_UDP: 
+  - icon: {fileID: 21300000, guid: 819f1dec44d749e4b99dda40fa012e96, type: 3}
+    productID: exampleofplatformgame.removeads
+    goodsToGetOnCompletePurchase:
+    - type: 7
+      productID: 0
+      costumeCategory: 0
+      floatQuantity: 0
+      intQuantity: 0
+    productType: 0
+    offlineTitle: Remove Ads
+    offlineDescription: remove ads description offline
+    offlinePrice: $1.99
+    textIfSuccessful: Purchase successful.
+    textIfFail: 'The purchase has failed. This is the reason: '
+    iHaveADifferentProductIDForEachStore: 1
+    override_productID_AppleAppstore: com.ugs.ExampleOfPlatformGame.RemoveAds
+    override_productID_GooglePlay: 
+    override_productID_FacebookStore: 
+    override_productID_SamsungApps: 
+    override_productID_AmazonApps: 
+    override_productID_MacAppStore: 
+    override_productID_TizenStore: 
+    override_productID_WindowsStore: 
+    override_productID_MoolahAppStore: 
+    override_productID_XiaomiMiPay: 
+    override_productID_UDP: 

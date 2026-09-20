@@ -1,0 +1,259 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4b08e628beb1c42a572e0289a23c86, type: 3}
+  m_Name: PlayerAndEnemyStates
+  m_EditorClassIdentifier: 
+  PlayerStates:
+  - <Name>k__BackingField: UsingPowerToFly
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: UsingPowerToFly
+  - <Name>k__BackingField: UsingObjectMagnetPowerUp
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: UsingObjectMagnetPowerUp
+  - <Name>k__BackingField: UsingScoreDuplicatorPowerUp
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: UsingScoreDuplicatorPowerUp
+  - <Name>k__BackingField: UsingTrapsConverterPowerUp
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: UsingTrapsConverterPowerUp
+  - <Name>k__BackingField: UsingProtectorShieldPowerUp
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: UsingProtectorShieldPowerUp
+  - <Name>k__BackingField: UsingKillerShieldPowerUp
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: UsingKillerShieldPowerUp
+  - <Name>k__BackingField: UsingJetpackPowerUp
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: UsingJetpackPowerUp
+  - <Name>k__BackingField: PlayerHasWonTheLevel
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerHasWonTheLevel
+  - <Name>k__BackingField: PlayerHasLostTheLevel
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerHasLostTheLevel
+  - <Name>k__BackingField: PlayerContinuesAndRevive_TriggerValue
+    <Type>k__BackingField: 3
+    <Description>k__BackingField: PlayerContinuesAndRevive_TriggerValue
+  - <Name>k__BackingField: LevelHasStarted
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: LevelHasStarted
+  - <Name>k__BackingField: PlayerIsGrounded
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerIsGrounded
+  - <Name>k__BackingField: ItIsTheSecondJumpOfPlayer
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: ItIsTheSecondJumpOfPlayer
+  - <Name>k__BackingField: PlayerIsUnderWater
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerIsUnderWater
+  - <Name>k__BackingField: PlayerStartedToMove
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerStartedToMove
+  - <Name>k__BackingField: PlayerLosesHealthPoint_TriggerValue
+    <Type>k__BackingField: 3
+    <Description>k__BackingField: PlayerLosesHealthPoint_TriggerValue
+  - <Name>k__BackingField: PlayerLosesOneLife_TriggerValue
+    <Type>k__BackingField: 3
+    <Description>k__BackingField: PlayerLosesOneLife_TriggerValue
+  - <Name>k__BackingField: PlayerLosesAllLives_TriggerValue
+    <Type>k__BackingField: 3
+    <Description>k__BackingField: PlayerLosesAllLives_TriggerValue
+  - <Name>k__BackingField: PlayerDirectionIsLeft
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerDirectionIsLeft
+  - <Name>k__BackingField: PlayerDirectionIsRight
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerDirectionIsRight
+  - <Name>k__BackingField: PlayerDirectionIsUp
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerDirectionIsUp
+  - <Name>k__BackingField: PlayerDirectionIsDown
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerDirectionIsDown
+  - <Name>k__BackingField: PlayerDirectionIsUpAndRight
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerDirectionIsUpAndRight
+  - <Name>k__BackingField: PlayerDirectionIsUpAndLeft
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerDirectionIsUpAndLeft
+  - <Name>k__BackingField: PlayerDirectionIsDownAndRight
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerDirectionIsDownAndRight
+  - <Name>k__BackingField: PlayerDirectionIsDownAndLeft
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerDirectionIsDownAndLeft
+  - <Name>k__BackingField: PlayerIsInImmunityTime
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerIsInImmunityTime
+  - <Name>k__BackingField: PlayerIsInConstantReductionOfHealth
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerIsInConstantReductionOfHealth
+  - <Name>k__BackingField: PlayerIsCrouched
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerIsCrouched
+  - <Name>k__BackingField: PlayerIsRidingAMount
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerIsRidingAMount
+  - <Name>k__BackingField: PlayerIsInLadder
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerIsInLadder
+  - <Name>k__BackingField: PlayerMovesInLadder
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerMovesInLadder
+  - <Name>k__BackingField: PlayerAttacks_TriggerValue
+    <Type>k__BackingField: 3
+    <Description>k__BackingField: PlayerAttacks_TriggerValue
+  - <Name>k__BackingField: PlayerMovesInLadderToLeft
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerMovesInLadderToLeft
+  - <Name>k__BackingField: PlayerMovesInLadderToRight
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerMovesInLadderToRight
+  - <Name>k__BackingField: PlayerMovesInLadderToDown
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerMovesInLadderToDown
+  - <Name>k__BackingField: PlayerMovesInLadderToUp
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerMovesInLadderToUp
+  - <Name>k__BackingField: PlayerIsUsingAWeaponOfACategory
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerIsUsingAWeaponOfACategory
+  - <Name>k__BackingField: PlayerIsInParkourWall
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerIsInParkourWall
+  - <Name>k__BackingField: PlayerIsMovingInXAxis
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerIsMovingInXAxis
+  - <Name>k__BackingField: PlayerIsMovingInYAxis
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerIsMovingInYAxis
+  - <Name>k__BackingField: PlayerIsMoving
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerIsMoving
+  - <Name>k__BackingField: PlayerXAxisVelocity_FloatValue
+    <Type>k__BackingField: 1
+    <Description>k__BackingField: PlayerXAxisVelocity_FloatValue
+  - <Name>k__BackingField: PlayerYAxisVelocity_FloatValue
+    <Type>k__BackingField: 1
+    <Description>k__BackingField: PlayerYAxisVelocity_FloatValue
+  - <Name>k__BackingField: PlayerHealth_FloatValue
+    <Type>k__BackingField: 1
+    <Description>k__BackingField: PlayerHealth_FloatValue
+  - <Name>k__BackingField: LivesOfPlayer_IntValue
+    <Type>k__BackingField: 0
+    <Description>k__BackingField: LivesOfPlayer_IntValue
+  - <Name>k__BackingField: PlayerChangesWeapon_TriggerValue
+    <Type>k__BackingField: 3
+    <Description>k__BackingField: PlayerChangesWeapon_TriggerValue
+  - <Name>k__BackingField: PlayerHasFinishedTheLevel
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerHasFinishedTheLevel
+  - <Name>k__BackingField: PlayerHasAGrabbedObject
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerHasAGrabbedObject
+  - <Name>k__BackingField: PlayerGrabsAnObject_TriggerValue
+    <Type>k__BackingField: 3
+    <Description>k__BackingField: PlayerGrabsAnObject_TriggerValue
+  - <Name>k__BackingField: PlayerDropsAnObject_TriggerValue
+    <Type>k__BackingField: 3
+    <Description>k__BackingField: PlayerDropsAnObject_TriggerValue
+  - <Name>k__BackingField: PlayerZAxisVelocity_FloatValue
+    <Type>k__BackingField: 1
+    <Description>k__BackingField: PlayerZAxisVelocity_FloatValue
+  - <Name>k__BackingField: PlayerIsMovingInZAxis
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: PlayerIsMovingInZAxis
+  - <Name>k__BackingField: ItIsTheThirdJumpOfThePlayer
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: ItIsTheThirdJumpOfThePlayer
+  - <Name>k__BackingField: SpeedMagnitude_FloatValue
+    <Type>k__BackingField: 1
+    <Description>k__BackingField: SpeedMagnitude_FloatValue
+  - <Name>k__BackingField: SpeedMagnitudeForXAndYAxes_FloatValue
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: SpeedMagnitudeForXAndYAxes_FloatValue
+  - <Name>k__BackingField: SpeedMagnitudeForXAndZAxes_FloatValue
+    <Type>k__BackingField: 1
+    <Description>k__BackingField: SpeedMagnitudeForXAndZAxes_FloatValue
+  EnemyStates:
+  - <Name>k__BackingField: '*EnemyIsGrounded'
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: '*EnemyIsGrounded'
+  - <Name>k__BackingField: '*EnemyIsMoving'
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: '**EnemyIsMoving'
+  - <Name>k__BackingField: '*EnemyLosesHealthPoint_TriggerValue'
+    <Type>k__BackingField: 3
+    <Description>k__BackingField: '*EnemyLosesHealthPoint_TriggerValue'
+  - <Name>k__BackingField: '*EnemyDies'
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: '*EnemyDies'
+  - <Name>k__BackingField: '*EnemyDirectionIsRight'
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: '*EnemyDirectionIsRight'
+  - <Name>k__BackingField: '*EnemyDirectionIsLeft'
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: '*EnemyDirectionIsLeft'
+  - <Name>k__BackingField: '*EnemyDirectionIsUp'
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: '*EnemyDirectionIsUp'
+  - <Name>k__BackingField: '*EnemyDirectionIsDown'
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: '*EnemyDirectionIsDown'
+  - <Name>k__BackingField: '*EnemyDirectionIsUpAndRight'
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: '*EnemyDirectionIsUpAndRight'
+  - <Name>k__BackingField: '*EnemyDirectionIsUpAndLeft'
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: '*EnemyDirectionIsUpAndLeft'
+  - <Name>k__BackingField: '*EnemyDirectionIsDownAndRight'
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: '*EnemyDirectionIsDownAndRight'
+  - <Name>k__BackingField: '*EnemyDirectionIsDownAndLeft'
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: '*EnemyDirectionIsDownAndLeft'
+  - <Name>k__BackingField: '*EnemyAttacksWithAnyWeapon_TriggerValue'
+    <Type>k__BackingField: 3
+    <Description>k__BackingField: '*EnemyAttacksWithAnyWeapon_TriggerValue'
+  - <Name>k__BackingField: '*EnemyXAxisVelocity_FloatValue'
+    <Type>k__BackingField: 1
+    <Description>k__BackingField: '*EnemyXAxisVelocity_FloatValue'
+  - <Name>k__BackingField: '*EnemyYAxisVelocity_FloatValue'
+    <Type>k__BackingField: 1
+    <Description>k__BackingField: '*EnemyYAxisVelocity_FloatValue'
+  - <Name>k__BackingField: '*EnemyZAxisVelocity_FloatValue'
+    <Type>k__BackingField: 1
+    <Description>k__BackingField: '*EnemyZAxisVelocity_FloatValue'
+  - <Name>k__BackingField: '*EnemyHealth_FloatValue'
+    <Type>k__BackingField: 1
+    <Description>k__BackingField: '*EnemyHealth_FloatValue'
+  - <Name>k__BackingField: '*EnemyIsMovingInXAxis'
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: '*EnemyIsMovingInXAxis'
+  - <Name>k__BackingField: '*EnemyIsMovingInYAxis'
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: '*EnemyIsMovingInYAxis'
+  - <Name>k__BackingField: '*EnemyIsMovingInZAxis'
+    <Type>k__BackingField: 2
+    <Description>k__BackingField: '*EnemyIsMovingInZAxis'
+  - <Name>k__BackingField: '*EnemyAttacksWithSpecificWeaponCategory_TriggerValue'
+    <Type>k__BackingField: 3
+    <Description>k__BackingField: '*EnemyAttacksWithSpecificWeaponCategory_TriggerValue'
+  - <Name>k__BackingField: '*SpeedMagnitude_FloatValue'
+    <Type>k__BackingField: 1
+    <Description>k__BackingField: '*SpeedMagnitude_FloatValue'
+  - <Name>k__BackingField: '*SpeedMagnitudeForXAndYAxes_FloatValue'
+    <Type>k__BackingField: 1
+    <Description>k__BackingField: '*SpeedMagnitudeForXAndYAxes_FloatValue'
+  - <Name>k__BackingField: '*SpeedMagnitudeForXAndZAxes_FloatValue'
+    <Type>k__BackingField: 1
+    <Description>k__BackingField: '*SpeedMagnitudeForXAndZAxes_FloatValue'

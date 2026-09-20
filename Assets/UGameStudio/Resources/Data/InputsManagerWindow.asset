@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f6c0c0b1f363045b735faa6f9dcb95, type: 3}
+  m_Name: InputsManagerWindow
+  m_EditorClassIdentifier: 
+  useInPC: 1
+  useControlsInUI: 1
+  useInJoystick: 0
+  useAcelerometerAsInput: 0
+  inputNames:
+  - Move Left
+  - Move Right
+  - Jump
+  - Attack
+  - Move Up
+  - Move Down
+  - Dismount
+  keyCodePC: 5b0000005a000000060000002e0000005800000059000000590000000000000000000000000000000000000000000000
+  keyCodeJoystick: 060000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  keyCodeCursorEvent: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  timeToKeepSwipeDown: 3
+  timeToKeepSwipeUp: 2
+  timeToKeepSwipeLeft: 5
+  timeToKeepSwipeRight: 4
+  keyCodeAccelerometer: 00000000000000000000000000000000000000000000000000000000
+  deadZoneXAxis: 0.2
+  deadZoneYAxis: 0.2
+  deadZoneZAxis: 0.2
+  useJoystickAxis: 000000000000000000000000
+  positiveAxisValue: 000101010101010101010101
+  nameOfParentMobileControls: MobileControls
+  useTouchOrClickEvents: 0

@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4af8e3689bf6e488303d3851fbdcca, type: 3}
+  m_Name: CharactersManager
+  m_EditorClassIdentifier: 
+  <typeExpForPlayer>k__BackingField: 1
+  <typeExpForSystem>k__BackingField: 0
+  <Levels>k__BackingField: 05000000000000000a000000000000000f000000000000001400000000000000
+  defaultCharacter: 0
+  howToManageEqupoedItems: 1
+  howToManageInventory: 1
+  charactersInfo:
+  - defaultEquippedWeapon:
+      startWithWeaponTheFirstTime: 0
+      weaponId: -1
+    defaultInventoryItems: []
+    defaultEquippedItems: []
+    name: DemoCharacter
+    characterObj: {fileID: 1123893097191180, guid: 0f49031015d06ee48bc557e4dcafc485, type: 3}
+    icon: {fileID: 21300000, guid: 282a167053d40234391e59fd02e49ae8, type: 3}
+    defaultHealth: 5
+    defaultLives: 0
+    defaultMaxLives: 0
+    immunityTime: 1.2
+    startUnlocked: 1
+    <Block_DefaultHealth>k__BackingField:
+      rid: -2
+    <Block_ImmunityTime>k__BackingField:
+      rid: -2
+  livesInfo:
+    resetLivesWhenLevelStarts: 0
+    lives: 3
+    <Block_CurrentLives>k__BackingField:
+      rid: -2
+    maxLives: 5
+    <Block_MaxLivesLimit>k__BackingField:
+      rid: -2
+    canObtainLivesPerTime: 0
+    secondsToGetOneLive: 1800
+    <Block_SecondsToGetOneLive>k__BackingField:
+      rid: -2
+    resetLivesToDefaultValueWhenLivesEnds: 1
+    showGameOverWindowWhenLivesEnds: 1
+    deleteAllLevelsClearedWhenLivesEnds: 0
+    deleteAllLevelsClearedOfCurrentWorldWhenLivesEnds: 0
+    deleteSavedPointOfCurrentLevelWhenLivesEnds: 0
+  healthConfigs:
+    resetHealthWhenTheLevelStarts: 1
+    resetHealthToDefaultValueOnDie: 1
+    showGameOverWindowOnDie: 1
+    deleteAllLevelsClearedOnDie: 0
+    deleteAllLevelsClearedOfCurrentWorldOnDie: 0
+  defaultInventoryItemsForAll: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

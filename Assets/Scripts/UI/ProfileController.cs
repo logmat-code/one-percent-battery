@@ -1,0 +1,85 @@
+using OnePercentBattery.Data;
+using OnePercentBattery.Meta;
+using OnePercentBattery.Save;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace OnePercentBattery.UI
+{
+    /// <summary>Profile screen: aggregate stats, recent runs log, and the achievements grid.</summary>
+    public sealed class ProfileController : MonoBehaviour
+    {
+        [SerializeField] private GameObject root;
+
+        [Header("Stats")]
+        [SerializeField] private Text bestText;
+        [SerializeField] private Text streakText;
+        [SerializeField] private Text runsText;
+        [SerializeField] private Text coinsText;
+
+        [Header("Recent runs")]
+        [SerializeField] private Text recentRunsHeaderText;
+        [SerializeField] private Transform recentRunsContentParent;
+        [SerializeField] private Text runLogLinePrefab;
+        [SerializeField] private int maxRecentRunsShown = 10;
+
+        [Header("Achievements")]
+        [SerializeField] private Text achievementsHeaderText;
+        [SerializeField] private Transform achievementsContentParent;
+        [SerializeField] private AchievementItemView achievementItemPrefab;
+
+        private void OnEnable()
+        {
+            AchievementManager.Instance.Unlocked += HandleAchievementUnlocked;
+            Refresh();
+        }
+
+        private void OnDisable()
+        {
+            AchievementManager.Instance.Unlocked -= HandleAchievementUnlocked;
+        }
+
+        private void HandleAchievementUnlocked(AchievementDefinition definition) => Refresh();
+
+        private void Refresh()
+        {
+            var data = SaveSystem.Data;
+            bestText.text = $"{Mathf.FloorToInt(data.OverallBestDistance())}m";
+            streakText.text = $"{DailyStreakManager.Instance.DayStreak}d";
+            runsText.text = data.totalRuns.ToString();
+            coinsText.text = data.coins.ToString();
+
+            recentRunsHeaderText.text = $"{Mathf.Min(data.recentRuns.Count, 50)}/50";
+            for (int i = recentRunsContentParent.childCount - 1; i >= 0; i--)
+            {
+                Destroy(recentRunsContentParent.GetChild(i).gameObject);
+            }
+            int shown = Mathf.Min(data.recentRuns.Count, maxRecentRunsShown);
+            for (int i = 0; i < shown; i++)
+            {
+                var entry = data.recentRuns[i];
+                Text line = Instantiate(runLogLinePrefab, recentRunsContentParent);
+                line.text = $"{Mathf.FloorToInt(entry.distanceMeters)}m · {entry.mode} · +{entry.coinsEarned} · {entry.zoneReached} · {entry.dateIso}";
+            }
+
+            int unlockedCount = 0;
+            foreach (var a in AchievementCatalog.All)
+            {
+                if (AchievementManager.Instance.IsUnlocked(a.Id)) unlockedCount++;
+            }
+            achievementsHeaderText.text = $"{unlockedCount}/{AchievementCatalog.All.Length} UNLOCKED";
+
+            for (int i = achievementsContentParent.childCount - 1; i >= 0; i--)
+            {
+                Destroy(achievementsContentParent.GetChild(i).gameObject);
+            }
+            foreach (var a in AchievementCatalog.All)
+            {
+                AchievementItemView view = Instantiate(achievementItemPrefab, achievementsContentParent);
+                view.Bind(a);
+            }
+        }
+
+        public void Close() => root.SetActive(false);
+    }
+}
