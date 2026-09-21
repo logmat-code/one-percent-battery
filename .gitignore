@@ -40,3 +40,7 @@ Recordings/
 .env
 .env.*
 
+.utmp/
+*.keystore
+*.jks
+*.aab

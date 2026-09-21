@@ -105,61 +105,26 @@ namespace OnePercentBattery.Core
 
         private void StartRunInternal(RunModeType mode)
         {
-            // TEMP PROFILING - remove after investigation.
-            var _swTotal = System.Diagnostics.Stopwatch.StartNew();
-            long _allocBefore = UnityEngine.Profiling.Profiler.GetTotalAllocatedMemoryLong();
-
             ActiveMode = mode;
             ActiveConfig = RunModeConfig.For(mode);
             ElapsedSeconds = 0f;
             _secondChanceUsedThisRun = false;
             _doubleCoinsClaimedThisRun = false;
 
-            var _swRng = System.Diagnostics.Stopwatch.StartNew();
             System.Random rng = mode == RunModeType.Daily ? DailyRunManager.Instance.CreateTodaysRng() : new System.Random();
-            _swRng.Stop();
 
-            var _swCurrency = System.Diagnostics.Stopwatch.StartNew();
             CurrencyManager.Instance.BeginRun();
-            _swCurrency.Stop();
-
-            var _swSetActive = System.Diagnostics.Stopwatch.StartNew();
             player.gameObject.SetActive(true);
             player.enabled = true;
             spawner.enabled = true;
-            _swSetActive.Stop();
-
-            var _swPlayerBegin = System.Diagnostics.Stopwatch.StartNew();
             player.BeginRun(ActiveConfig);
-            _swPlayerBegin.Stop();
-
-            var _swSpawnerBegin = System.Diagnostics.Stopwatch.StartNew();
             spawner.BeginRun(ActiveConfig, rng);
-            _swSpawnerBegin.Stop();
-
-            var _swZone = System.Diagnostics.Stopwatch.StartNew();
             zoneManager.ResetZone();
-            _swZone.Stop();
 
             Time.timeScale = 1f;
             State = GameState.Playing;
             _runTransitionInProgress = false;
-
-            var _swRaise = System.Diagnostics.Stopwatch.StartNew();
             GameEvents.RaiseRunStarted(mode);
-            _swRaise.Stop();
-
-            long _allocAfter = UnityEngine.Profiling.Profiler.GetTotalAllocatedMemoryLong();
-            _swTotal.Stop();
-            Debug.Log("[TempProfile] StartRunInternal TotalMs=" + _swTotal.Elapsed.TotalMilliseconds.ToString("F3")
-                + " rngMs=" + _swRng.Elapsed.TotalMilliseconds.ToString("F3")
-                + " currencyMs=" + _swCurrency.Elapsed.TotalMilliseconds.ToString("F3")
-                + " setActiveMs=" + _swSetActive.Elapsed.TotalMilliseconds.ToString("F3")
-                + " playerBeginMs=" + _swPlayerBegin.Elapsed.TotalMilliseconds.ToString("F3")
-                + " spawnerBeginMs=" + _swSpawnerBegin.Elapsed.TotalMilliseconds.ToString("F3")
-                + " zoneMs=" + _swZone.Elapsed.TotalMilliseconds.ToString("F3")
-                + " raiseRunStartedMs=" + _swRaise.Elapsed.TotalMilliseconds.ToString("F3")
-                + " allocBytes=" + (_allocAfter - _allocBefore));
         }
 
         private void Update()
@@ -241,11 +206,7 @@ namespace OnePercentBattery.Core
         {
             if (State != GameState.GameOver || _runTransitionInProgress) return;
             _runTransitionInProgress = true;
-            // TEMP PROFILING - remove after investigation.
-            var _swFinalize = System.Diagnostics.Stopwatch.StartNew();
             FinalizeRun();
-            _swFinalize.Stop();
-            Debug.Log("[TempProfile] RetrySameMode FinalizeRunMs=" + _swFinalize.Elapsed.TotalMilliseconds.ToString("F3"));
             AdsManager.Instance.MaybeShowInterstitial(() => StartRunInternal(ActiveMode));
         }
 

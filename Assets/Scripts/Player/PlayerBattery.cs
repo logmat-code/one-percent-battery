@@ -109,6 +109,22 @@ namespace OnePercentBattery.Player
             }
         }
 
+        /// <summary>
+        /// Falling into a Pit is an unconditional fall, not a graduated hit - unlike ApplyHit, this
+        /// ignores Shield/invulnerability and the mode's HitDamagePercent/OneHitKnockout config (a Pit
+        /// deals the same fate in every mode). It still ends the run through the exact same
+        /// ApplyDelta -> IsDead/DeathCause path every other death already uses, and still raises
+        /// ObstacleHit so the existing impact feedback (haptics/SFX/camera shake) plays.
+        /// </summary>
+        public void FallIntoPit()
+        {
+            if (IsDead) return;
+
+            GameEvents.RaiseObstacleHit();
+            _pendingCause = RunEndCause.FellInPit;
+            ApplyDelta(-CurrentPercent);
+        }
+
         public void RestoreEnergy(float amountPercent)
         {
             if (IsDead) return;

@@ -45,7 +45,7 @@ namespace OnePercentBattery.UI
         {
             root.SetActive(true);
             titleText.text = "OUT OF CHARGE";
-            causeText.text = preview.Cause == RunEndCause.HitObstacle ? "HIT AN OBSTACLE" : "RAN OUT OF ENERGY";
+            causeText.text = DescribeCause(preview.Cause);
             newRecordBadge.SetActive(preview.IsNewRecord);
 
             _coinsEarnedThisRun = preview.CoinsCollected;
@@ -65,6 +65,16 @@ namespace OnePercentBattery.UI
                 doubleCoinsButton.gameObject.SetActive(canOfferDoubleCoins);
                 doubleCoinsButton.interactable = canOfferDoubleCoins && AdsManager.Instance.IsRewardedAvailable(RewardedAdPlacement.DoubleCoins);
                 if (doubleCoinsButtonLabel != null) doubleCoinsButtonLabel.text = $"WATCH AD -> +{preview.CoinsCollected}";
+            }
+        }
+
+        private static string DescribeCause(RunEndCause cause)
+        {
+            switch (cause)
+            {
+                case RunEndCause.HitObstacle: return "HIT AN OBSTACLE";
+                case RunEndCause.FellInPit: return "FELL INTO A PIT";
+                default: return "RAN OUT OF ENERGY";
             }
         }
 

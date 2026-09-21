@@ -246,3 +246,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: OnePercentBattery::OnePercentBattery.Spawning.Obstacle
   groundOffsetY: 0.3
+  heightClass: 0

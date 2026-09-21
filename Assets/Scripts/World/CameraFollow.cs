@@ -70,7 +70,7 @@ namespace OnePercentBattery.World
 
         private void HandleRunEnded(RunResult result)
         {
-            if (result.Cause == RunEndCause.HitObstacle)
+            if (result.Cause == RunEndCause.HitObstacle || result.Cause == RunEndCause.FellInPit)
             {
                 Shake(deathShakeDuration, deathShakeMagnitude);
             }

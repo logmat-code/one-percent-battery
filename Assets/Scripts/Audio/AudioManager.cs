@@ -32,10 +32,17 @@ namespace OnePercentBattery.Audio
         [SerializeField] private AudioClip deathSfxOverride;
         [SerializeField] private AudioClip uiClickSfxOverride;
 
+        [Header("Low-battery warning SFX overrides (leave empty to use the synthesized defaults)")]
+        [SerializeField] private AudioClip batteryWarning25SfxOverride;
+        [SerializeField] private AudioClip batteryCritical10SfxOverride;
+        [SerializeField] private AudioClip batterySevere5SfxOverride;
+        [SerializeField] private AudioClip batteryFinal1SfxOverride;
+
         private AudioSource _musicSource;
         private AudioSource _sfxSource;
 
         private AudioClip _jumpSfx, _landSfx, _coinSfx, _energySfx, _shieldSfx, _hitSfx, _survivalSfx, _deathSfx, _uiClickSfx;
+        private AudioClip _batteryWarning25Sfx, _batteryCritical10Sfx, _batterySevere5Sfx, _batteryFinal1Sfx;
         private bool _shieldWasActive;
 
         protected override void Awake()
@@ -65,6 +72,8 @@ namespace OnePercentBattery.Audio
             GameEvents.RunEnded += HandleRunEnded;
             GameEvents.RunStarted += HandleRunStarted;
             GameEvents.ReturnedToMenu += HandleReturnedToMenu;
+            GameEvents.LowBatteryThresholdCrossed += HandleLowBatteryThresholdCrossed;
+            GameEvents.LowBatteryIntensityChanged += HandleLowBatteryIntensityChanged;
         }
 
         private void OnDisable()
@@ -79,6 +88,8 @@ namespace OnePercentBattery.Audio
             GameEvents.RunEnded -= HandleRunEnded;
             GameEvents.RunStarted -= HandleRunStarted;
             GameEvents.ReturnedToMenu -= HandleReturnedToMenu;
+            GameEvents.LowBatteryThresholdCrossed -= HandleLowBatteryThresholdCrossed;
+            GameEvents.LowBatteryIntensityChanged -= HandleLowBatteryIntensityChanged;
         }
 
         private void HandleJumped() => PlaySfx(_jumpSfx, 0.7f);
@@ -100,7 +111,7 @@ namespace OnePercentBattery.Audio
 
         private void HandleRunEnded(RunResult result)
         {
-            if (result.Cause == RunEndCause.HitObstacle)
+            if (result.Cause == RunEndCause.HitObstacle || result.Cause == RunEndCause.FellInPit)
             {
                 PlaySfx(_deathSfx, 1f);
             }
@@ -108,6 +119,29 @@ namespace OnePercentBattery.Audio
 
         private void HandleRunStarted(RunModeType mode) => PlayMusic(gameplayMusic);
         private void HandleReturnedToMenu() => PlayMusic(menuMusic);
+
+        private void HandleLowBatteryThresholdCrossed(BatteryWarningTier tier)
+        {
+            switch (tier)
+            {
+                case BatteryWarningTier.Warning25:
+                    PlaySfx(_batteryWarning25Sfx, 0.6f);
+                    break;
+                case BatteryWarningTier.Critical10:
+                    PlaySfx(_batteryCritical10Sfx, 0.75f);
+                    break;
+                case BatteryWarningTier.Severe5:
+                    PlaySfx(_batterySevere5Sfx, 0.9f);
+                    break;
+                case BatteryWarningTier.Final1:
+                    PlaySfx(_batteryFinal1Sfx, 1f);
+                    break;
+            }
+        }
+
+        /// <summary>Reuses the existing (previously unwired) pitch-nudge hook - low battery reads as
+        /// rising tension the same way high speed was already meant to.</summary>
+        private void HandleLowBatteryIntensityChanged(float intensity01) => SetMusicIntensity(intensity01);
 
         /// <summary>Hook for a UI Button's OnClick to get a consistent click sound; safe to wire even before real audio exists.</summary>
         public void PlayUiClick() => PlaySfx(_uiClickSfx, 0.5f);
@@ -147,6 +181,11 @@ namespace OnePercentBattery.Audio
             _survivalSfx = survivalSfxOverride != null ? survivalSfxOverride : SynthAlarm("sfx_survival");
             _deathSfx = deathSfxOverride != null ? deathSfxOverride : SynthTone("sfx_death", 500f, 90f, 0.45f, WaveShape.Sine, 0.02f);
             _uiClickSfx = uiClickSfxOverride != null ? uiClickSfxOverride : SynthTone("sfx_ui_click", 1800f, 1800f, 0.03f, WaveShape.Square, 0.001f);
+
+            _batteryWarning25Sfx = batteryWarning25SfxOverride != null ? batteryWarning25SfxOverride : SynthTone("sfx_battery_25", 700f, 500f, 0.12f, WaveShape.Sine, 0.01f);
+            _batteryCritical10Sfx = batteryCritical10SfxOverride != null ? batteryCritical10SfxOverride : SynthTone("sfx_battery_10", 640f, 420f, 0.16f, WaveShape.Triangle, 0.01f);
+            _batterySevere5Sfx = batterySevere5SfxOverride != null ? batterySevere5SfxOverride : SynthTone("sfx_battery_5", 580f, 340f, 0.2f, WaveShape.Square, 0.005f);
+            _batteryFinal1Sfx = batteryFinal1SfxOverride != null ? batteryFinal1SfxOverride : SynthAlarm("sfx_battery_1");
         }
 
         private enum WaveShape { Sine, Square, Triangle, Noise }

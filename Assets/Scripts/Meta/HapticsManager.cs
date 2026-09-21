@@ -40,7 +40,7 @@ namespace OnePercentBattery.Meta
 
         private void HandleRunEnded(RunResult result)
         {
-            if (result.Cause == RunEndCause.HitObstacle)
+            if (result.Cause == RunEndCause.HitObstacle || result.Cause == RunEndCause.FellInPit)
             {
                 Pulse();
             }

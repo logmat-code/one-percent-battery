@@ -35,6 +35,12 @@ namespace OnePercentBattery.Player
         [Tooltip("Extra forward-speed multiplier while the battery is coasting at 1% (see PlayerBattery.IsInSurvivalMode).")]
         [SerializeField] private float survivalModeSpeedMultiplier = 1.15f;
 
+        [Header("Pits")]
+        [Tooltip("How far below groundY the player must fall (while over a Pit) before it's fatal - see SetOverPit.")]
+        [SerializeField] private float pitFallDeathDepth = 1f;
+        [Tooltip("How far below groundY counts as a genuine fall (vs. floating-point noise at rest) for a jump that was ALREADY airborne when it entered a Pit and turns out insufficient - see the !_pitGraceActive branch in Step(). A grounded entry's fate is decided by pit grace/coyote instead (see _pitGraceActive), not by this.")]
+        [SerializeField] private float pitFallCommitEpsilon = 0.05f;
+
         public float CurrentSpeed { get; private set; }
         public bool IsGrounded { get; private set; } = true;
         public float DistanceMeters { get; private set; }
@@ -54,6 +60,9 @@ namespace OnePercentBattery.Player
         private float _jumpBufferTimer;
         private bool _jumpHeldThisFrame;
         private float _startX;
+        private bool _isOverPit;
+        private bool _pitGraceActive;
+        private bool _pitFallCommitted;
 
         private void Awake()
         {
@@ -99,6 +108,9 @@ namespace OnePercentBattery.Player
             IsGrounded = true;
             _coyoteTimer = coyoteTimeSeconds;
             _jumpBufferTimer = 0f;
+            _isOverPit = false;
+            _pitGraceActive = false;
+            _pitFallCommitted = false;
             _speedMultiplier = SaveSystem.Data.practiceMode ? practiceModeSpeedMultiplier : 1f;
             CurrentSpeed = config.BaseSpeed * _speedMultiplier;
             Battery.BeginRun(config);
@@ -113,6 +125,9 @@ namespace OnePercentBattery.Player
         public void StopRun()
         {
             _runActive = false;
+            _isOverPit = false;
+            _pitGraceActive = false;
+            _pitFallCommitted = false;
             // Covers both "died" (GameManager.HandleDeath) and "returned to menu" (FinishReturnToMenu) -
             // a Magnet active at either moment must not carry a lingering visual/state into the next run.
             Magnet.ResetState();
@@ -126,6 +141,13 @@ namespace OnePercentBattery.Player
             IsGrounded = true;
             _coyoteTimer = coyoteTimeSeconds;
             _jumpBufferTimer = 0f;
+            // A revive always treats the player as safely grounded again (see IsGrounded above) -
+            // carrying a stale IsOverPit/_pitGraceActive/_pitFallCommitted into that would contradict
+            // it (grounded, yet "no ground exists here" or "already doomed to fall"), so all three
+            // reset the same way for the same reason.
+            _isOverPit = false;
+            _pitGraceActive = false;
+            _pitFallCommitted = false;
             _runActive = true;
         }
 
@@ -154,6 +176,11 @@ namespace OnePercentBattery.Player
                 StartJump();
                 _jumpBufferTimer = 0f;
                 _coyoteTimer = 0f;
+                // This IS the coyote jump a Pit's grace exists to wait for - no separate jump system,
+                // just ending grace right where the existing consumption already happens. StartJump
+                // just applied the normal jump velocity, so the fall stops under its own steam; Step()
+                // needs nothing else from this.
+                _pitGraceActive = false;
             }
 
             if (!_jumpHeldThisFrame)
@@ -165,6 +192,15 @@ namespace OnePercentBattery.Player
             if (!IsGrounded)
             {
                 _coyoteTimer = Mathf.Max(0f, _coyoteTimer - Time.fixedDeltaTime);
+                if (_pitGraceActive && _coyoteTimer <= 0f)
+                {
+                    // The full 0.1s ran out with no jump to show for it - irreversible from here,
+                    // regardless of whether IsOverPit is still true (a fast crossing may already have
+                    // left the trigger during grace - see Step(), which keeps treating this the same
+                    // as still being over the Pit either way).
+                    _pitGraceActive = false;
+                    _pitFallCommitted = true;
+                }
             }
 
             Step(Time.fixedDeltaTime);
@@ -201,15 +237,44 @@ namespace OnePercentBattery.Player
 
             if (pos.y <= groundY)
             {
-                pos.y = groundY;
-                _verticalVelocity = 0f;
-                if (!IsGrounded)
+                // This physical check ONLY matters for a jump that was already airborne when it
+                // entered the Pit (no grace was ever granted for that case - see SetOverPit) and turns
+                // out insufficient: it commits the instant that jump is genuinely sinking below ground.
+                // A grounded entry's fate is instead decided entirely by pit grace/coyote (FixedUpdate)
+                // below, never by this - gating on !_pitGraceActive is what stops this from re-cutting
+                // the coyote window short the way it did before grace existed (gravity alone reaches
+                // pitFallCommitEpsilon in ~2-3 ticks, well before a walking entry's real 0.1s coyote
+                // window would otherwise resolve one way or the other).
+                if (!_pitGraceActive && _isOverPit && !_pitFallCommitted && _verticalVelocity < 0f && pos.y < groundY - pitFallCommitEpsilon)
                 {
-                    _coyoteTimer = coyoteTimeSeconds;
-                    GameEvents.RaiseLanded();
+                    _pitFallCommitted = true;
                 }
-                IsGrounded = true;
-                _isHoldingJump = false;
+
+                if (_isOverPit || _pitGraceActive || _pitFallCommitted)
+                {
+                    // No ground here - keep falling instead of clamping. _pitGraceActive is included
+                    // deliberately: it can outlive _isOverPit (a fast crossing can clear the Pit's own
+                    // trigger before its 0.1s coyote grace resolves - see FixedUpdate), and until grace
+                    // itself resolves (jump consumed, or coyote runs out and commits the fall), ground
+                    // must NOT reappear just because the player is no longer horizontally over the gap.
+                    IsGrounded = false;
+                    if (pos.y <= groundY - pitFallDeathDepth)
+                    {
+                        Battery.FallIntoPit();
+                    }
+                }
+                else
+                {
+                    pos.y = groundY;
+                    _verticalVelocity = 0f;
+                    if (!IsGrounded)
+                    {
+                        _coyoteTimer = coyoteTimeSeconds;
+                        GameEvents.RaiseLanded();
+                    }
+                    IsGrounded = true;
+                    _isHoldingJump = false;
+                }
             }
             else
             {
@@ -238,6 +303,23 @@ namespace OnePercentBattery.Player
         /// <summary>Lets UI (an on-screen touch button) drive jumping without going through the Input System.</summary>
         public void SetExternalJumpHeld(bool held) => _externalJumpHeld = held;
 
+        /// <summary>
+        /// Called by PitZone's own trigger as the player's X enters/exits its horizontal span - see
+        /// Step() for what this actually does to the ground check. A grounded entry starts this Pit's
+        /// coyote grace (see _pitGraceActive); one that was already airborne (a jump already in
+        /// progress) does not - that jump just continues, with no artificial extra 0.1s. Exiting
+        /// (overPit=false) never touches grace either way - only a consumed coyote jump or an expired
+        /// one (both in FixedUpdate) end it.
+        /// </summary>
+        public void SetOverPit(bool overPit)
+        {
+            if (overPit && !_isOverPit && IsGrounded)
+            {
+                _pitGraceActive = true;
+            }
+            _isOverPit = overPit;
+        }
+
         private static bool WasJumpPressedThisFrame()
         {
             if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame) return true;
@@ -257,6 +339,10 @@ namespace OnePercentBattery.Player
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!_runActive) return;
+
+            // PitZone does not deal a hit here - it drives SetOverPit on its own (see PitZone), and
+            // falling far enough while over one is handled entirely inside Step().
+            if (other.GetComponent<PitZone>() != null) return;
 
             var obstacle = other.GetComponent<Obstacle>();
             if (obstacle != null)

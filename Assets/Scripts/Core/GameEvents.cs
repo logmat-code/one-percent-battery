@@ -30,6 +30,9 @@ namespace OnePercentBattery.Core
         public static event Action ObstacleHit;
         public static event Action<ZoneDefinition> ZoneChanged;
 
+        public static event Action<float> LowBatteryIntensityChanged; // 0 (100% charge) to 1 (1%/critical)
+        public static event Action<BatteryWarningTier> LowBatteryThresholdCrossed; // fires once per downward crossing
+
         public static void RaiseRunStarted(RunModeType mode) => RunStarted?.Invoke(mode);
         public static void RaiseRunEnded(RunResult result) => RunEnded?.Invoke(result);
         public static void RaiseRunAwaitingContinue(RunResult preview, bool canOfferSecondChance) => RunAwaitingContinue?.Invoke(preview, canOfferSecondChance);
@@ -50,5 +53,8 @@ namespace OnePercentBattery.Core
         public static void RaiseEnergyCollected(float amount) => EnergyCollected?.Invoke(amount);
         public static void RaiseObstacleHit() => ObstacleHit?.Invoke();
         public static void RaiseZoneChanged(ZoneDefinition zone) => ZoneChanged?.Invoke(zone);
+
+        public static void RaiseLowBatteryIntensityChanged(float intensity01) => LowBatteryIntensityChanged?.Invoke(intensity01);
+        public static void RaiseLowBatteryThresholdCrossed(BatteryWarningTier tier) => LowBatteryThresholdCrossed?.Invoke(tier);
     }
 }

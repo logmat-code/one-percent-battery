@@ -11,7 +11,8 @@ namespace OnePercentBattery.Core
     public enum RunEndCause
     {
         HitObstacle,
-        RanOutOfCharge
+        RanOutOfCharge,
+        FellInPit
     }
 
     /// <summary>Snapshot handed to the game-over screen and to meta systems (missions/achievements/save).</summary>
