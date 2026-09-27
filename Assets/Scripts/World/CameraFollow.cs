@@ -26,6 +26,9 @@ namespace OnePercentBattery.World
         [SerializeField] private float deathShakeMagnitude = 0.3f;
         [SerializeField] private float survivalShakeDuration = 0.25f;
         [SerializeField] private float survivalShakeMagnitude = 0.2f;
+        [Tooltip("Extremely subtle - a blocked hit should read as a save, not an impact. Shake() already no-ops if a stronger shake (e.g. the real hit shake) is already running, so this never overrides one.")]
+        [SerializeField] private float shieldBlockShakeDuration = 0.1f;
+        [SerializeField] private float shieldBlockShakeMagnitude = 0.05f;
 
         private Camera _camera;
         private float _velocityX;
@@ -42,6 +45,7 @@ namespace OnePercentBattery.World
         private void OnEnable()
         {
             GameEvents.ObstacleHit += HandleObstacleHit;
+            GameEvents.ShieldBlockedHit += HandleShieldBlockedHit;
             GameEvents.SurvivalModeEntered += HandleSurvivalModeEntered;
             GameEvents.RunEnded += HandleRunEnded;
             GameEvents.RunStarted += HandleRunStarted;
@@ -50,6 +54,7 @@ namespace OnePercentBattery.World
         private void OnDisable()
         {
             GameEvents.ObstacleHit -= HandleObstacleHit;
+            GameEvents.ShieldBlockedHit -= HandleShieldBlockedHit;
             GameEvents.SurvivalModeEntered -= HandleSurvivalModeEntered;
             GameEvents.RunEnded -= HandleRunEnded;
             GameEvents.RunStarted -= HandleRunStarted;
@@ -66,6 +71,7 @@ namespace OnePercentBattery.World
         }
 
         private void HandleObstacleHit() => Shake(hitShakeDuration, hitShakeMagnitude);
+        private void HandleShieldBlockedHit(Vector3 position) => Shake(shieldBlockShakeDuration, shieldBlockShakeMagnitude);
         private void HandleSurvivalModeEntered() => Shake(survivalShakeDuration, survivalShakeMagnitude);
 
         private void HandleRunEnded(RunResult result)

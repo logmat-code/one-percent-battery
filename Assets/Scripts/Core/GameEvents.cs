@@ -1,5 +1,7 @@
 using System;
 using OnePercentBattery.Data;
+using OnePercentBattery.Spawning;
+using UnityEngine;
 
 namespace OnePercentBattery.Core
 {
@@ -33,6 +35,13 @@ namespace OnePercentBattery.Core
         public static event Action<float> LowBatteryIntensityChanged; // 0 (100% charge) to 1 (1%/critical)
         public static event Action<BatteryWarningTier> LowBatteryThresholdCrossed; // fires once per downward crossing
 
+        // Purely cosmetic notifications for the VFX layer (see Assets/Scripts/VFX) - nothing else
+        // subscribes to these, and nothing upstream changes behavior based on whether anything is
+        // listening. Kept generic (one event per pickup type instead of four) rather than one-per-cue.
+        public static event Action<PickupType, Vector3> PickupCollected; // (type, world position) - fires for Coin/Energy/Shield/Magnet, alongside the existing specific events those already raise
+        public static event Action<Vector3> ShieldBlockedHit; // (world position) - an Obstacle hit that IsInvulnerable already turned into a no-op; ObstacleHit does NOT fire for this case
+        public static event Action PitCleared; // the player left a Pit's horizontal span without ever committing to the fall - fires once, before the landing that follows it
+
         public static void RaiseRunStarted(RunModeType mode) => RunStarted?.Invoke(mode);
         public static void RaiseRunEnded(RunResult result) => RunEnded?.Invoke(result);
         public static void RaiseRunAwaitingContinue(RunResult preview, bool canOfferSecondChance) => RunAwaitingContinue?.Invoke(preview, canOfferSecondChance);
@@ -56,5 +65,9 @@ namespace OnePercentBattery.Core
 
         public static void RaiseLowBatteryIntensityChanged(float intensity01) => LowBatteryIntensityChanged?.Invoke(intensity01);
         public static void RaiseLowBatteryThresholdCrossed(BatteryWarningTier tier) => LowBatteryThresholdCrossed?.Invoke(tier);
+
+        public static void RaisePickupCollected(PickupType type, Vector3 position) => PickupCollected?.Invoke(type, position);
+        public static void RaiseShieldBlockedHit(Vector3 position) => ShieldBlockedHit?.Invoke(position);
+        public static void RaisePitCleared() => PitCleared?.Invoke();
     }
 }

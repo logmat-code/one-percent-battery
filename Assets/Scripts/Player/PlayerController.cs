@@ -59,6 +59,7 @@ namespace OnePercentBattery.Player
         private float _coyoteTimer;
         private float _jumpBufferTimer;
         private bool _jumpHeldThisFrame;
+        private bool _jumpHeldLastFrame;
         private float _startX;
         private bool _isOverPit;
         private bool _pitGraceActive;
@@ -158,11 +159,15 @@ namespace OnePercentBattery.Player
             // Raw input is polled every render frame so a quick tap between two FixedUpdate ticks
             // is never missed - it just latches into the buffer timer below, which FixedUpdate
             // consumes on the fixed cadence that actually moves the body.
-            if (_externalJumpHeld || WasJumpPressedThisFrame())
+            bool heldNow = _externalJumpHeld || IsJumpInputHeldNow();
+            bool justPressed = heldNow && !_jumpHeldLastFrame;
+            _jumpHeldLastFrame = heldNow;
+
+            if (justPressed)
             {
                 _jumpBufferTimer = jumpBufferSeconds;
             }
-            _jumpHeldThisFrame = _externalJumpHeld || IsJumpCurrentlyHeld();
+            _jumpHeldThisFrame = heldNow;
         }
 
         private void FixedUpdate()
@@ -317,22 +322,42 @@ namespace OnePercentBattery.Player
             {
                 _pitGraceActive = true;
             }
+            // Purely cosmetic notification for the VFX layer - fires once, on the exit edge, only when
+            // the fall was never committed (a clean jump-over, or a still-in-progress coyote jump that
+            // will resolve safely). Read-only against existing state; changes nothing about the fall logic.
+            if (!overPit && _isOverPit && !_pitFallCommitted)
+            {
+                GameEvents.RaisePitCleared();
+            }
             _isOverPit = overPit;
         }
 
-        private static bool WasJumpPressedThisFrame()
-        {
-            if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame) return true;
-            if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) return true;
-            if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame) return true;
-            return false;
-        }
-
-        private static bool IsJumpCurrentlyHeld()
+        /// <summary>
+        /// Single source of truth for "is the jump input physically held right now" - keyboard/mouse/
+        /// touch via the New Input System, PLUS a legacy UnityEngine.Input fallback for touch and mouse.
+        /// The legacy fallback matters because Unity Remote predates the New Input System and is not
+        /// officially supported by it - it only ever feeds touches into the legacy API, so without this
+        /// a device connected only through Unity Remote could never register a touch as Touchscreen.current.
+        /// #if guarded rather than an unconditional call: UnityEngine.Input throws at runtime when Active
+        /// Input Handling is set to "Input System Package (New)" only: ENABLE_LEGACY_INPUT_MANAGER is
+        /// only defined when the legacy manager is actually available (Old or Both - this project is
+        /// currently Both), so switching Active Input Handling later can't reintroduce that exception.
+        /// Update() below turns this single "held" read into its own "just pressed" edge itself (see
+        /// _jumpHeldLastFrame) instead of trusting the Input System's own wasPressedThisFrame flag, which
+        /// is edge-triggered against the Input System's internal frame bookkeeping rather than against
+        /// this MonoBehaviour's own Update cadence.
+        /// </summary>
+        private static bool IsJumpInputHeldNow()
         {
             if (Keyboard.current != null && Keyboard.current.spaceKey.isPressed) return true;
             if (Mouse.current != null && Mouse.current.leftButton.isPressed) return true;
             if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed) return true;
+
+#if ENABLE_LEGACY_INPUT_MANAGER
+            if (UnityEngine.Input.touchCount > 0) return true;
+            if (UnityEngine.Input.GetMouseButton(0)) return true;
+#endif
+
             return false;
         }
 
@@ -347,6 +372,14 @@ namespace OnePercentBattery.Player
             var obstacle = other.GetComponent<Obstacle>();
             if (obstacle != null)
             {
+                // Purely cosmetic notification for the VFX layer - read BEFORE ApplyHit() since that
+                // is what would flip IsInvulnerable off if this hit uses up the last of the shield
+                // window. ApplyHit() itself is completely unchanged; ObstacleHit does not fire for a
+                // blocked hit (see PlayerBattery.ApplyHit), so this is the only signal a shield block happened.
+                if (Battery.IsInvulnerable)
+                {
+                    GameEvents.RaiseShieldBlockedHit(transform.position);
+                }
                 Battery.ApplyHit();
                 return;
             }

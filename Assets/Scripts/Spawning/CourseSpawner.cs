@@ -22,6 +22,15 @@ namespace OnePercentBattery.Spawning
     /// coming right after it - e.g. widening the approach to a Pit without widening every plain-obstacle
     /// gap - and so a roll that would repeat the tallest obstacle back-to-back can be substituted for a
     /// shorter one deterministically, with no reroll loop.
+    ///
+    /// Micro-patterns: <see cref="RollNextPlan"/> occasionally (see patternChance) substitutes a single
+    /// independent roll with a short 2-3 element <see cref="HazardPatternDefinition"/> instead (queued in
+    /// <see cref="_patternQueue"/> and drained one element per iteration of the same loop) - a designed
+    /// rhythm like "Tall then Medium" rather than pure chance. This is layered ON the existing roll/gap
+    /// machinery, not a parallel system: a pattern element still goes through the same pools, the same
+    /// DynamicMinGap call (see the IsPatternElement branch below), and - for MovingObstacle/Pit - the same
+    /// fairness math as any independently-rolled hazard. It only ever occupies slots that would otherwise
+    /// have held independent rolls, so it never inflates the total amount of content along the course.
     /// </summary>
     public sealed class CourseSpawner : MonoBehaviour
     {
@@ -62,6 +71,15 @@ namespace OnePercentBattery.Spawning
         [Tooltip("Tuned down from 0.10 which felt too common in real play - Magnet should read as occasional/special, rarer than the Charger.")]
         [SerializeField] private float magnetSpawnChance = 0.05f;
 
+        [Header("Micro-patterns")]
+        [Tooltip("Chance, each time the spawner is about to decide its next content, that it attempts a short designed sequence (see patterns) instead of an independent random roll. An attempt only succeeds if the cooldown (minNormalSlotsBetweenPatterns) has elapsed, a pattern other than the last one used is available, and every element in it maps to a prefab this build actually has - otherwise it silently falls back to a normal roll for that same slot.")]
+        [SerializeField] private float patternChance = 0.15f;
+        [Tooltip("Normal (non-pattern) slots required between the end of one pattern and the start of the next - keeps the course from reading as a string of prefabricated segments back-to-back.")]
+        [SerializeField] private int minNormalSlotsBetweenPatterns = 3;
+        [SerializeField] private HazardPatternDefinition[] patterns = DefaultPatterns();
+
+        private const float PatternCoinClusterWidth = 4.5f; // conservative upper bound for a 5-coin SpawnCoinCluster (4 gaps * 1.1m spacing) - reserves real room via DynamicMinGap so a pattern's coins never land inside a neighboring hazard's collider.
+
         private enum SpawnKind { Obstacle, Pit, MovingObstacle, Energy, Shield, Magnet, CoinCluster }
 
         private struct SpawnPlan
@@ -71,6 +89,8 @@ namespace OnePercentBattery.Spawning
             public float Width;
             public bool DemandsLandingRecovery;
             public ObstacleHeightClass HeightClass;
+            public bool IsPatternElement;
+            public float DesiredExtraSpacingBefore;
         }
 
         private ObjectPool<Obstacle>[] _obstaclePools;
@@ -86,9 +106,13 @@ namespace OnePercentBattery.Spawning
         private float[] _movingObstacleWidths;
         private int _mediumObstacleIndex = -1;
         private int _lowObstacleIndex = -1;
+        private int _tallObstacleIndex = -1;
+        private int _smallPitIndex = -1;
+        private int _mediumPitIndex = -1;
 
         private readonly List<Transform> _active = new List<Transform>();
         private readonly Dictionary<Transform, Action> _releaseByTransform = new Dictionary<Transform, Action>();
+        private readonly Queue<SpawnPlan> _patternQueue = new Queue<SpawnPlan>();
 
         private System.Random _rng;
         private RunModeConfig _config;
@@ -96,6 +120,8 @@ namespace OnePercentBattery.Spawning
         private SpawnPlan _pendingPlan;
         private ObstacleHeightClass _lastHeightClass;
         private bool _lastWasMovingObstacle;
+        private int _lastPatternIndex = -1;
+        private int _normalSlotsSincePattern;
         private bool _running;
         private PlayerController _playerController;
         private JumpProfile _jumpProfile;
@@ -116,6 +142,10 @@ namespace OnePercentBattery.Spawning
                     _mediumObstacleIndex = i;
                 if (obstaclePrefabs[i].HeightClass == ObstacleHeightClass.Low && _lowObstacleIndex < 0)
                     _lowObstacleIndex = i;
+                // Also cached purely for micro-patterns (see BuildPatternElementPlan), which need to name a
+                // SPECIFIC height class rather than roll a random index - the normal random roll never reads this.
+                if (obstaclePrefabs[i].HeightClass == ObstacleHeightClass.Tall && _tallObstacleIndex < 0)
+                    _tallObstacleIndex = i;
             }
 
             _pitPools = new ObjectPool<PitZone>[pitPrefabs.Length];
@@ -124,6 +154,12 @@ namespace OnePercentBattery.Spawning
             {
                 _pitPools[i] = new ObjectPool<PitZone>(pitPrefabs[i], transform, prewarm: 1);
                 _pitWidths[i] = FootprintWidth(pitPrefabs[i].GetComponent<BoxCollider2D>(), pitPrefabs[i].transform);
+
+                // Same reasoning as the obstacle indices above - only micro-patterns need a specific size class.
+                if (pitPrefabs[i].SizeClass == PitSizeClass.Small && _smallPitIndex < 0)
+                    _smallPitIndex = i;
+                if (pitPrefabs[i].SizeClass == PitSizeClass.Medium && _mediumPitIndex < 0)
+                    _mediumPitIndex = i;
             }
 
             _movingObstaclePools = new ObjectPool<MovingObstacle>[movingObstaclePrefabs.Length];
@@ -174,7 +210,10 @@ namespace OnePercentBattery.Spawning
             ClearActive();
             _lastHeightClass = ObstacleHeightClass.Low;
             _lastWasMovingObstacle = false;
-            _pendingPlan = RollSpawnPlan();
+            _patternQueue.Clear();
+            _lastPatternIndex = -1;
+            _normalSlotsSincePattern = 0;
+            _pendingPlan = RollNextPlan();
             _pendingX = player.position.x + firstSpawnBufferMeters;
             _running = true;
         }
@@ -209,9 +248,17 @@ namespace OnePercentBattery.Spawning
             {
                 Execute(_pendingPlan, _pendingX);
 
-                SpawnPlan next = RollSpawnPlan();
+                SpawnPlan next = RollNextPlan();
                 float speed = _playerController.CurrentSpeed;
-                float gap = DynamicMinGap(speed, _pendingPlan, next) + (float)_rng.NextDouble() * maxGapVarianceMeters;
+                float dynamicGap = DynamicMinGap(speed, _pendingPlan, next);
+                // A pattern-internal element (see RollNextPlan/TryStartPattern) uses ONLY the safe dynamic
+                // minimum plus whatever extra the pattern itself asked for - never LESS than DynamicMinGap,
+                // and never the added random variance a normal roll gets, so the sequence reads as a single
+                // deliberate beat rather than the usual loose spacing. Element 0 of a pattern is not marked
+                // (see TryStartPattern) - the gap INTO a pattern still behaves like any other normal transition.
+                float gap = next.IsPatternElement
+                    ? Mathf.Max(dynamicGap, next.DesiredExtraSpacingBefore)
+                    : dynamicGap + (float)_rng.NextDouble() * maxGapVarianceMeters;
                 _pendingX += gap;
                 _pendingPlan = next;
             }
@@ -288,9 +335,15 @@ namespace OnePercentBattery.Spawning
         private SpawnPlan RollObstaclePlan()
         {
             int index = _rng.Next(obstaclePrefabs.Length);
+            return BuildObstaclePlan(index, _lastHeightClass);
+        }
+
+        /// <summary>Shared by the random roll above and micro-patterns (see BuildPatternElementPlan) - `lastHeightClass` is a plain parameter rather than reading `_lastHeightClass` directly so a pattern can simulate its OWN internal progression before committing to placing anything.</summary>
+        private SpawnPlan BuildObstaclePlan(int index, ObstacleHeightClass lastHeightClass)
+        {
             ObstacleHeightClass cls = obstaclePrefabs[index].HeightClass;
 
-            if (cls == ObstacleHeightClass.Tall && _lastHeightClass == ObstacleHeightClass.Tall)
+            if (cls == ObstacleHeightClass.Tall && lastHeightClass == ObstacleHeightClass.Tall)
             {
                 int substitute = _mediumObstacleIndex >= 0 ? _mediumObstacleIndex : _lowObstacleIndex;
                 if (substitute >= 0)
@@ -313,6 +366,11 @@ namespace OnePercentBattery.Spawning
         private SpawnPlan RollPitPlan()
         {
             int index = _rng.Next(pitPrefabs.Length);
+            return BuildPitPlan(index);
+        }
+
+        private SpawnPlan BuildPitPlan(int index)
+        {
             bool isMedium = pitPrefabs[index].SizeClass == PitSizeClass.Medium;
             return new SpawnPlan
             {
@@ -326,6 +384,11 @@ namespace OnePercentBattery.Spawning
         private SpawnPlan RollMovingObstaclePlan()
         {
             int index = _rng.Next(movingObstaclePrefabs.Length);
+            return BuildMovingObstaclePlan(index);
+        }
+
+        private SpawnPlan BuildMovingObstaclePlan(int index)
+        {
             return new SpawnPlan
             {
                 Kind = SpawnKind.MovingObstacle,
@@ -340,6 +403,175 @@ namespace OnePercentBattery.Spawning
                 DemandsLandingRecovery = true,
             };
         }
+
+        /// <summary>
+        /// The single entry point RollSpawnPlan's old call sites now use: drains a micro-pattern already in
+        /// progress one element at a time, otherwise mostly defers to the normal random roll - a pattern
+        /// attempt only replaces THIS ONE call's result, so it can never add extra content beyond what an
+        /// independent roll would have occupied anyway.
+        /// </summary>
+        private SpawnPlan RollNextPlan()
+        {
+            if (_patternQueue.Count > 0)
+            {
+                return _patternQueue.Dequeue();
+            }
+
+            if (_normalSlotsSincePattern >= minNormalSlotsBetweenPatterns && _rng.NextDouble() < patternChance)
+            {
+                SpawnPlan? started = TryStartPattern();
+                if (started != null)
+                {
+                    return started.Value;
+                }
+            }
+
+            _normalSlotsSincePattern++;
+            return RollSpawnPlan();
+        }
+
+        /// <summary>
+        /// Picks a pattern (never the same one used last - see _lastPatternIndex) and resolves every one of
+        /// its elements against this build's actual prefabs/pools, simulating the Tall-Tall and
+        /// Moving-Moving fairness rules across the pattern's OWN elements as it goes (seeded from the real
+        /// _lastHeightClass/_lastWasMovingObstacle, so a pattern starting right after a Tall or a Moving
+        /// Obstacle still gets the same protection a random roll would have). If ANY element can't be
+        /// resolved (a size class this build has no prefab for, or a Moving element that would illegally
+        /// follow another one), the whole attempt is discarded and nothing is committed - RollNextPlan falls
+        /// back to a normal roll for this slot, so a partially-invalid pattern never leaves the course in an
+        /// inconsistent state.
+        /// </summary>
+        private SpawnPlan? TryStartPattern()
+        {
+            if (patterns == null || patterns.Length == 0) return null;
+
+            int chosenIndex = ChoosePatternIndex();
+            if (chosenIndex < 0) return null;
+
+            HazardPatternDefinition def = patterns[chosenIndex];
+            if (def.Elements == null || def.Elements.Length == 0) return null;
+
+            var built = new List<SpawnPlan>(def.Elements.Length);
+            ObstacleHeightClass simulatedLastHeight = _lastHeightClass;
+            bool simulatedLastMoving = _lastWasMovingObstacle;
+
+            foreach (PatternElementKind kind in def.Elements)
+            {
+                SpawnPlan? maybePlan = BuildPatternElementPlan(kind, ref simulatedLastHeight, ref simulatedLastMoving);
+                if (maybePlan == null) return null;
+                built.Add(maybePlan.Value);
+            }
+
+            // Element 0 behaves exactly like a normal roll for the gap LEADING INTO the pattern (see
+            // Update()) - only elements 1+ are marked so their gap uses the pattern's own tighter spacing.
+            for (int i = 1; i < built.Count; i++)
+            {
+                SpawnPlan element = built[i];
+                element.IsPatternElement = true;
+                element.DesiredExtraSpacingBefore = def.DesiredExtraSpacingMeters;
+                _patternQueue.Enqueue(element);
+            }
+
+            _lastHeightClass = simulatedLastHeight;
+            _lastWasMovingObstacle = simulatedLastMoving;
+            _lastPatternIndex = chosenIndex;
+            _normalSlotsSincePattern = 0;
+
+            return built[0];
+        }
+
+        private int ChoosePatternIndex()
+        {
+            float totalWeight = 0f;
+            for (int i = 0; i < patterns.Length; i++)
+            {
+                if (i == _lastPatternIndex) continue; // anti-repeat: never the same pattern twice in a row
+                totalWeight += Mathf.Max(0f, patterns[i].Weight);
+            }
+            if (totalWeight <= 0f) return -1;
+
+            float roll = (float)_rng.NextDouble() * totalWeight;
+            for (int i = 0; i < patterns.Length; i++)
+            {
+                if (i == _lastPatternIndex) continue;
+                float w = Mathf.Max(0f, patterns[i].Weight);
+                if (roll < w) return i;
+                roll -= w;
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Resolves one pattern element against this build's cached prefab indices. MovingObstacle's own
+        /// phase (HIGH/LOW) is deliberately NOT decided here - see SpawnMovingObstacle, which every queued
+        /// MovingObstacle plan still passes through unchanged, computing the safe phase from the real
+        /// distance/speed at the moment it's actually placed, exactly like an independently-rolled one.
+        /// </summary>
+        private SpawnPlan? BuildPatternElementPlan(PatternElementKind kind, ref ObstacleHeightClass simulatedLastHeight, ref bool simulatedLastMoving)
+        {
+            switch (kind)
+            {
+                case PatternElementKind.Low:
+                case PatternElementKind.Medium:
+                case PatternElementKind.Tall:
+                {
+                    int index = kind == PatternElementKind.Tall ? _tallObstacleIndex
+                        : kind == PatternElementKind.Medium ? _mediumObstacleIndex
+                        : _lowObstacleIndex;
+                    if (index < 0) return null;
+
+                    SpawnPlan plan = BuildObstaclePlan(index, simulatedLastHeight);
+                    simulatedLastHeight = plan.HeightClass;
+                    simulatedLastMoving = false;
+                    return plan;
+                }
+                case PatternElementKind.SmallPit:
+                case PatternElementKind.MediumPit:
+                {
+                    int index = kind == PatternElementKind.MediumPit ? _mediumPitIndex : _smallPitIndex;
+                    if (index < 0) return null;
+
+                    simulatedLastMoving = false;
+                    return BuildPitPlan(index);
+                }
+                case PatternElementKind.MovingObstacle:
+                {
+                    if (movingObstaclePrefabs.Length == 0) return null;
+                    // Mirrors the same rule RollSpawnPlan enforces for independent rolls (see
+                    // _lastWasMovingObstacle there) - a pattern must never be the loophole that places two
+                    // Moving Obstacles back-to-back, whether both are its own elements or its first element
+                    // happens to land right after a Moving Obstacle the normal roll just placed.
+                    if (simulatedLastMoving) return null;
+
+                    int index = _rng.Next(movingObstaclePrefabs.Length);
+                    simulatedLastMoving = true;
+                    return BuildMovingObstaclePlan(index);
+                }
+                case PatternElementKind.Coins:
+                {
+                    simulatedLastMoving = false;
+                    return new SpawnPlan
+                    {
+                        Kind = SpawnKind.CoinCluster,
+                        Width = PatternCoinClusterWidth,
+                    };
+                }
+                default:
+                    return null;
+            }
+        }
+
+        private static HazardPatternDefinition[] DefaultPatterns() => new[]
+        {
+            new HazardPatternDefinition { Name = "P1 Warmup", Elements = new[] { PatternElementKind.Low, PatternElementKind.Coins, PatternElementKind.Low }, Weight = 1f },
+            new HazardPatternDefinition { Name = "P2 StepDown", Elements = new[] { PatternElementKind.Tall, PatternElementKind.Medium }, Weight = 1f },
+            new HazardPatternDefinition { Name = "P3 JumpReward", Elements = new[] { PatternElementKind.SmallPit, PatternElementKind.Coins }, Weight = 1f },
+            new HazardPatternDefinition { Name = "P4 TimingReward", Elements = new[] { PatternElementKind.MovingObstacle, PatternElementKind.Coins }, Weight = 1f },
+            new HazardPatternDefinition { Name = "P5 Mixed", Elements = new[] { PatternElementKind.Low, PatternElementKind.SmallPit }, Weight = 1f },
+            new HazardPatternDefinition { Name = "P6 Recovery", Elements = new[] { PatternElementKind.MediumPit, PatternElementKind.Coins, PatternElementKind.Medium }, Weight = 1f },
+            new HazardPatternDefinition { Name = "P7 TallReward", Elements = new[] { PatternElementKind.Tall, PatternElementKind.Coins, PatternElementKind.Low }, Weight = 1f },
+            new HazardPatternDefinition { Name = "P8 TimingCombo", Elements = new[] { PatternElementKind.MovingObstacle, PatternElementKind.Coins, PatternElementKind.SmallPit }, Weight = 1f },
+        };
 
         private void Execute(SpawnPlan plan, float x)
         {

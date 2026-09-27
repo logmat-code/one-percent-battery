@@ -11,6 +11,8 @@ namespace OnePercentBattery.UI
     public sealed class GameOverController : MonoBehaviour
     {
         [SerializeField] private GameObject root;
+        [Tooltip("Optional - if assigned, the panel fades in instead of popping instantly when a run ends.")]
+        [SerializeField] private PanelFadeTransition transition;
         [SerializeField] private Text titleText;
         [SerializeField] private Text causeText;
         [SerializeField] private GameObject newRecordBadge;
@@ -43,7 +45,8 @@ namespace OnePercentBattery.UI
 
         private void HandleRunAwaitingContinue(RunResult preview, bool canOfferSecondChance)
         {
-            root.SetActive(true);
+            if (transition != null) transition.Show();
+            else root.SetActive(true);
             titleText.text = "OUT OF CHARGE";
             causeText.text = DescribeCause(preview.Cause);
             newRecordBadge.SetActive(preview.IsNewRecord);

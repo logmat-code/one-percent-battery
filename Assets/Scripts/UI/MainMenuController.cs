@@ -12,6 +12,8 @@ namespace OnePercentBattery.UI
     public sealed class MainMenuController : MonoBehaviour
     {
         [SerializeField] private GameObject root;
+        [Tooltip("Optional - if assigned, Show() fades the panel in instead of popping it instantly.")]
+        [SerializeField] private PanelFadeTransition transition;
 
         [Header("Top bar")]
         [SerializeField] private Text coinsText;
@@ -68,7 +70,8 @@ namespace OnePercentBattery.UI
 
         public void Show()
         {
-            root.SetActive(true);
+            if (transition != null) transition.Show();
+            else root.SetActive(true);
             RefreshStats();
             RefreshModeSelection();
             AdsManager.Instance.ShowBanner();

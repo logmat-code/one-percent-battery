@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using OnePercentBattery.Save;
 using OnePercentBattery.Utils;
 using UnityEngine;
@@ -21,12 +22,20 @@ namespace OnePercentBattery.Services
         [SerializeField] private Yodo1MasAdService deviceAdService;
         [SerializeField] private Yodo1AdsConfig config;
 
+        [Header("Safety")]
+        [Tooltip("Watchdog ceiling used only while FakeAdService (Editor/dev) is the active service - safe to keep short since its own simulated delay is a known, fixed ~1-2s. Covers a lost/never-fired callback (e.g. a domain reload killing its coroutine mid-show) so a run transition can never hang indefinitely in the Editor.")]
+        [SerializeField] private float editorAdWatchdogSeconds = 8f;
+        [Tooltip("Watchdog ceiling used whenever a real ad service (anything other than FakeAdService, i.e. a future real Yodo1 MAS interstitial) is active. Deliberately long: a real interstitial can legitimately stay on screen well past 8s, and this must never fire while an ad the player can see is still up - it is an EMERGENCY deadlock escape for a genuinely stuck/lost SDK callback, not a normal ad-duration limit. IAdService currently exposes only IsInterstitialAdReady/ShowInterstitialAd(onClosed) - no separate \"is currently visible\" signal - so a long ceiling is the safe choice without inventing visibility-tracking the SDK doesn't cleanly provide.")]
+        [SerializeField] private float realAdEmergencyWatchdogSeconds = 60f;
+
         public bool IsInitialized => _service != null && _service.IsInitialized;
 
         private IAdService _service;
         private RewardedAdPlacement? _pendingRewardPlacement;
         private bool _rewardedShowInFlight;
         private bool _interstitialShowInFlight;
+        private Coroutine _interstitialWatchdogRoutine;
+        private Action _pendingInterstitialContinuation;
 
         private int _completedRuns;
         private int _runsSinceLastInterstitial;
@@ -133,7 +142,11 @@ namespace OnePercentBattery.Services
         /// <summary>
         /// Shows an interstitial if (and only if) the frequency cap allows it right now, then always
         /// calls `continuation` - unavailable/failed/disabled all continue immediately, never blocking
-        /// the Retry/Home flow the spec calls out as highest priority.
+        /// the Retry/Home flow the spec calls out as highest priority. Once a show attempt actually
+        /// starts, a watchdog (see <see cref="CurrentInterstitialWatchdogSeconds"/>/<see cref="CompleteInterstitial"/>)
+        /// guarantees `continuation` still fires even if the ad service's own callback never arrives -
+        /// e.g. FakeAdService's simulated delay never running to completion, or a real SDK callback
+        /// that gets lost - so this can never leave a Retry/Home transition waiting forever.
         /// </summary>
         public void MaybeShowInterstitial(Action continuation)
         {
@@ -146,16 +159,51 @@ namespace OnePercentBattery.Services
             _interstitialShowInFlight = true;
             _runsSinceLastInterstitial = 0;
             _lastInterstitialRealtime = Time.unscaledTime;
+            _pendingInterstitialContinuation = continuation;
             Debug.Log("[Yodo1MAS] Interstitial requested");
             MuteForAd();
 
-            _service.ShowInterstitialAd(() =>
+            _interstitialWatchdogRoutine = StartCoroutine(InterstitialWatchdog(CurrentInterstitialWatchdogSeconds));
+            _service.ShowInterstitialAd(() => CompleteInterstitial("closed"));
+        }
+
+        /// <summary>
+        /// FakeAdService's own delay is a known, short, fixed quantity, so its watchdog can stay short
+        /// too - but a real ad service's actual on-screen time isn't something this watchdog should ever
+        /// race against, so anything other than FakeAdService gets the long emergency ceiling instead.
+        /// </summary>
+        private float CurrentInterstitialWatchdogSeconds => _service is FakeAdService ? editorAdWatchdogSeconds : realAdEmergencyWatchdogSeconds;
+
+        private IEnumerator InterstitialWatchdog(float seconds)
+        {
+            yield return new WaitForSecondsRealtime(seconds);
+            Debug.LogWarning($"[Yodo1MAS] Interstitial callback never arrived within the {seconds}s watchdog window - continuing without waiting further.");
+            CompleteInterstitial("timed out");
+        }
+
+        /// <summary>
+        /// The one place either the real ad-closed callback or the watchdog timeout ends an
+        /// interstitial attempt. Guarded on <see cref="_interstitialShowInFlight"/> so whichever of the
+        /// two fires FIRST wins and the other is a no-op - `continuation` is invoked exactly once no
+        /// matter which path completes it, and a stray late callback after a timeout can't double-fire it.
+        /// </summary>
+        private void CompleteInterstitial(string reason)
+        {
+            if (!_interstitialShowInFlight) return;
+
+            if (_interstitialWatchdogRoutine != null)
             {
-                UnmuteAfterAd();
-                _interstitialShowInFlight = false;
-                Debug.Log("[Yodo1MAS] Interstitial closed");
-                continuation?.Invoke();
-            });
+                StopCoroutine(_interstitialWatchdogRoutine);
+                _interstitialWatchdogRoutine = null;
+            }
+
+            UnmuteAfterAd();
+            _interstitialShowInFlight = false;
+            Debug.Log($"[Yodo1MAS] Interstitial {reason}");
+
+            Action continuation = _pendingInterstitialContinuation;
+            _pendingInterstitialContinuation = null;
+            continuation?.Invoke();
         }
 
         // ----- Banner -----

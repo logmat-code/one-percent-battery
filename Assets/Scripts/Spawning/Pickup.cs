@@ -1,4 +1,5 @@
 using System;
+using OnePercentBattery.Core;
 using OnePercentBattery.Meta;
 using OnePercentBattery.Player;
 using UnityEngine;
@@ -67,6 +68,12 @@ namespace OnePercentBattery.Spawning
 
         public void Collect(PlayerController player)
         {
+            // Purely cosmetic notification for the VFX layer - read before the switch below since
+            // OnCollected (at the end) can deactivate this instance, which would make transform.position
+            // stale. Fires alongside whichever specific event the branch below already raises (CoinCollected/
+            // EnergyCollected/ShieldTimeChanged/MagnetTimeChanged) - those are unchanged.
+            GameEvents.RaisePickupCollected(type, transform.position);
+
             switch (type)
             {
                 case PickupType.Coin:

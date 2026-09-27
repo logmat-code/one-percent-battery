@@ -26,8 +26,16 @@ namespace OnePercentBattery.UI
         [SerializeField] private Color lowColor = new Color(0.95f, 0.65f, 0.2f);
         [SerializeField] private Color criticalColor = new Color(0.992f, 0.643f, 0.686f);
 
+        [Header("Charger pulse (brief, cosmetic only - see GameEvents.EnergyCollected)")]
+        [SerializeField] private float chargerPulseScale = 1.15f;
+        [SerializeField] private float chargerPulseSeconds = 0.25f;
+
+        private Vector3 _batteryTextBaseScale = Vector3.one;
+        private float _chargerPulseTimer;
+
         private void Awake()
         {
+            if (batteryPercentText != null) _batteryTextBaseScale = batteryPercentText.transform.localScale;
             // Subscriptions live here rather than OnEnable: this controller's own GameObject
             // starts inactive (it IS the panel being shown/hidden), and OnEnable never fires
             // for a component on a GameObject that starts disabled - Awake does.
@@ -41,6 +49,7 @@ namespace OnePercentBattery.UI
             GameEvents.RunAwaitingContinue += HandleRunAwaitingContinue;
             GameEvents.ReturnedToMenu += HandleReturnedToMenu;
             GameEvents.SurvivalModeEntered += HandleSurvivalModeEntered;
+            GameEvents.EnergyCollected += HandleEnergyCollected;
         }
 
         private void Update()
@@ -49,6 +58,8 @@ namespace OnePercentBattery.UI
             {
                 survivalModeText.text = $"SURVIVE! {playerBattery.SurvivalModeSeconds:0.0}s";
             }
+
+            UpdateChargerPulse();
         }
 
         private void OnDestroy()
@@ -63,11 +74,32 @@ namespace OnePercentBattery.UI
             GameEvents.RunAwaitingContinue -= HandleRunAwaitingContinue;
             GameEvents.ReturnedToMenu -= HandleReturnedToMenu;
             GameEvents.SurvivalModeEntered -= HandleSurvivalModeEntered;
+            GameEvents.EnergyCollected -= HandleEnergyCollected;
+        }
+
+        private void HandleEnergyCollected(float amount) => _chargerPulseTimer = chargerPulseSeconds;
+
+        private void UpdateChargerPulse()
+        {
+            if (batteryPercentText == null) return;
+
+            if (_chargerPulseTimer > 0f)
+            {
+                _chargerPulseTimer -= Time.deltaTime;
+                float t = Mathf.Clamp01(_chargerPulseTimer / chargerPulseSeconds);
+                batteryPercentText.transform.localScale = Vector3.Lerp(_batteryTextBaseScale, _batteryTextBaseScale * chargerPulseScale, t);
+            }
+            else if (batteryPercentText.transform.localScale != _batteryTextBaseScale)
+            {
+                batteryPercentText.transform.localScale = _batteryTextBaseScale;
+            }
         }
 
         private void HandleRunStarted(RunModeType mode)
         {
             root.SetActive(true);
+            _chargerPulseTimer = 0f;
+            if (batteryPercentText != null) batteryPercentText.transform.localScale = _batteryTextBaseScale;
             modeLabelText.text = RunModeConfig.For(mode).DisplayName;
             coinsText.text = "0";
             shieldBadge.SetActive(false);

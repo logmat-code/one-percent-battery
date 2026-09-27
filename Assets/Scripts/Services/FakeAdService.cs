@@ -5,9 +5,12 @@ using UnityEngine;
 namespace OnePercentBattery.Services
 {
     /// <summary>
-    /// Editor/development stand-in: "shows" an ad by waiting briefly, then always succeeds. Active
-    /// only in the Editor or development builds (see <see cref="AdsManager"/>) so a real device
-    /// release build can never ship with a fake automatic reward.
+    /// Editor stand-in: "shows" an ad by waiting briefly, then always succeeds. This class has no
+    /// build-time guard of its own - the safety net is entirely <see cref="AdsManager"/>.Awake(),
+    /// which only ever assigns this to `_service` inside `#if UNITY_EDITOR`. A device build falls
+    /// back to this ONLY if `deviceAdService` is left unassigned in the Inspector - verify that
+    /// field stays wired to a real IAdService (currently Yodo1MasAdService) before every release
+    /// build, since that's the only thing preventing a fake automatic reward from reaching players.
     /// </summary>
     public sealed class FakeAdService : MonoBehaviour, IAdService
     {
