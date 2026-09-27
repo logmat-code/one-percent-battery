@@ -7,19 +7,14 @@ namespace OnePercentBattery.UI
     /// <summary>Sound/Haptics/Practice Mode toggles and local data deletion.</summary>
     public sealed class SettingsController : MonoBehaviour
     {
+        private const string PrivacyPolicyUrl = "https://sites.google.com/view/1-battery/inicio?read_current=1";
+        private const string SupportEmail = "matiasrigozzi@gmail.com";
+
         [SerializeField] private GameObject root;
         [SerializeField] private Toggle soundToggle;
         [SerializeField] private Toggle hapticsToggle;
         [SerializeField] private Toggle practiceModeToggle;
         [SerializeField] private GameObject resetConfirmPanel;
-
-        [Header("Support links (leave blank pre-release - the buttons stay disabled until set)")]
-        [Tooltip("Your published privacy policy URL. Google Play requires a working one - this MUST be set before a real submission.")]
-        [SerializeField] private string privacyPolicyUrl;
-        [Tooltip("Support contact URL (a mailto: link works) shown to players who need help.")]
-        [SerializeField] private string contactSupportUrl;
-        [SerializeField] private Button privacyPolicyButton;
-        [SerializeField] private Button contactSupportButton;
 
         private void OnEnable()
         {
@@ -31,11 +26,6 @@ namespace OnePercentBattery.UI
             soundToggle.onValueChanged.AddListener(OnSoundChanged);
             hapticsToggle.onValueChanged.AddListener(OnHapticsChanged);
             practiceModeToggle.onValueChanged.AddListener(OnPracticeModeChanged);
-
-            // Disabled rather than hidden: players (and Play reviewers) expect these to exist, but they
-            // must not look tappable-yet-broken while no real URL has been supplied.
-            if (privacyPolicyButton != null) privacyPolicyButton.interactable = !string.IsNullOrEmpty(privacyPolicyUrl);
-            if (contactSupportButton != null) contactSupportButton.interactable = !string.IsNullOrEmpty(contactSupportUrl);
 
             if (resetConfirmPanel != null) resetConfirmPanel.SetActive(false);
         }
@@ -76,27 +66,9 @@ namespace OnePercentBattery.UI
             OnEnable();
         }
 
-        /// <summary>No-ops (and the button stays disabled - see OnEnable) until privacyPolicyUrl is set.</summary>
-        public void OnPrivacyPolicyClicked()
-        {
-            if (string.IsNullOrEmpty(privacyPolicyUrl))
-            {
-                Debug.LogWarning("[SettingsController] No privacy policy URL configured - set privacyPolicyUrl before release.");
-                return;
-            }
-            Application.OpenURL(privacyPolicyUrl);
-        }
+        public void OnPrivacyPolicyClicked() => Application.OpenURL(PrivacyPolicyUrl);
 
-        /// <summary>No-ops (and the button stays disabled - see OnEnable) until contactSupportUrl is set.</summary>
-        public void OnContactSupportClicked()
-        {
-            if (string.IsNullOrEmpty(contactSupportUrl))
-            {
-                Debug.LogWarning("[SettingsController] No support contact URL configured - set contactSupportUrl before release.");
-                return;
-            }
-            Application.OpenURL(contactSupportUrl);
-        }
+        public void OnContactSupportClicked() => Application.OpenURL("mailto:" + SupportEmail);
 
         public void Close() => root.SetActive(false);
     }
