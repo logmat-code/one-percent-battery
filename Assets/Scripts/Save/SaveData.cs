@@ -14,8 +14,10 @@ namespace OnePercentBattery.Save
     [Serializable]
     public sealed class MissionPeriodState
     {
-        /// <summary>ISO date (daily) or "yyyy-MM" (monthly) this progress block belongs to. A mismatch triggers a reset.</summary>
-        public string periodKey;
+        /// <summary>UTC instant (DateTime.O round-trip format) this rotation was generated. Empty/unparseable (fresh or pre-rotation save) is treated as "generate now". Elapsed time is measured from this, NOT a calendar-day/month boundary.</summary>
+        public string rotationTimestampUtc = "";
+        /// <summary>The 5 mission ids randomly selected from MissionCatalog.DailyPool/MonthlyPool for the current rotation - resolved to full MissionDefinitions by MissionManager, never persisted as full objects.</summary>
+        public List<string> activeMissionIds = new List<string>();
         public List<MissionProgressEntry> entries = new List<MissionProgressEntry>();
     }
 
@@ -63,8 +65,8 @@ namespace OnePercentBattery.Save
 
         public List<string> unlockedAchievementIds = new List<string>();
 
-        public MissionPeriodState dailyMissions = new MissionPeriodState { periodKey = "" };
-        public MissionPeriodState monthlyMissions = new MissionPeriodState { periodKey = "" };
+        public MissionPeriodState dailyMissions = new MissionPeriodState();
+        public MissionPeriodState monthlyMissions = new MissionPeriodState();
 
         public List<RunLogEntry> recentRuns = new List<RunLogEntry>();
 

@@ -27,23 +27,29 @@ namespace OnePercentBattery.Core
         [Header("Battery-driven game speed")]
         [Tooltip("Global speed multiplier at 100% battery (progress = 0 on the curve below).")]
         [SerializeField] private float minGameSpeed = 1f;
-        [Tooltip("Global speed multiplier at 1% battery / survival mode (progress = 1 on the curve below). Lowered from 2 - that felt like the game had simply doubled its own speed rather than getting progressively more tense.")]
-        [SerializeField] private float maxGameSpeed = 1.55f;
-        [Tooltip("Shapes the ramp from minGameSpeed to maxGameSpeed as battery drains from 100% to 0%. Tuned so the first half of the battery barely accelerates, it becomes clearly noticeable under 50%, tense under 30%, and frantic-but-controllable from 10% down - not a symmetric ease-in-out, since that made the 30-50% stretch (its steepest region) feel like the game had suddenly doubled speed.")]
+        [Tooltip("Global speed multiplier ceiling, reached by ~5% battery and held flat from there (progress = 0.95-1.0 on the curve below). Lowered from 1.42 - real-device feedback was that the game was still far too fast near 1%, on top of the separate survivalModeSpeedMultiplier stacking at exactly 1%. Combined, the two used to reach ~1.42*1.15=1.63x; this pass targets the two multiplied together landing around 1.25-1.27x instead.")]
+        [SerializeField] private float maxGameSpeed = 1.245f;
+        [Tooltip("Shapes the ramp from minGameSpeed to maxGameSpeed as battery drains from 100% to 0%. Preserves the prior feel above ~30% battery; the main flattening happens from ~20% down, and the curve is essentially flat (not still climbing) from 5% to 0% so the small survivalModeSpeedMultiplier bump at exactly 1% can't push the total past the target ceiling.")]
         [SerializeField] private AnimationCurve speedCurve = BuildDefaultSpeedCurve();
+        [Tooltip("Pro starts at 1% charge with no passive drain and no power-ups (see RunModeConfig.Pro), so its battery never actually moves - it would otherwise sit at progress=1 (the curve's own maximum, meant for a player who just drained all the way down from 100%) for an entire run with zero ramp-up, which is what made Pro feel nearly unplayable. This is the FIXED curve-progress Pro's speed multiplier reads instead, representing its own difficulty tier rather than the tail end of a drain it never experiences. Purely a speed-multiplier input - the HUD/battery display for Pro is untouched and still genuinely reads 1%. Re-evaluated (not changed) after the shared curve flattened - 0.85 now lands around 1.20x, clearly faster than Easy/Frenzy's mid-game but well short of their own new ceiling, which is fine since Pro's difficulty already comes from one-hit knockout/no power-ups/no revive rather than raw velocity.")]
+        [SerializeField] private float proSpeedProgress = 0.85f;
 
         private static AnimationCurve BuildDefaultSpeedCurve()
         {
-            // Keyframes are (progress = 1 - battery/100, curve value 0-1) chosen to hit ~1.00x/1.08x/
-            // 1.18x/1.30x/1.38x/1.47x/1.55x at battery 100/75/50/30/20/10/1% once fed through
-            // Lerp(minGameSpeed, maxGameSpeed, curve.Evaluate(progress)).
+            // Keyframes are (progress = 1 - battery/100, curve value 0-1) chosen to hit ~1.00x/1.05x/
+            // 1.11x/1.16x/1.19x/1.22x/1.235x at battery 100/75/50/30/20/10/5%, then hold flat to 1.245x
+            // by progress 0.99 (battery 1%) once fed through Lerp(minGameSpeed, maxGameSpeed,
+            // curve.Evaluate(progress)) - see maxGameSpeed's tooltip for why the tail is flat rather
+            // than still climbing.
             var curve = new AnimationCurve(
                 new Keyframe(0.00f, 0.0000f),
-                new Keyframe(0.25f, 0.1455f),
-                new Keyframe(0.50f, 0.3273f),
-                new Keyframe(0.70f, 0.5455f),
-                new Keyframe(0.80f, 0.6909f),
-                new Keyframe(0.90f, 0.8545f),
+                new Keyframe(0.25f, 0.2041f),
+                new Keyframe(0.50f, 0.4490f),
+                new Keyframe(0.70f, 0.6531f),
+                new Keyframe(0.80f, 0.7755f),
+                new Keyframe(0.90f, 0.8980f),
+                new Keyframe(0.95f, 0.9592f),
+                new Keyframe(0.99f, 1.0000f),
                 new Keyframe(1.00f, 1.0000f));
             for (int i = 0; i < curve.length; i++)
             {
@@ -83,8 +89,16 @@ namespace OnePercentBattery.Core
         {
             get
             {
-                float batteryNormalized = player.Battery.CurrentPercent / 100f;
-                float progress = 1f - batteryNormalized;
+                float progress;
+                if (ActiveConfig != null && ActiveConfig.Mode == RunModeType.Pro)
+                {
+                    progress = proSpeedProgress;
+                }
+                else
+                {
+                    float batteryNormalized = player.Battery.CurrentPercent / 100f;
+                    progress = 1f - batteryNormalized;
+                }
                 return Mathf.Lerp(minGameSpeed, maxGameSpeed, speedCurve.Evaluate(progress));
             }
         }

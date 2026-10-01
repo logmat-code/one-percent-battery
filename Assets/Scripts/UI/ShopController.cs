@@ -12,6 +12,7 @@ namespace OnePercentBattery.UI
         [SerializeField] private Text coinsText;
         [SerializeField] private Transform contentParent;
         [SerializeField] private ShopItemView itemPrefab;
+        [SerializeField] private SkinPreviewController skinPreview;
 
         [Header("Tabs")]
         [SerializeField] private Image tabSkinsImage;
@@ -56,7 +57,7 @@ namespace OnePercentBattery.UI
             foreach (var item in _currentList)
             {
                 ShopItemView view = Instantiate(itemPrefab, contentParent);
-                view.Bind(item);
+                view.Bind(item, skinPreview);
             }
         }
 

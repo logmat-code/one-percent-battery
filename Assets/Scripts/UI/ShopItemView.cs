@@ -16,10 +16,12 @@ namespace OnePercentBattery.UI
         [SerializeField] private Button button;
 
         private CosmeticDefinition _item;
+        private SkinPreviewController _preview;
 
-        public void Bind(CosmeticDefinition item)
+        public void Bind(CosmeticDefinition item, SkinPreviewController preview)
         {
             _item = item;
+            _preview = preview;
             swatch.color = item.AccentColor.a > 0f ? item.AccentColor : Color.gray;
             nameText.text = item.DisplayName;
 
@@ -37,12 +39,25 @@ namespace OnePercentBattery.UI
 
         private void HandleClicked()
         {
-            if (!ShopManager.Instance.IsUnlocked(_item))
+            bool unlocked = ShopManager.Instance.IsUnlocked(_item);
+
+            // Every locked item (Skins, Trails, and Exclusive - which are just Skins/Trails from a
+            // curated list, see ShopCatalog.Exclusive) opens a preview instead of purchasing
+            // immediately. The preview never touches SaveData itself; it only calls
+            // ShopManager.TryPurchase/Equip once the player presses Buy there, so nothing changes
+            // here unless/until that happens.
+            if (!unlocked && _preview != null)
+            {
+                _preview.Show(_item);
+                return;
+            }
+
+            if (!unlocked)
             {
                 if (!ShopManager.Instance.TryPurchase(_item)) return;
             }
             ShopManager.Instance.Equip(_item);
-            Bind(_item);
+            Bind(_item, _preview);
         }
     }
 }

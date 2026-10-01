@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using OnePercentBattery.Data;
 using OnePercentBattery.Meta;
 using UnityEngine;
 
 namespace OnePercentBattery.UI
 {
-    /// <summary>Daily missions + monthly challenges list.</summary>
+    /// <summary>Daily missions + monthly challenges list - shows only the current 5-mission rotation for each period (see MissionManager.GetActiveDailyMissions/GetActiveMonthlyMissions), never the full pool.</summary>
     public sealed class MissionsController : MonoBehaviour
     {
         [SerializeField] private GameObject root;
@@ -14,6 +15,9 @@ namespace OnePercentBattery.UI
 
         private void OnEnable()
         {
+            // Panel open is one of the three checkpoints (app start/resume are the others, both already
+            // routed through MissionManager.Awake/HandleRunStarted) where a 24h/30d-elapsed rotation
+            // should actually take effect - EnsureCurrentPeriods() is a cheap no-op otherwise.
             MissionManager.Instance.EnsureCurrentPeriods();
             MissionManager.Instance.ProgressChanged += Refresh;
             Refresh();
@@ -26,11 +30,11 @@ namespace OnePercentBattery.UI
 
         private void Refresh()
         {
-            Populate(dailyContentParent, MissionCatalog.Daily);
-            Populate(monthlyContentParent, MissionCatalog.Monthly);
+            Populate(dailyContentParent, MissionManager.Instance.GetActiveDailyMissions());
+            Populate(monthlyContentParent, MissionManager.Instance.GetActiveMonthlyMissions());
         }
 
-        private void Populate(Transform parent, MissionDefinition[] definitions)
+        private void Populate(Transform parent, List<MissionDefinition> definitions)
         {
             for (int i = parent.childCount - 1; i >= 0; i--)
             {

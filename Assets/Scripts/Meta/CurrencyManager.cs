@@ -29,6 +29,7 @@ namespace OnePercentBattery.Meta
             if (amount == 0) return;
             SaveSystem.Data.coins += amount;
             SaveSystem.Save();
+            GameEvents.RaiseCoinsChanged(SaveSystem.Data.coins);
         }
 
         public void AddFragments(int amount)
@@ -43,6 +44,7 @@ namespace OnePercentBattery.Meta
             if (amount <= 0 || SaveSystem.Data.coins < amount) return false;
             SaveSystem.Data.coins -= amount;
             SaveSystem.Save();
+            GameEvents.RaiseCoinsChanged(SaveSystem.Data.coins);
             return true;
         }
     }

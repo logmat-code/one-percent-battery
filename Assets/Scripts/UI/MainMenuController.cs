@@ -17,6 +17,7 @@ namespace OnePercentBattery.UI
 
         [Header("Top bar")]
         [SerializeField] private Text coinsText;
+        [Tooltip("Despite the field name (kept as-is to avoid re-wiring the scene reference), this shows the BEST FOR THE CURRENTLY SELECTED MODE, not the overall best - see RefreshBestForSelectedMode.")]
         [SerializeField] private Text personalBestText;
         [SerializeField] private Text dayStreakText;
 
@@ -48,6 +49,9 @@ namespace OnePercentBattery.UI
         [SerializeField] private GameObject profilePanelRoot;
         [SerializeField] private GameObject settingsPanelRoot;
 
+        [Tooltip("Optional - the gameplay World's ground (with its ParallaxLayer) renders at a fixed world position with nothing gating its visibility, so without this it shows through as a stray bar behind the menu's own art. Hidden while the menu is up, shown again the moment a run actually starts.")]
+        [SerializeField] private GameObject gameplayGroundRoot;
+
         private RunModeType _selectedMode = RunModeType.Easy;
 
         private void Awake()
@@ -56,11 +60,23 @@ namespace OnePercentBattery.UI
             // OnEnable would never fire again to re-subscribe, so this would stop hearing
             // ReturnedToMenu after the very first run.
             GameEvents.ReturnedToMenu += Show;
+            // Root stays active (just not on top) while Shop/Missions/Profile/Settings open as
+            // overlays on top of it - a coin change there (e.g. claiming a mission reward) previously
+            // never reached this already-visible top bar, since nothing but Show() ever touched
+            // coinsText. That's what made CLAIM look like it wasn't awarding anything: the balance
+            // WAS updated in SaveData, just never redrawn until the next full Show().
+            GameEvents.CoinsChanged += HandleCoinsChanged;
         }
 
         private void OnDestroy()
         {
             GameEvents.ReturnedToMenu -= Show;
+            GameEvents.CoinsChanged -= HandleCoinsChanged;
+        }
+
+        private void HandleCoinsChanged(int newTotal)
+        {
+            if (coinsText != null) coinsText.text = newTotal.ToString();
         }
 
         private void Start()
@@ -75,12 +91,14 @@ namespace OnePercentBattery.UI
             RefreshStats();
             RefreshModeSelection();
             AdsManager.Instance.ShowBanner();
+            if (gameplayGroundRoot != null) gameplayGroundRoot.SetActive(false);
         }
 
         public void Hide()
         {
             root.SetActive(false);
             AdsManager.Instance.HideBanner();
+            if (gameplayGroundRoot != null) gameplayGroundRoot.SetActive(true);
         }
 
         public void OnEasyClicked() => SelectMode(RunModeType.Easy);
@@ -106,6 +124,15 @@ namespace OnePercentBattery.UI
             RunModeConfig config = RunModeConfig.For(_selectedMode);
             modeTaglineText.text = config.Tagline;
             modeRulesText.text = config.RulesLine;
+
+            RefreshBestForSelectedMode();
+        }
+
+        /// <summary>Each mode persists its own best distance (SaveData.BestDistanceFor) - this shows THAT mode's record, not the overall best, so switching modes must update it immediately.</summary>
+        private void RefreshBestForSelectedMode()
+        {
+            float best = SaveSystem.Data.BestDistanceFor(_selectedMode);
+            personalBestText.text = $"{Mathf.FloorToInt(best)} m";
         }
 
         private void Tint(Image buttonImage, Text label, bool selected)
@@ -160,7 +187,6 @@ namespace OnePercentBattery.UI
         {
             var data = SaveSystem.Data;
             coinsText.text = data.coins.ToString();
-            personalBestText.text = $"{Mathf.FloorToInt(data.OverallBestDistance())} m";
             int streak = DailyStreakManager.Instance.DayStreak;
             dayStreakText.text = $"{streak} day{(streak == 1 ? "" : "s")}";
 

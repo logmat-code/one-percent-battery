@@ -65,7 +65,6 @@ namespace OnePercentBattery.Audio
             _sfxSource.playOnAwake = false;
 
             BuildSynthesizedClips();
-            BuildSynthesizedMusicIfMissing();
         }
 
         private void OnEnable()
@@ -224,52 +223,6 @@ namespace OnePercentBattery.Audio
             _batteryCritical10Sfx = batteryCritical10SfxOverride != null ? batteryCritical10SfxOverride : SynthTone("sfx_battery_10", 640f, 420f, 0.16f, WaveShape.Triangle, 0.01f);
             _batterySevere5Sfx = batterySevere5SfxOverride != null ? batterySevere5SfxOverride : SynthTone("sfx_battery_5", 580f, 340f, 0.2f, WaveShape.Square, 0.005f);
             _batteryFinal1Sfx = batteryFinal1SfxOverride != null ? batteryFinal1SfxOverride : SynthAlarm("sfx_battery_1");
-        }
-
-        /// <summary>
-        /// menuMusic/gameplayMusic have no synthesized fallback like the SFX above - assign real clips
-        /// on the AudioManager instance to replace these placeholders before shipping. A soft three-note
-        /// pad (root/fifth/octave), each an exact multiple of a 4-second loop length so it repeats with
-        /// no click at the seam. Gameplay's pad adds a gentle pulse so it doesn't feel identical to menu;
-        /// SetMusicIntensity (driven by LowBatteryIntensityChanged) still does the actual tension ramp via
-        /// pitch on top of whichever of these is playing.
-        /// </summary>
-        private void BuildSynthesizedMusicIfMissing()
-        {
-            if (menuMusic == null) menuMusic = SynthPad("music_menu_placeholder", pulseHz: 0f);
-            if (gameplayMusic == null) gameplayMusic = SynthPad("music_gameplay_placeholder", pulseHz: 2f);
-        }
-
-        private static AudioClip SynthPad(string name, float pulseHz)
-        {
-            const int sampleRate = 44100;
-            const float duration = 4f;
-            int sampleCount = Mathf.RoundToInt(duration * sampleRate);
-            var samples = new float[sampleCount];
-
-            // 110/165/220 Hz (root, fifth, octave) each complete a whole number of cycles in 4s (440/660/880),
-            // so every voice - and the loop as a whole - returns to phase 0 exactly at the last sample.
-            const float root = 110f;
-            const float fifth = 165f;
-            const float octave = 220f;
-            const float swellHz = 0.25f; // 1 full cycle over the 4s loop - keeps the loop point click-free too.
-
-            for (int i = 0; i < sampleCount; i++)
-            {
-                float t = i / (float)sampleRate;
-                float wave = Mathf.Sin(2f * Mathf.PI * root * t) * 0.5f
-                           + Mathf.Sin(2f * Mathf.PI * fifth * t) * 0.3f
-                           + Mathf.Sin(2f * Mathf.PI * octave * t) * 0.2f;
-
-                float swell = 0.75f + 0.25f * Mathf.Sin(2f * Mathf.PI * swellHz * t);
-                float pulse = pulseHz > 0f ? 0.85f + 0.15f * Mathf.Sin(2f * Mathf.PI * pulseHz * t) : 1f;
-
-                samples[i] = wave * swell * pulse * 0.18f;
-            }
-
-            var clip = AudioClip.Create(name, sampleCount, 1, sampleRate, false);
-            clip.SetData(samples, 0);
-            return clip;
         }
 
         private enum WaveShape { Sine, Square, Triangle, Noise }

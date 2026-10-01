@@ -28,6 +28,7 @@ namespace OnePercentBattery.Core
         public static event Action Jumped;
         public static event Action Landed;
         public static event Action<int> CoinCollected; // running coin total for the active run
+        public static event Action<int> CoinsChanged; // player's total wallet balance, fired on every CurrencyManager mutation (claims, purchases, ad rewards, run pickups) - any persistent coin display should subscribe to this rather than reading TotalCoins once on its own Show/OnEnable
         public static event Action<float> EnergyCollected; // amount restored
         public static event Action ObstacleHit;
         public static event Action<ZoneDefinition> ZoneChanged;
@@ -59,6 +60,7 @@ namespace OnePercentBattery.Core
         public static void RaiseJumped() => Jumped?.Invoke();
         public static void RaiseLanded() => Landed?.Invoke();
         public static void RaiseCoinCollected(int runTotal) => CoinCollected?.Invoke(runTotal);
+        public static void RaiseCoinsChanged(int newTotal) => CoinsChanged?.Invoke(newTotal);
         public static void RaiseEnergyCollected(float amount) => EnergyCollected?.Invoke(amount);
         public static void RaiseObstacleHit() => ObstacleHit?.Invoke();
         public static void RaiseZoneChanged(ZoneDefinition zone) => ZoneChanged?.Invoke(zone);

@@ -41,30 +41,35 @@ namespace OnePercentBattery.Data
             PassiveDrainPerSecond = passiveDrainPerSecond;
         }
 
+        // speedPerMeter reduced ~14-15% across all modes (real-device feedback: later zones were too hard
+        // to realistically reach) - baseSpeed and maxSpeed are UNCHANGED so early-game feel and the
+        // eventual difficulty ceiling stay the same; only how FAST the run climbs toward that ceiling is
+        // gentler. This is independent of GameManager.CurrentGameSpeedMultiplier (the battery-driven
+        // curve) - that multiplier is untouched, so the 1% survival-mode pacing is unaffected.
         public static readonly RunModeConfig Easy = new RunModeConfig(
             RunModeType.Easy, "EASY", "Find your rhythm. Recharge, collect and keep moving.",
             "-20% per hit · power-ups enabled",
             startingChargePercent: 100f, hitDamagePercent: 20f, oneHitKnockout: false, powerUpsEnabled: true,
-            allowSecondChance: true, baseSpeed: 7f, speedPerMeter: 0.0035f, maxSpeed: 14f, passiveDrainPerSecond: 1f);
+            allowSecondChance: true, baseSpeed: 7f, speedPerMeter: 0.003f, maxSpeed: 14f, passiveDrainPerSecond: 1f);
 
         public static readonly RunModeConfig Frenzy = new RunModeConfig(
             RunModeType.Frenzy, "FRENZY", "Start low. Run fast. Every recharge is a lifeline.",
             "-20% per hit · power-ups enabled",
             startingChargePercent: 20f, hitDamagePercent: 20f, oneHitKnockout: false, powerUpsEnabled: true,
-            allowSecondChance: true, baseSpeed: 9.5f, speedPerMeter: 0.005f, maxSpeed: 17f, passiveDrainPerSecond: 1.3f);
+            allowSecondChance: true, baseSpeed: 9.5f, speedPerMeter: 0.0043f, maxSpeed: 17f, passiveDrainPerSecond: 1.3f);
 
         public static readonly RunModeConfig Pro = new RunModeConfig(
             RunModeType.Pro, "PRO", "One charge. One chance. Make every jump count.",
             "One hit ends the run · no power-ups",
             startingChargePercent: 1f, hitDamagePercent: 100f, oneHitKnockout: true, powerUpsEnabled: false,
-            allowSecondChance: false, baseSpeed: 8f, speedPerMeter: 0.004f, maxSpeed: 15f, passiveDrainPerSecond: 0f);
+            allowSecondChance: false, baseSpeed: 8f, speedPerMeter: 0.0034f, maxSpeed: 15f, passiveDrainPerSecond: 0f);
 
         /// <summary>Same pacing as Easy; the Daily Run's identity comes from its seeded course, not different rules.</summary>
         public static readonly RunModeConfig Daily = new RunModeConfig(
             RunModeType.Daily, "DAILY", "A fresh course every day.",
             "-20% per hit · power-ups enabled",
             startingChargePercent: 100f, hitDamagePercent: 20f, oneHitKnockout: false, powerUpsEnabled: true,
-            allowSecondChance: true, baseSpeed: 7f, speedPerMeter: 0.0035f, maxSpeed: 14f, passiveDrainPerSecond: 1f);
+            allowSecondChance: true, baseSpeed: 7f, speedPerMeter: 0.003f, maxSpeed: 14f, passiveDrainPerSecond: 1f);
 
         public static RunModeConfig For(RunModeType mode)
         {

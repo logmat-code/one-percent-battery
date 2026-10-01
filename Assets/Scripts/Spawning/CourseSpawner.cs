@@ -60,13 +60,14 @@ namespace OnePercentBattery.Spawning
         [SerializeField] private float landingRecoverySeconds = 0.35f;
 
         [Header("Spawn weights (must sum to <= 1; remainder is a plain coin cluster)")]
-        [SerializeField] private float obstacleWeight = 0.55f;
+        [Tooltip("Raised back from 0.46 - a prior pass over-corrected coin frequency to ~25.6% measured; this pass retargets ~22% (see energyWeight below for the paired change). Value is empirically calibrated via RollNextPlan simulation, not naive remainder math: micro-patterns (DefaultPatterns) inject additional coin/obstacle content independently of this weight. pit/shield/magnet are untouched by this pass.")]
+        [SerializeField] private float obstacleWeight = 0.487f;
         [Tooltip("Ground-gap hazard. Kept deliberately occasional (unlike obstacles, this is not gated by PowerUpsEnabled - it's a level hazard, not a power-up - but it is rarer than a plain obstacle) so the course doesn't feel like constant pits.")]
         [SerializeField] private float pitWeight = 0.08f;
         [Tooltip("Periodic vertical hazard (see MovingObstacle) - a level hazard like Pit, not gated by PowerUpsEnabled. Kept rarer than Pit while this first timing-based variant is still being validated.")]
         [SerializeField] private float movingObstacleWeight = 0.05f;
-        [Tooltip("The battery-life resource - a bit more frequent than Magnet/Shield so it reads as a lifeline, but tuned down from 0.14 which felt too common in real play.")]
-        [SerializeField] private float energyWeight = 0.07f;
+        [Tooltip("The battery-life resource - a bit more frequent than Magnet/Shield so it reads as a lifeline. Raised from 0.07 to 0.088 (paired with the obstacleWeight reduction above) to push effective Charger frequency from ~5.5% to ~6.5-7% measured, without touching Shield/Magnet.")]
+        [SerializeField] private float energyWeight = 0.088f;
         [SerializeField] private float shieldWeight = 0.05f;
         [Tooltip("Tuned down from 0.10 which felt too common in real play - Magnet should read as occasional/special, rarer than the Charger.")]
         [SerializeField] private float magnetSpawnChance = 0.05f;
@@ -608,7 +609,27 @@ namespace OnePercentBattery.Spawning
             ObjectPool<Obstacle> pool = _obstaclePools[index];
             Obstacle instance = pool.Get();
             instance.transform.position = new Vector3(x, groundY + instance.GroundOffsetY, 0f);
+            ActivateBakedInCoins(instance);
             Track(instance.transform, () => pool.Release(instance));
+        }
+
+        /// <summary>
+        /// Some obstacles (Coin Gate) carry their own child Pickup coins baked directly into the prefab
+        /// instead of going through the coin pool - they ride along with the Obstacle's own pool/Track
+        /// lifecycle rather than needing a second tracked entry each. A no-op for every other obstacle
+        /// (GetComponentsInChildren returns empty), so this is safe to call unconditionally here. Each
+        /// coin re-activates and re-wires on every real spawn, which also correctly resets a coin that was
+        /// collected (and hidden) the last time this same pooled instance appeared.
+        /// </summary>
+        private void ActivateBakedInCoins(Obstacle instance)
+        {
+            var bakedCoins = instance.GetComponentsInChildren<Pickup>(true);
+            foreach (var coin in bakedCoins)
+            {
+                coin.gameObject.SetActive(true);
+                coin.SetPlayer(_playerController);
+                coin.OnCollected = c => c.gameObject.SetActive(false);
+            }
         }
 
         private void SpawnPit(int index, float x)

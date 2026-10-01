@@ -25,9 +25,26 @@ namespace OnePercentBattery.Player
         [SerializeField] private Color criticalColor = new Color(0.94f, 0.45f, 0.5f);
 
         [Header("Battery fill readout (on the character itself, not just the HUD %)")]
-        [Tooltip("A dark mask that grows down from the top of the body as charge depletes, like a battery gauge.")]
-        [SerializeField] private SpriteRenderer batteryFillOverlay;
-        [SerializeField] private Color depletedOverlayColor = new Color(0.05f, 0.07f, 0.08f, 0.72f);
+        [Tooltip("A rounded energy capsule (SpriteRenderer.drawMode=Sliced over a pill-shaped 9-sliced sprite) inset well inside the body silhouette - rises and falls with charge without ever crossing the face. Sliced mode changes .size rather than transform.localScale, so the capsule's rounded caps never distort into hard corners at any fill height, and gracefully shrink into a small rounded blob near the minimum instead of a flat-edged sliver.")]
+        [SerializeField] private SpriteRenderer innerCharge;
+        [Tooltip("A soft glow that tracks the current top edge of innerCharge, like a meniscus/highlight on the energy level.")]
+        [SerializeField] private SpriteRenderer innerChargeTopGlow;
+        [Tooltip("innerCharge's fixed width in world units - kept narrow with clear margin on both sides so it can never reach the body's edge (and therefore never the silver rim) at any fill level. Matches the pill sprite's native pixel width exactly (34px @ 100 PPU) so the capsule is never horizontally stretched/shrunk away from its authored corner radius.")]
+        [SerializeField] private float chamberWidth = 0.34f;
+        [Tooltip("Local Y (in the body's own -0.5..0.5 space) of the chamber's bottom and top - the range innerCharge rises and falls within. Kept well inside the body's rounded edge on both ends.")]
+        [SerializeField] private float chamberBottom = -0.34f;
+        [SerializeField] private float chamberTop = 0.34f;
+        [Tooltip("Never lets the column fully vanish - even at 1% there should be a faint, visible sliver of energy left, matching a 'tiny glowing reserve' rather than nothing. Kept small deliberately - large enough to still render as something, never large enough that low battery reads as 'basically full'. The 9-sliced pill also auto-shrinks both rounded caps together below this height, so the floor still reads as a small glowing blob rather than a flat-edged sliver.")]
+        [Range(0f, 0.2f)]
+        [SerializeField] private float chamberMinFillFraction = 0.02f;
+
+        [Header("Outer glow (energy aura, tied to charge)")]
+        [Tooltip("Glow's alpha at 100% charge - was previously a fixed value baked into the scene and never touched by code, which is why it read as a static halo completely disconnected from the battery's actual state.")]
+        [Range(0f, 1f)]
+        [SerializeField] private float glowMaxAlpha = 0.35f;
+        [Tooltip("Glow's alpha at 1% charge, as a fraction of glowMaxAlpha - never fully off (a dying battery still has SOME aura), but noticeably dimmer than a full one, so the aura reads as an energy level rather than pure decoration.")]
+        [Range(0f, 1f)]
+        [SerializeField] private float glowMinAlphaFraction = 0.35f;
 
         [Header("Expression (mouth flattens/inverts as charge drops)")]
         [Tooltip("Whichever sprite currently reads as a smile - flattened for the low tier, swapped away from for critical.")]
@@ -53,18 +70,23 @@ namespace OnePercentBattery.Player
         private Vector3 _shieldBaseScale = Vector3.one;
         private Vector3 _trailBaseScale = Vector3.one;
         private Vector3 _magnetRingBaseScale = Vector3.one;
-        private Vector3 _overlayIntendedScale = Vector3.one;
-        private Vector3 _overlayIntendedLocalPos = Vector3.zero;
+        private Vector3 _chargeIntendedLocalPos = Vector3.zero;
+        private Vector3 _topGlowBaseScale = Vector3.one;
+        private Vector3 _topGlowIntendedLocalPos = Vector3.zero;
 
         private void Awake()
         {
             _skinTint = healthyColor;
             _baseScale = transform.localScale;
-            if (batteryFillOverlay != null)
+            if (innerCharge != null)
             {
-                batteryFillOverlay.color = depletedOverlayColor;
-                _overlayIntendedScale = batteryFillOverlay.transform.localScale;
-                _overlayIntendedLocalPos = batteryFillOverlay.transform.localPosition;
+                innerCharge.drawMode = SpriteDrawMode.Sliced;
+                _chargeIntendedLocalPos = innerCharge.transform.localPosition;
+            }
+            if (innerChargeTopGlow != null)
+            {
+                _topGlowBaseScale = innerChargeTopGlow.transform.localScale;
+                _topGlowIntendedLocalPos = innerChargeTopGlow.transform.localPosition;
             }
             if (glowRenderer != null) _glowBaseScale = glowRenderer.transform.localScale;
             if (shieldRingRenderer != null) _shieldBaseScale = shieldRingRenderer.transform.localScale;
@@ -138,17 +160,24 @@ namespace OnePercentBattery.Player
                 magnetRingRenderer.transform.localScale = InverseScaleAround(_magnetRingBaseScale, transform.localScale, _baseScale);
             }
 
-            // The battery-depletion mask is drawn directly over the body sprite, so any squash/stretch
-            // on the root warped it right along with the "skin" underneath - reapply the intended
-            // scale/position (set by UpdateBatteryFillOverlay) counter-scaled every frame, the same
-            // fix as Glow/ShieldRing/Trail above, so it stays visually locked to the body regardless
-            // of the current jump/land pose.
-            if (batteryFillOverlay != null)
+            // innerCharge/innerChargeTopGlow are drawn directly over the body sprite, so any
+            // squash/stretch on the root would warp them right along with the "skin" underneath -
+            // reapply their intended scale/position (set by UpdateInnerCharge) counter-scaled every
+            // frame, the same fix as Glow/ShieldRing/Trail above, so they stay visually locked to the
+            // body regardless of the current jump/land pose.
+            Vector3 chargeCounterScale = InverseScaleAround(Vector3.one, transform.localScale, _baseScale);
+            if (innerCharge != null)
             {
-                var overlayTransform = batteryFillOverlay.transform;
-                Vector3 counterScale = InverseScaleAround(Vector3.one, transform.localScale, _baseScale);
-                overlayTransform.localScale = Vector3.Scale(_overlayIntendedScale, counterScale);
-                overlayTransform.localPosition = Vector3.Scale(_overlayIntendedLocalPos, counterScale);
+                // Sliced draw mode already conveys width/height through .size (set in
+                // UpdateInnerCharge), so the transform itself only needs to cancel the body's
+                // squash/stretch back to identity - never scaled to represent fill.
+                innerCharge.transform.localScale = chargeCounterScale;
+                innerCharge.transform.localPosition = Vector3.Scale(_chargeIntendedLocalPos, chargeCounterScale);
+            }
+            if (innerChargeTopGlow != null)
+            {
+                innerChargeTopGlow.transform.localScale = Vector3.Scale(_topGlowBaseScale, chargeCounterScale);
+                innerChargeTopGlow.transform.localPosition = Vector3.Scale(_topGlowIntendedLocalPos, chargeCounterScale);
             }
         }
 
@@ -206,18 +235,63 @@ namespace OnePercentBattery.Player
 
             bodyRenderer.color = baseColor;
             RefreshExpression(currentPercent);
-            UpdateBatteryFillOverlay(currentPercent);
+            UpdateInnerCharge(currentPercent, baseColor);
         }
 
-        private void UpdateBatteryFillOverlay(float currentPercent)
+        /// <summary>
+        /// Replaces the old edge-to-edge BatteryFillOverlay AND the plain-rectangle InnerCharge that
+        /// followed it - both still read as a flat colored block across the face even once contained
+        /// inside the body. innerCharge is now a Sliced-mode SpriteRenderer over a pill-shaped 9-sliced
+        /// sprite (rounded caps baked into the 17px border on all sides): only .size changes here, never
+        /// transform.localScale, so the rounded caps are preserved pixel-perfect at every fill height
+        /// instead of being stretched into hard corners. Below the sprite's native cap height, Unity's
+        /// own 9-slice shrinks both caps together into a small rounded blob rather than a flat-edged
+        /// sliver, which is exactly the "tiny glowing reserve" look wanted near 1%. No separate dark
+        /// background track is used (removed ChargeChamberBackground) - contrast against the body comes
+        /// from tinting the capsule a lighter/brighter blend of the tier color instead, so it reads as a
+        /// glowing core rather than a gauge fill against its track. Fills from the BOTTOM up and sits
+        /// behind Eyes/Mouth in sorting order so the face is always fully readable.
+        /// </summary>
+        private void UpdateInnerCharge(float currentPercent, Color tierColor)
         {
-            if (batteryFillOverlay == null) return;
+            float fillFraction = Mathf.Max(chamberMinFillFraction, Mathf.Clamp01(currentPercent / 100f));
+            float fillHeight = (chamberTop - chamberBottom) * fillFraction;
+            float topY = chamberBottom + fillHeight;
 
-            // Stored as the "intended" pose rather than applied directly - Update() reapplies it
-            // counter-scaled every frame so squash/stretch on the root can't warp it (see Update()).
-            float emptyFraction = 1f - Mathf.Clamp01(currentPercent / 100f);
-            _overlayIntendedScale = new Vector3(1f, emptyFraction, 1f);
-            _overlayIntendedLocalPos = new Vector3(_overlayIntendedLocalPos.x, 0.5f - emptyFraction * 0.5f, _overlayIntendedLocalPos.z);
+            // Applied immediately (not just stored for Update() to pick up next frame) so the capsule/
+            // glow are correct the instant battery changes, regardless of Update() call timing/order -
+            // Update() still re-applies these every frame afterward, but only to counter-scale against
+            // squash/stretch, not to do the actual positioning for the first time.
+            Vector3 chargeCounterScale = InverseScaleAround(Vector3.one, transform.localScale, _baseScale);
+
+            if (innerCharge != null)
+            {
+                Color c = Color.Lerp(tierColor, Color.white, 0.4f);
+                c.a = 0.95f;
+                innerCharge.color = c;
+                innerCharge.size = new Vector2(chamberWidth, fillHeight);
+                _chargeIntendedLocalPos = new Vector3(_chargeIntendedLocalPos.x, chamberBottom + fillHeight * 0.5f, _chargeIntendedLocalPos.z);
+                innerCharge.transform.localPosition = Vector3.Scale(_chargeIntendedLocalPos, chargeCounterScale);
+            }
+            if (innerChargeTopGlow != null)
+            {
+                Color glowColor = Color.Lerp(tierColor, Color.white, 0.5f);
+                glowColor.a = 0.55f;
+                innerChargeTopGlow.color = glowColor;
+                _topGlowIntendedLocalPos = new Vector3(_topGlowIntendedLocalPos.x, topY, _topGlowIntendedLocalPos.z);
+                innerChargeTopGlow.transform.localPosition = Vector3.Scale(_topGlowIntendedLocalPos, chargeCounterScale);
+            }
+            if (glowRenderer != null)
+            {
+                // Previously a fixed scene-authored color/alpha never touched at runtime, so the aura
+                // never visibly reacted to anything - now tinted per tier like the body/capsule, and
+                // its intensity tracks the same fillFraction the capsule's height already reads from,
+                // so a fuller battery genuinely radiates more (an "energy aura"), a dying one visibly
+                // dims but never fully goes dark.
+                Color glow = tierColor;
+                glow.a = glowMaxAlpha * Mathf.Lerp(glowMinAlphaFraction, 1f, fillFraction);
+                glowRenderer.color = glow;
+            }
         }
 
         private void RefreshExpression(float currentPercent)

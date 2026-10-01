@@ -32,8 +32,8 @@ namespace OnePercentBattery.Player
         [SerializeField] private float jumpBufferSeconds = 0.1f;
 
         [Header("1% Survival Mode")]
-        [Tooltip("Extra forward-speed multiplier while the battery is coasting at 1% (see PlayerBattery.IsInSurvivalMode).")]
-        [SerializeField] private float survivalModeSpeedMultiplier = 1.15f;
+        [Tooltip("Extra forward-speed multiplier while the battery is coasting at 1% (see PlayerBattery.IsInSurvivalMode), stacked on top of GameManager.CurrentGameSpeedMultiplier. Lowered from 1.15 - it was stacking with the battery curve's own ~1.42x tail to reach ~1.63x total at exactly 1%, which is what made Survival Mode 'far too fast, practically impossible' on real devices. Now just a small final-urgency tic on top of the curve's own (much flatter) ceiling, not the main source of 1%'s intensity.")]
+        [SerializeField] private float survivalModeSpeedMultiplier = 1.02f;
 
         [Header("Pits")]
         [Tooltip("How far below groundY the player must fall (while over a Pit) before it's fatal - see SetOverPit.")]
