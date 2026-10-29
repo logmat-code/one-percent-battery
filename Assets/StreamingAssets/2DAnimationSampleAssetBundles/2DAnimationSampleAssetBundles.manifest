@@ -1,0 +1,9 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.6.2f1
+CRC: 4030679599
+HashAppended: 0
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: skeleton
+      Dependencies: {}

@@ -49,7 +49,7 @@ namespace OnePercentBattery.Spawning
         [SerializeField] private float maxGapVarianceMeters = 5f;
         [SerializeField] private float lookAheadMeters = 20f;
         [SerializeField] private float despawnBehindMeters = 15f;
-        [SerializeField] private float firstSpawnBufferMeters = 12f;
+        [SerializeField] private float firstSpawnBufferMeters = 14f;
 
         [Header("Fairness")]
         [Tooltip("Minimum time a player must be able to see a hazard before it's reachable, at any speed.")]
@@ -60,17 +60,16 @@ namespace OnePercentBattery.Spawning
         [SerializeField] private float landingRecoverySeconds = 0.35f;
 
         [Header("Spawn weights (must sum to <= 1; remainder is a plain coin cluster)")]
-        [Tooltip("Raised back from 0.46 - a prior pass over-corrected coin frequency to ~25.6% measured; this pass retargets ~22% (see energyWeight below for the paired change). Value is empirically calibrated via RollNextPlan simulation, not naive remainder math: micro-patterns (DefaultPatterns) inject additional coin/obstacle content independently of this weight. pit/shield/magnet are untouched by this pass.")]
-        [SerializeField] private float obstacleWeight = 0.487f;
+        [Tooltip("Calibrated to target 22.0-22.5% effective coin-containing frequency across micro-patterns and coin gate rewards.")]
+        [SerializeField] private float obstacleWeight = 0.520f;
         [Tooltip("Ground-gap hazard. Kept deliberately occasional (unlike obstacles, this is not gated by PowerUpsEnabled - it's a level hazard, not a power-up - but it is rarer than a plain obstacle) so the course doesn't feel like constant pits.")]
         [SerializeField] private float pitWeight = 0.08f;
         [Tooltip("Periodic vertical hazard (see MovingObstacle) - a level hazard like Pit, not gated by PowerUpsEnabled. Kept rarer than Pit while this first timing-based variant is still being validated.")]
         [SerializeField] private float movingObstacleWeight = 0.05f;
-        [Tooltip("The battery-life resource - a bit more frequent than Magnet/Shield so it reads as a lifeline. Raised from 0.07 to 0.088 (paired with the obstacleWeight reduction above) to push effective Charger frequency from ~5.5% to ~6.5-7% measured, without touching Shield/Magnet.")]
-        [SerializeField] private float energyWeight = 0.088f;
-        [SerializeField] private float shieldWeight = 0.05f;
-        [Tooltip("Tuned down from 0.10 which felt too common in real play - Magnet should read as occasional/special, rarer than the Charger.")]
-        [SerializeField] private float magnetSpawnChance = 0.05f;
+        [Tooltip("The battery-life resource - kept robust to support player survival.")]
+        [SerializeField] private float energyWeight = 0.095f;
+        [SerializeField] private float shieldWeight = 0.053f;
+        [SerializeField] private float magnetSpawnChance = 0.053f;
 
         [Header("Micro-patterns")]
         [Tooltip("Chance, each time the spawner is about to decide its next content, that it attempts a short designed sequence (see patterns) instead of an independent random roll. An attempt only succeeds if the cooldown (minNormalSlotsBetweenPatterns) has elapsed, a pattern other than the last one used is available, and every element in it maps to a prefab this build actually has - otherwise it silently falls back to a normal roll for that same slot.")]
@@ -134,7 +133,7 @@ namespace OnePercentBattery.Spawning
             for (int i = 0; i < obstaclePrefabs.Length; i++)
             {
                 _obstaclePools[i] = new ObjectPool<Obstacle>(obstaclePrefabs[i], transform, prewarm: 2);
-                _obstacleWidths[i] = FootprintWidth(obstaclePrefabs[i].GetComponent<BoxCollider2D>(), obstaclePrefabs[i].transform);
+                _obstacleWidths[i] = FootprintWidth(obstaclePrefabs[i], obstaclePrefabs[i].transform);
 
                 // Cached once so a roll that lands on Tall right after Tall can be substituted in O(1) -
                 // no reroll loop. Medium is preferred (matches the "one tier down" spirit); Low is the
@@ -154,7 +153,7 @@ namespace OnePercentBattery.Spawning
             for (int i = 0; i < pitPrefabs.Length; i++)
             {
                 _pitPools[i] = new ObjectPool<PitZone>(pitPrefabs[i], transform, prewarm: 1);
-                _pitWidths[i] = FootprintWidth(pitPrefabs[i].GetComponent<BoxCollider2D>(), pitPrefabs[i].transform);
+                _pitWidths[i] = FootprintWidth(pitPrefabs[i], pitPrefabs[i].transform);
 
                 // Same reasoning as the obstacle indices above - only micro-patterns need a specific size class.
                 if (pitPrefabs[i].SizeClass == PitSizeClass.Small && _smallPitIndex < 0)
@@ -168,7 +167,7 @@ namespace OnePercentBattery.Spawning
             for (int i = 0; i < movingObstaclePrefabs.Length; i++)
             {
                 _movingObstaclePools[i] = new ObjectPool<MovingObstacle>(movingObstaclePrefabs[i], transform, prewarm: 1);
-                _movingObstacleWidths[i] = FootprintWidth(movingObstaclePrefabs[i].GetComponent<BoxCollider2D>(), movingObstaclePrefabs[i].transform);
+                _movingObstacleWidths[i] = FootprintWidth(movingObstaclePrefabs[i], movingObstaclePrefabs[i].transform);
             }
 
             _coinPool = new ObjectPool<Pickup>(coinPrefab, transform, prewarm: 8);
@@ -180,9 +179,23 @@ namespace OnePercentBattery.Spawning
             _jumpProfile = _playerController.ComputeJumpAirTimes();
         }
 
-        private static float FootprintWidth(BoxCollider2D col, Transform t)
+        private static float FootprintWidth(Component comp, Transform t)
         {
-            return col != null ? col.size.x * t.localScale.x : 0f;
+            if (comp == null || t == null) return 0f;
+            var colliders = comp.GetComponentsInChildren<BoxCollider2D>();
+            if (colliders == null || colliders.Length == 0) return 0f;
+            if (colliders.Length == 1) return colliders[0].size.x * t.localScale.x;
+
+            float minX = float.MaxValue;
+            float maxX = float.MinValue;
+            foreach (var c in colliders)
+            {
+                Vector3 center = c.transform.localPosition + (Vector3)c.offset;
+                float halfW = c.size.x * 0.5f * c.transform.localScale.x;
+                minX = Mathf.Min(minX, center.x - halfW);
+                maxX = Mathf.Max(maxX, center.x + halfW);
+            }
+            return (maxX - minX) * t.localScale.x;
         }
 
         /// <summary>

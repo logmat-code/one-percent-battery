@@ -40,8 +40,13 @@ namespace OnePercentBattery.UI
 
         [Header("Claims")]
         [SerializeField] private Button claimDailyBonusButton;
+        [SerializeField] private Text claimDailyBonusButtonLabel;
         [SerializeField] private Button claimGiftButton;
+        [SerializeField] private Text claimGiftButtonLabel;
         [SerializeField] private Button watchAdButton;
+
+        [Header("Tutorial")]
+        [SerializeField] private TutorialController tutorialController;
 
         [Header("Panels")]
         [SerializeField] private GameObject shopPanelRoot;
@@ -60,18 +65,23 @@ namespace OnePercentBattery.UI
             // OnEnable would never fire again to re-subscribe, so this would stop hearing
             // ReturnedToMenu after the very first run.
             GameEvents.ReturnedToMenu += Show;
-            // Root stays active (just not on top) while Shop/Missions/Profile/Settings open as
-            // overlays on top of it - a coin change there (e.g. claiming a mission reward) previously
-            // never reached this already-visible top bar, since nothing but Show() ever touched
-            // coinsText. That's what made CLAIM look like it wasn't awarding anything: the balance
-            // WAS updated in SaveData, just never redrawn until the next full Show().
             GameEvents.CoinsChanged += HandleCoinsChanged;
+            AdsManager.AdAvailabilityChanged += RefreshWatchAdButton;
+            if (DailyStreakManager.Instance != null)
+            {
+                DailyStreakManager.Instance.Claimed += RefreshStats;
+            }
         }
 
         private void OnDestroy()
         {
             GameEvents.ReturnedToMenu -= Show;
             GameEvents.CoinsChanged -= HandleCoinsChanged;
+            AdsManager.AdAvailabilityChanged -= RefreshWatchAdButton;
+            if (DailyStreakManager.Instance != null)
+            {
+                DailyStreakManager.Instance.Claimed -= RefreshStats;
+            }
         }
 
         private void HandleCoinsChanged(int newTotal)
@@ -82,6 +92,24 @@ namespace OnePercentBattery.UI
         private void Start()
         {
             Show();
+            CheckFirstTimeTutorial();
+        }
+
+        private void CheckFirstTimeTutorial()
+        {
+            var data = SaveSystem.Data;
+            // Existing players who have already played runs are treated as having completed the tutorial
+            // so we don't unexpectedly block testers on Google Play.
+            if (!data.hasCompletedTutorial && (data.totalRuns > 0 || data.bestDistanceEasy > 0 || data.bestDistanceFrenzy > 0 || data.bestDistancePro > 0))
+            {
+                data.hasCompletedTutorial = true;
+                SaveSystem.Save();
+            }
+
+            if (!data.hasCompletedTutorial && tutorialController != null)
+            {
+                tutorialController.Show();
+            }
         }
 
         public void Show()
@@ -89,6 +117,7 @@ namespace OnePercentBattery.UI
             if (transition != null) transition.Show();
             else root.SetActive(true);
             RefreshStats();
+            RefreshWatchAdButton();
             RefreshModeSelection();
             AdsManager.Instance.ShowBanner();
             if (gameplayGroundRoot != null) gameplayGroundRoot.SetActive(false);
@@ -169,18 +198,28 @@ namespace OnePercentBattery.UI
             }
         }
 
+        public void RefreshWatchAdButton()
+        {
+            if (watchAdButton == null) return;
+            bool available = AdsManager.Instance != null && AdsManager.Instance.IsRewardedAvailable(RewardedAdPlacement.BonusCoins);
+            watchAdButton.interactable = available;
+        }
+
         public void OnWatchAdClicked()
         {
-            if (!AdsManager.Instance.IsRewardedAvailable(RewardedAdPlacement.BonusCoins)) return;
+            if (AdsManager.Instance == null || !AdsManager.Instance.IsRewardedAvailable(RewardedAdPlacement.BonusCoins)) return;
             watchAdButton.interactable = false;
             AdsManager.Instance.ShowRewarded(RewardedAdPlacement.BonusCoins,
                 onRewardEarned: () =>
                 {
                     CurrencyManager.Instance.AddCoins(25);
                     RefreshStats();
-                    watchAdButton.interactable = true;
+                    RefreshWatchAdButton();
                 },
-                onFailedOrSkipped: () => watchAdButton.interactable = true);
+                onFailedOrSkipped: () =>
+                {
+                    RefreshWatchAdButton();
+                });
         }
 
         private void RefreshStats()
@@ -190,13 +229,36 @@ namespace OnePercentBattery.UI
             int streak = DailyStreakManager.Instance.DayStreak;
             dayStreakText.text = $"{streak} day{(streak == 1 ? "" : "s")}";
 
-            claimDailyBonusButton.interactable = DailyStreakManager.Instance.CanClaimDailyBonus;
-            claimGiftButton.interactable = DailyStreakManager.Instance.CanClaimGift;
+            bool canClaimBonus = DailyStreakManager.Instance.CanClaimDailyBonus;
+            claimDailyBonusButton.interactable = canClaimBonus;
+            Text bonusLabel = claimDailyBonusButtonLabel != null ? claimDailyBonusButtonLabel : claimDailyBonusButton?.GetComponentInChildren<Text>();
+            if (bonusLabel != null)
+            {
+                bonusLabel.text = canClaimBonus ? "DAILY BONUS\n\n+50" : "DAILY BONUS\n\nCLAIMED";
+            }
+
+            bool canClaimGift = DailyStreakManager.Instance.CanClaimGift;
+            claimGiftButton.interactable = canClaimGift;
+            Text giftLabel = claimGiftButtonLabel != null ? claimGiftButtonLabel : claimGiftButton?.GetComponentInChildren<Text>();
+            if (giftLabel != null)
+            {
+                giftLabel.text = canClaimGift ? "FREE GIFT\n\n+30" : "FREE GIFT\n\nCLAIMED";
+            }
+
+            RefreshBestForSelectedMode();
         }
 
         public void OpenShop() => shopPanelRoot.SetActive(true);
         public void OpenMissions() => missionsPanelRoot.SetActive(true);
         public void OpenProfile() => profilePanelRoot.SetActive(true);
         public void OpenSettings() => settingsPanelRoot.SetActive(true);
+        public void OnShareStatsClicked() => NativeShareService.ShareHomeStats();
+        public void OpenTutorial()
+        {
+            if (tutorialController != null)
+            {
+                tutorialController.Show();
+            }
+        }
     }
 }

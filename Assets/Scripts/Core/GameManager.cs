@@ -66,6 +66,10 @@ namespace OnePercentBattery.Core
 
         private bool _secondChanceUsedThisRun;
         private bool _doubleCoinsClaimedThisRun;
+        private bool _runFinalizedThisRun;
+        private float _finalizedDistanceMeters;
+        private float _bestDistanceAtRunStart;
+        private float _bestSurvivalAtRunStart;
         // Root cause of the Retry bugs: FinalizeRun()+MaybeShowInterstitial() is an async chain (the
         // interstitial can take real seconds to close), and State stays GameOver for its entire
         // duration. A second RetrySameMode()/ReturnToMainMenu() call in that window used to pass the
@@ -124,6 +128,16 @@ namespace OnePercentBattery.Core
             ElapsedSeconds = 0f;
             _secondChanceUsedThisRun = false;
             _doubleCoinsClaimedThisRun = false;
+            _runFinalizedThisRun = false;
+            _finalizedDistanceMeters = 0f;
+
+            if (mode == RunModeType.Daily && DailyRunManager.Instance != null)
+            {
+                DailyRunManager.Instance.EnsureCurrentDay();
+            }
+
+            _bestDistanceAtRunStart = SaveSystem.Data.BestDistanceFor(mode);
+            _bestSurvivalAtRunStart = SaveSystem.Data.bestSurvivalModeSeconds;
 
             System.Random rng = mode == RunModeType.Daily ? DailyRunManager.Instance.CreateTodaysRng() : new System.Random();
 
@@ -158,9 +172,9 @@ namespace OnePercentBattery.Core
             player.StopRun();
             spawner.StopRun();
 
-            RunResult preview = BuildResult();
-            bool canOfferSecondChance = ActiveConfig.AllowSecondChance && !_secondChanceUsedThisRun;
-            GameEvents.RaiseRunAwaitingContinue(preview, canOfferSecondChance);
+            FinalizeRun();
+            bool canOfferSecondChance = ActiveConfig.AllowSecondChance && !_secondChanceUsedThisRun && !_doubleCoinsClaimedThisRun;
+            GameEvents.RaiseRunAwaitingContinue(LastResult, canOfferSecondChance);
         }
 
         private RunResult BuildResult()
@@ -168,15 +182,15 @@ namespace OnePercentBattery.Core
             float distance = player.DistanceMeters;
             int coins = CurrencyManager.Instance.RunCoins;
             float survivalSeconds = player.Battery.SurvivalModeSeconds;
-            bool isNewRecord = distance > SaveSystem.Data.BestDistanceFor(ActiveMode);
-            bool isNewSurvivalRecord = survivalSeconds > SaveSystem.Data.bestSurvivalModeSeconds;
+            bool isNewRecord = distance > _bestDistanceAtRunStart;
+            bool isNewSurvivalRecord = survivalSeconds > _bestSurvivalAtRunStart;
             return new RunResult(ActiveMode, distance, coins, survivalSeconds, ElapsedSeconds, player.Battery.DeathCause, isNewRecord, isNewSurvivalRecord);
         }
 
         /// <summary>Revive ("Second Chance"): one rewarded-ad revive per run, granted only from the ad's reward-earned callback.</summary>
         public void RequestSecondChance(Action onFailedOrSkipped)
         {
-            if (State != GameState.GameOver || !ActiveConfig.AllowSecondChance || _secondChanceUsedThisRun)
+            if (State != GameState.GameOver || !ActiveConfig.AllowSecondChance || _secondChanceUsedThisRun || _doubleCoinsClaimedThisRun)
             {
                 onFailedOrSkipped?.Invoke();
                 return;
@@ -200,7 +214,8 @@ namespace OnePercentBattery.Core
         /// <summary>Double Coins: awards exactly `coinsEarnedThisRun` additional coins, once, only from the reward-earned callback.</summary>
         public void RequestDoubleCoins(int coinsEarnedThisRun, Action onGranted, Action onFailedOrSkipped)
         {
-            if (State != GameState.GameOver || _doubleCoinsClaimedThisRun || coinsEarnedThisRun <= 0)
+            int currentRunCoins = CurrencyManager.Instance.RunCoins;
+            if (State != GameState.GameOver || _doubleCoinsClaimedThisRun || currentRunCoins <= 0)
             {
                 onFailedOrSkipped?.Invoke();
                 return;
@@ -210,7 +225,15 @@ namespace OnePercentBattery.Core
                 onRewardEarned: () =>
                 {
                     _doubleCoinsClaimedThisRun = true;
-                    CurrencyManager.Instance.AddCoins(coinsEarnedThisRun);
+                    CurrencyManager.Instance.DoubleRunCoins();
+                    LastResult = BuildResult();
+                    var data = SaveSystem.Data;
+                    if (data.recentRuns != null && data.recentRuns.Count > 0)
+                    {
+                        data.recentRuns[0].coinsEarned = LastResult.CoinsCollected;
+                    }
+                    SaveSystem.Save();
+                    GameEvents.RaiseRunEnded(LastResult);
                     onGranted?.Invoke();
                 },
                 onFailedOrSkipped: onFailedOrSkipped);
@@ -235,6 +258,10 @@ namespace OnePercentBattery.Core
             }
             else
             {
+                if (State == GameState.Paused || State == GameState.Playing)
+                {
+                    FinalizeRun();
+                }
                 FinishReturnToMenu();
             }
         }
@@ -285,40 +312,65 @@ namespace OnePercentBattery.Core
             RunResult result = BuildResult();
             var data = SaveSystem.Data;
 
-            if (result.IsNewRecord)
+            if (result.DistanceMeters > data.BestDistanceFor(ActiveMode))
             {
                 data.SetBestDistanceFor(ActiveMode, result.DistanceMeters);
             }
-            if (result.IsNewSurvivalRecord)
+            if (result.SurvivalModeSeconds > data.bestSurvivalModeSeconds)
             {
                 data.bestSurvivalModeSeconds = result.SurvivalModeSeconds;
             }
-            data.lifetimeDistanceMeters += result.DistanceMeters;
-            data.totalRuns += 1;
 
-            data.recentRuns.Insert(0, new RunLogEntry
+            string zoneReached = zoneManager.CurrentZone != null ? zoneManager.CurrentZone.Name : ZoneCatalog.Zones[0].Name;
+
+            if (!_runFinalizedThisRun)
             {
-                mode = ActiveConfig.DisplayName,
-                distanceMeters = result.DistanceMeters,
-                coinsEarned = result.CoinsCollected,
-                survivalModeSeconds = result.SurvivalModeSeconds,
-                zoneReached = zoneManager.CurrentZone != null ? zoneManager.CurrentZone.Name : ZoneCatalog.Zones[0].Name,
-                endCause = result.Cause.ToString(),
-                dateIso = DateTime.Now.ToString("yyyy-MM-dd HH:mm"),
-            });
-            if (data.recentRuns.Count > 50)
-            {
-                data.recentRuns.RemoveRange(50, data.recentRuns.Count - 50);
+                _runFinalizedThisRun = true;
+                _finalizedDistanceMeters = result.DistanceMeters;
+                data.lifetimeDistanceMeters += result.DistanceMeters;
+                data.totalRuns += 1;
+
+                data.recentRuns.Insert(0, new RunLogEntry
+                {
+                    mode = ActiveConfig.DisplayName,
+                    distanceMeters = result.DistanceMeters,
+                    coinsEarned = result.CoinsCollected,
+                    survivalModeSeconds = result.SurvivalModeSeconds,
+                    zoneReached = zoneReached,
+                    endCause = result.Cause.ToString(),
+                    dateIso = DateTime.Now.ToString("yyyy-MM-dd HH:mm"),
+                });
+                if (data.recentRuns.Count > 50)
+                {
+                    data.recentRuns.RemoveRange(50, data.recentRuns.Count - 50);
+                }
+
+                AdsManager.Instance.NotifyRunCompleted();
             }
-            SaveSystem.Save();
+            else
+            {
+                float deltaDistance = Mathf.Max(0f, result.DistanceMeters - _finalizedDistanceMeters);
+                _finalizedDistanceMeters = Mathf.Max(_finalizedDistanceMeters, result.DistanceMeters);
+                data.lifetimeDistanceMeters += deltaDistance;
+
+                if (data.recentRuns != null && data.recentRuns.Count > 0)
+                {
+                    var latest = data.recentRuns[0];
+                    latest.distanceMeters = result.DistanceMeters;
+                    latest.coinsEarned = result.CoinsCollected;
+                    latest.survivalModeSeconds = result.SurvivalModeSeconds;
+                    latest.zoneReached = zoneReached;
+                    latest.endCause = result.Cause.ToString();
+                }
+            }
 
             if (ActiveMode == RunModeType.Daily)
             {
                 DailyRunManager.Instance.ReportRun(result.DistanceMeters);
             }
 
+            SaveSystem.Save();
             LastResult = result;
-            AdsManager.Instance.NotifyRunCompleted();
             GameEvents.RaiseRunEnded(result);
         }
     }

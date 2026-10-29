@@ -25,6 +25,9 @@ namespace OnePercentBattery.Meta
         public event Action ProgressChanged;
 
         private int _lastRunCoinTotal;
+        private float _lastReportedDistance;
+        private float _lastReportedSurvivalSeconds;
+        private bool _runCompletionCountedThisRun;
 
         protected override void Awake()
         {
@@ -212,16 +215,37 @@ namespace OnePercentBattery.Meta
         {
             EnsureCurrentPeriods();
             _lastRunCoinTotal = 0;
+            _lastReportedDistance = 0f;
+            _lastReportedSurvivalSeconds = 0f;
+            _runCompletionCountedThisRun = false;
         }
 
         private void HandleRunEnded(RunResult result)
         {
-            AddProgress(MissionMetric.TravelDistanceMeters, result.DistanceMeters);
-            AddProgress(MissionMetric.SurviveAtCriticalSeconds, result.SurvivalModeSeconds);
+            float deltaDistance = Mathf.Max(0f, result.DistanceMeters - _lastReportedDistance);
+            _lastReportedDistance = Mathf.Max(_lastReportedDistance, result.DistanceMeters);
+
+            float deltaSurvival = Mathf.Max(0f, result.SurvivalModeSeconds - _lastReportedSurvivalSeconds);
+            _lastReportedSurvivalSeconds = Mathf.Max(_lastReportedSurvivalSeconds, result.SurvivalModeSeconds);
+
+            if (deltaDistance > 0f)
+            {
+                AddProgress(MissionMetric.TravelDistanceMeters, deltaDistance);
+                AddProgress(MissionMetric.TravelDistanceInMode, deltaDistance, runMode: result.Mode);
+            }
+            if (deltaSurvival > 0f)
+            {
+                AddProgress(MissionMetric.SurviveAtCriticalSeconds, deltaSurvival);
+            }
+
             AddProgress(MissionMetric.SingleRunDistanceMeters, result.DistanceMeters);
             AddProgress(MissionMetric.SingleRunCoins, result.CoinsCollected);
-            AddProgress(MissionMetric.CompleteRuns, 1f);
-            AddProgress(MissionMetric.TravelDistanceInMode, result.DistanceMeters, runMode: result.Mode);
+
+            if (!_runCompletionCountedThisRun)
+            {
+                _runCompletionCountedThisRun = true;
+                AddProgress(MissionMetric.CompleteRuns, 1f);
+            }
         }
 
         private void HandleJumped()

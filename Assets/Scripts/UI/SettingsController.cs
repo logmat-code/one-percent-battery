@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace OnePercentBattery.UI
 {
-    /// <summary>Sound/Haptics/Practice Mode toggles and local data deletion.</summary>
+    /// <summary>Sound/Haptics/Practice Mode toggles, tutorial replay, and local data deletion.</summary>
     public sealed class SettingsController : MonoBehaviour
     {
         private const string PrivacyPolicyUrl = "https://sites.google.com/view/1-battery/inicio?read_current=1";
@@ -15,6 +15,7 @@ namespace OnePercentBattery.UI
         [SerializeField] private Toggle hapticsToggle;
         [SerializeField] private Toggle practiceModeToggle;
         [SerializeField] private GameObject resetConfirmPanel;
+        [SerializeField] private TutorialController tutorialController;
 
         private void OnEnable()
         {
@@ -64,6 +65,14 @@ namespace OnePercentBattery.UI
             SaveSystem.ResetAll();
             resetConfirmPanel.SetActive(false);
             OnEnable();
+        }
+
+        public void OnHowToPlayClicked()
+        {
+            if (tutorialController != null)
+            {
+                tutorialController.Show();
+            }
         }
 
         public void OnPrivacyPolicyClicked() => Application.OpenURL(PrivacyPolicyUrl);

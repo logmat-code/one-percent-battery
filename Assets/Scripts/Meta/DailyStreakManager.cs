@@ -11,11 +11,11 @@ namespace OnePercentBattery.Meta
         public const int GiftCoins = 30;
         public const int GiftFragments = 1;
 
-        public int DayStreak => SaveSystem.Data.dayStreak;
-        public bool CanClaimDailyBonus => SaveSystem.Data.lastDailyBonusDateIso != TodayIso;
-        public bool CanClaimGift => SaveSystem.Data.lastGiftDateIso != TodayIso;
+        public event Action Claimed;
 
-        private static string TodayIso => DateTime.Now.ToString("yyyy-MM-dd");
+        public int DayStreak => SaveSystem.Data.dayStreak;
+        public bool CanClaimDailyBonus => DailyResetService.IsClaimAvailable(SaveSystem.Data.lastDailyBonusDateIso);
+        public bool CanClaimGift => DailyResetService.IsClaimAvailable(SaveSystem.Data.lastGiftDateIso);
 
         protected override void Awake()
         {
@@ -23,24 +23,16 @@ namespace OnePercentBattery.Meta
             RegisterVisitToday();
         }
 
-        private void RegisterVisitToday()
+        public void RegisterVisitToday()
         {
             var data = SaveSystem.Data;
-            string today = TodayIso;
+            string today = DailyResetService.TodayUtcDayKey;
             if (data.lastPlayedDateIso == today)
             {
                 return;
             }
 
-            if (data.lastPlayedDateIso == DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd"))
-            {
-                data.dayStreak += 1;
-            }
-            else
-            {
-                data.dayStreak = 1;
-            }
-
+            data.dayStreak = DailyResetService.CalculateStreak(data.dayStreak, data.lastPlayedDateIso);
             data.lastPlayedDateIso = today;
             SaveSystem.Save();
         }
@@ -48,17 +40,21 @@ namespace OnePercentBattery.Meta
         public bool TryClaimDailyBonus()
         {
             if (!CanClaimDailyBonus) return false;
-            SaveSystem.Data.lastDailyBonusDateIso = TodayIso;
+            SaveSystem.Data.lastDailyBonusDateIso = DailyResetService.TodayUtcDayKey;
             CurrencyManager.Instance.AddCoins(DailyBonusCoins);
+            SaveSystem.Save();
+            Claimed?.Invoke();
             return true;
         }
 
         public bool TryClaimGift()
         {
             if (!CanClaimGift) return false;
-            SaveSystem.Data.lastGiftDateIso = TodayIso;
+            SaveSystem.Data.lastGiftDateIso = DailyResetService.TodayUtcDayKey;
             CurrencyManager.Instance.AddCoins(GiftCoins);
             CurrencyManager.Instance.AddFragments(GiftFragments);
+            SaveSystem.Save();
+            Claimed?.Invoke();
             return true;
         }
     }

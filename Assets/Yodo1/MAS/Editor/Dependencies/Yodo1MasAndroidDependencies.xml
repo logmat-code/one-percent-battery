@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dependencies>
+  <androidPackages>
+    <repositories>
+      <repository>https://artifact.bytedance.com/repository/pangle/</repository>
+      <repository>https://android-sdk.is.com/</repository>
+      <repository>https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea</repository>
+      <repository>https://artifactory.bidmachine.io/bidmachine</repository>
+      <repository>https://ysonetwork.s3.eu-west-3.amazonaws.com/sdk/android</repository>
+      <repository>https://repo.pubmatic.com/artifactory/public-repos</repository>
+      <repository>https://cboost.jfrog.io/artifactory/chartboost-ads/</repository>
+      <repository>https://jfrog.anythinktech.com/artifactory/overseas_sdk</repository>
+      <repository>https://jitpack.io</repository>
+    </repositories>
+    <androidPackage spec="com.yodo1.mas:full:4.18.1" />
+  </androidPackages>
+</dependencies>

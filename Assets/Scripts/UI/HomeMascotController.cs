@@ -20,8 +20,30 @@ namespace OnePercentBattery.UI
             // MascotDecoration lives under the Home root, which MainMenuController disables/re-enables
             // on Hide()/Show() - OnEnable already re-fires on every return to Home, so no need to also
             // hook GameEvents.ReturnedToMenu here.
+            EnsureTerminalCap();
             ShopManager.Instance.CollectionChanged += Refresh;
             Refresh();
+        }
+
+        private void EnsureTerminalCap()
+        {
+            if (bodyImage == null || transform.Find("TerminalCap") != null) return;
+            var capGo = new GameObject("TerminalCap", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            capGo.transform.SetParent(transform, false);
+            capGo.transform.SetAsFirstSibling();
+            var rt = (RectTransform)capGo.transform;
+            rt.anchorMin = new Vector2(0.5f, 0.5f);
+            rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            float bodyH = bodyImage.rectTransform.sizeDelta.y > 0f ? bodyImage.rectTransform.sizeDelta.y : 220f;
+            float bodyW = bodyImage.rectTransform.sizeDelta.x > 0f ? bodyImage.rectTransform.sizeDelta.x : 220f;
+            rt.anchoredPosition = new Vector2(0f, bodyH * 0.54f);
+            rt.sizeDelta = new Vector2(bodyW * 0.38f, bodyH * 0.14f);
+            var img = capGo.GetComponent<Image>();
+            img.sprite = bodyImage.sprite;
+            img.type = bodyImage.type;
+            img.color = new Color(0.76f, 0.79f, 0.84f, 0.95f);
+            img.raycastTarget = false;
         }
 
         private void OnDisable()

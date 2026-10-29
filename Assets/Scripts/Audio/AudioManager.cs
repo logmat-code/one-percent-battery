@@ -105,7 +105,7 @@ namespace OnePercentBattery.Audio
 
         private void HandleJumped() => PlaySfx(_jumpSfx, 0.7f);
         private void HandleLanded() => PlaySfx(_landSfx, 0.5f);
-        private void HandleCoinCollected(int runTotal) => PlaySfx(_coinSfx, 0.6f);
+        private void HandleCoinCollected(int runTotal) => PlaySfx(_coinSfx, 0.55f, 0.08f);
         private void HandleEnergyCollected(float amount) => PlaySfx(_energySfx, 0.8f);
         private void HandleObstacleHit() => PlaySfx(_hitSfx, 1f);
         private void HandleSurvivalModeEntered() => PlaySfx(_survivalSfx, 1f);
@@ -191,7 +191,7 @@ namespace OnePercentBattery.Audio
             _musicSource.Play();
         }
 
-        private void PlaySfx(AudioClip clip, float volume)
+        private void PlaySfx(AudioClip clip, float volume, float pitchVariation = 0f)
         {
             if (_sfxSource == null || clip == null) return;
 
@@ -202,19 +202,29 @@ namespace OnePercentBattery.Audio
             }
             _lastPlayedRealtime[clip] = now;
 
-            _sfxSource.PlayOneShot(clip, volume);
+            if (pitchVariation > 0f)
+            {
+                float prevPitch = _sfxSource.pitch;
+                _sfxSource.pitch = 1f + UnityEngine.Random.Range(-pitchVariation, pitchVariation);
+                _sfxSource.PlayOneShot(clip, volume);
+                _sfxSource.pitch = prevPitch;
+            }
+            else
+            {
+                _sfxSource.PlayOneShot(clip, volume);
+            }
         }
 
         private void BuildSynthesizedClips()
         {
-            _jumpSfx = jumpSfxOverride != null ? jumpSfxOverride : SynthTone("sfx_jump", 320f, 720f, 0.12f, WaveShape.Sine, 0.02f);
-            _landSfx = landSfxOverride != null ? landSfxOverride : SynthTone("sfx_land", 160f, 90f, 0.08f, WaveShape.Sine, 0.005f);
-            _coinSfx = coinSfxOverride != null ? coinSfxOverride : SynthTone("sfx_coin", 900f, 1500f, 0.1f, WaveShape.Sine, 0.005f);
-            _energySfx = energySfxOverride != null ? energySfxOverride : SynthTone("sfx_energy", 380f, 950f, 0.25f, WaveShape.Sine, 0.02f);
-            _shieldSfx = shieldSfxOverride != null ? shieldSfxOverride : SynthTone("sfx_shield", 600f, 1000f, 0.14f, WaveShape.Triangle, 0.01f);
-            _magnetSfx = magnetSfxOverride != null ? magnetSfxOverride : SynthTone("sfx_magnet", 500f, 1400f, 0.18f, WaveShape.Triangle, 0.03f);
-            _shieldBlockSfx = shieldBlockSfxOverride != null ? shieldBlockSfxOverride : SynthTone("sfx_shield_block", 1200f, 700f, 0.1f, WaveShape.Sine, 0.002f);
-            _hitSfx = hitSfxOverride != null ? hitSfxOverride : SynthTone("sfx_hit", 220f, 60f, 0.16f, WaveShape.Noise, 0.002f);
+            _jumpSfx = jumpSfxOverride != null ? jumpSfxOverride : SynthTone("sfx_jump", 280f, 680f, 0.10f, WaveShape.Sine, 0.005f);
+            _landSfx = landSfxOverride != null ? landSfxOverride : SynthTone("sfx_land", 150f, 60f, 0.06f, WaveShape.Sine, 0.003f);
+            _coinSfx = coinSfxOverride != null ? coinSfxOverride : SynthTone("sfx_coin", 980f, 1680f, 0.08f, WaveShape.Sine, 0.003f);
+            _energySfx = energySfxOverride != null ? energySfxOverride : SynthTone("sfx_energy", 340f, 1100f, 0.22f, WaveShape.Triangle, 0.01f);
+            _shieldSfx = shieldSfxOverride != null ? shieldSfxOverride : SynthTone("sfx_shield", 520f, 1200f, 0.15f, WaveShape.Square, 0.008f);
+            _magnetSfx = magnetSfxOverride != null ? magnetSfxOverride : SynthTone("sfx_magnet", 440f, 1320f, 0.16f, WaveShape.Triangle, 0.015f);
+            _shieldBlockSfx = shieldBlockSfxOverride != null ? shieldBlockSfxOverride : SynthTone("sfx_shield_block", 1400f, 650f, 0.09f, WaveShape.Square, 0.002f);
+            _hitSfx = hitSfxOverride != null ? hitSfxOverride : SynthTone("sfx_hit", 260f, 50f, 0.14f, WaveShape.Noise, 0.002f);
             _survivalSfx = survivalSfxOverride != null ? survivalSfxOverride : SynthAlarm("sfx_survival");
             _deathSfx = deathSfxOverride != null ? deathSfxOverride : SynthTone("sfx_death", 500f, 90f, 0.45f, WaveShape.Sine, 0.02f);
             _uiClickSfx = uiClickSfxOverride != null ? uiClickSfxOverride : SynthTone("sfx_ui_click", 1800f, 1800f, 0.03f, WaveShape.Square, 0.001f);

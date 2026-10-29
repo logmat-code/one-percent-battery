@@ -27,6 +27,7 @@ namespace OnePercentBattery.UI
         [SerializeField] private float adFailureMessageSeconds = 2.5f;
 
         private int _coinsEarnedThisRun;
+        private RunResult _currentRunResult;
         private Coroutine _failureMessageRoutine;
 
         private void Awake()
@@ -35,12 +36,14 @@ namespace OnePercentBattery.UI
             // would never fire, so subscriptions happen in Awake instead (fires once at scene load).
             GameEvents.RunAwaitingContinue += HandleRunAwaitingContinue;
             GameEvents.SecondChanceGranted += HandleSecondChanceGranted;
+            AdsManager.AdAvailabilityChanged += RefreshAdButtons;
         }
 
         private void OnDestroy()
         {
             GameEvents.RunAwaitingContinue -= HandleRunAwaitingContinue;
             GameEvents.SecondChanceGranted -= HandleSecondChanceGranted;
+            AdsManager.AdAvailabilityChanged -= RefreshAdButtons;
         }
 
         private void HandleRunAwaitingContinue(RunResult preview, bool canOfferSecondChance)
@@ -49,8 +52,14 @@ namespace OnePercentBattery.UI
             else root.SetActive(true);
             titleText.text = "OUT OF CHARGE";
             causeText.text = DescribeCause(preview.Cause);
-            newRecordBadge.SetActive(preview.IsNewRecord);
+            if (newRecordBadge != null)
+            {
+                newRecordBadge.SetActive(preview.IsNewRecord);
+                var badgeText = newRecordBadge.GetComponentInChildren<Text>();
+                if (badgeText != null) badgeText.text = "NEW HIGH SCORE";
+            }
 
+            _currentRunResult = preview;
             _coinsEarnedThisRun = preview.CoinsCollected;
             distanceText.text = $"{Mathf.FloorToInt(preview.DistanceMeters)} m";
             coinsText.text = $"+{preview.CoinsCollected}";
@@ -71,6 +80,31 @@ namespace OnePercentBattery.UI
             }
         }
 
+        private void RefreshAdButtons()
+        {
+            if (root == null || !root.activeSelf) return;
+
+            if (secondChanceButton != null && secondChanceButton.gameObject.activeSelf)
+            {
+                bool canOfferSecondChance = GameManager.Instance != null 
+                    && GameManager.Instance.ActiveConfig.AllowSecondChance 
+                    && !GameManager.Instance.SecondChanceUsedThisRun;
+                secondChanceButton.interactable = canOfferSecondChance 
+                    && AdsManager.Instance != null 
+                    && AdsManager.Instance.IsRewardedAvailable(RewardedAdPlacement.Revive);
+            }
+
+            if (doubleCoinsButton != null && doubleCoinsButton.gameObject.activeSelf)
+            {
+                bool canOfferDoubleCoins = _coinsEarnedThisRun > 0 
+                    && GameManager.Instance != null 
+                    && !GameManager.Instance.DoubleCoinsClaimedThisRun;
+                doubleCoinsButton.interactable = canOfferDoubleCoins 
+                    && AdsManager.Instance != null 
+                    && AdsManager.Instance.IsRewardedAvailable(RewardedAdPlacement.DoubleCoins);
+            }
+        }
+
         private static string DescribeCause(RunEndCause cause)
         {
             switch (cause)
@@ -88,46 +122,55 @@ namespace OnePercentBattery.UI
 
         public void OnSecondChanceClicked()
         {
+            if (secondChanceButton == null || !secondChanceButton.interactable) return;
             secondChanceButton.interactable = false;
             GameManager.Instance.RequestSecondChance(onFailedOrSkipped: () =>
             {
                 // Root may already be hidden if the run somehow ended between the click and this
                 // callback (e.g. a scene/UI teardown) - guard rather than touch a dead panel.
                 if (secondChanceButton == null || !root.activeSelf) return;
-                secondChanceButton.interactable = AdsManager.Instance.IsRewardedAvailable(RewardedAdPlacement.Revive);
+                RefreshAdButtons();
                 ShowAdFailureMessage();
             });
         }
 
         public void OnDoubleCoinsClicked()
         {
-            if (doubleCoinsButton == null) return;
+            if (doubleCoinsButton == null || !doubleCoinsButton.interactable) return;
             doubleCoinsButton.interactable = false;
             GameManager.Instance.RequestDoubleCoins(_coinsEarnedThisRun,
                 onGranted: () =>
                 {
                     if (!root.activeSelf) return;
-                    coinsText.text = $"+{_coinsEarnedThisRun * 2}";
+                    _currentRunResult = GameManager.Instance.LastResult;
+                    _coinsEarnedThisRun = _currentRunResult.CoinsCollected;
+                    coinsText.text = $"+{_coinsEarnedThisRun}";
                     doubleCoinsButton.gameObject.SetActive(false);
+                    if (secondChanceButton != null) secondChanceButton.gameObject.SetActive(false);
                 },
                 onFailedOrSkipped: () =>
                 {
                     if (doubleCoinsButton == null || !root.activeSelf) return;
-                    doubleCoinsButton.interactable = AdsManager.Instance.IsRewardedAvailable(RewardedAdPlacement.DoubleCoins);
+                    RefreshAdButtons();
                     ShowAdFailureMessage();
                 });
         }
 
         private void ShowAdFailureMessage()
         {
-            if (adFailureMessageText == null) return;
-            if (_failureMessageRoutine != null) StopCoroutine(_failureMessageRoutine);
-            _failureMessageRoutine = StartCoroutine(ShowAdFailureMessageRoutine());
+            ShowStatusMessage("Ad unavailable. Try again.");
         }
 
-        private IEnumerator ShowAdFailureMessageRoutine()
+        private void ShowStatusMessage(string message)
         {
-            adFailureMessageText.text = "Ad unavailable. Try again.";
+            if (adFailureMessageText == null) return;
+            if (_failureMessageRoutine != null) StopCoroutine(_failureMessageRoutine);
+            _failureMessageRoutine = StartCoroutine(ShowStatusMessageRoutine(message));
+        }
+
+        private IEnumerator ShowStatusMessageRoutine(string message)
+        {
+            adFailureMessageText.text = message;
             adFailureMessageText.gameObject.SetActive(true);
             yield return new WaitForSecondsRealtime(adFailureMessageSeconds);
             adFailureMessageText.gameObject.SetActive(false);
@@ -145,16 +188,23 @@ namespace OnePercentBattery.UI
             GameManager.Instance.ReturnToMainMenu();
         }
 
-        /// <summary>Stub - wire up a native share sheet / social SDK here.</summary>
+        /// <summary>Generates a 1080x1920 vertical pixel-art social card for the run that just ended and opens native share.</summary>
         public void OnShareClicked()
         {
-            Debug.Log("[GameOverController] Share requested - hook up a native share sheet here.");
+            RunResult resultToShare = GameManager.Instance != null ? GameManager.Instance.LastResult : _currentRunResult;
+            NativeShareService.ShareRunResult(resultToShare, (ok, msg) =>
+            {
+                if (root != null && root.activeSelf && !string.IsNullOrEmpty(msg))
+                {
+                    ShowStatusMessage(msg);
+                }
+            });
         }
 
-        /// <summary>Stub - wire up an Instagram/Snapchat story share SDK here.</summary>
+        /// <summary>Shares the vertical 9:16 story card for the completed run.</summary>
         public void OnStoryClicked()
         {
-            Debug.Log("[GameOverController] Story share requested - hook up a social SDK here.");
+            OnShareClicked();
         }
     }
 }

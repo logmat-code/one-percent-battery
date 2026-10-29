@@ -152,5 +152,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630a8354d2dbe4069af38b389ed78c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: OnePercentBattery::OnePercentBattery.Spawning.Obstacle
-  groundOffsetY: 3.6
+  groundOffsetY: 0.45
   heightClass: 0

@@ -28,6 +28,8 @@ namespace OnePercentBattery.Services
         [Tooltip("Watchdog ceiling used whenever a real ad service (anything other than FakeAdService, i.e. a future real Yodo1 MAS interstitial) is active. Deliberately long: a real interstitial can legitimately stay on screen well past 8s, and this must never fire while an ad the player can see is still up - it is an EMERGENCY deadlock escape for a genuinely stuck/lost SDK callback, not a normal ad-duration limit. IAdService currently exposes only IsInterstitialAdReady/ShowInterstitialAd(onClosed) - no separate \"is currently visible\" signal - so a long ceiling is the safe choice without inventing visibility-tracking the SDK doesn't cleanly provide.")]
         [SerializeField] private float realAdEmergencyWatchdogSeconds = 60f;
 
+        public static event Action AdAvailabilityChanged;
+
         public bool IsInitialized => _service != null && _service.IsInitialized;
 
         private IAdService _service;
@@ -61,13 +63,34 @@ namespace OnePercentBattery.Services
         {
             if (_service == null || IsInitialized) return;
 
-            Debug.Log("[Yodo1MAS] Initializing");
+            string appKey = config != null ? config.AppKeyForCurrentPlatform() : "";
+            bool testMode = config != null && config.EnableTestMode;
+            Debug.Log($"[ADS] SDK initialization started (Service: {_service.GetType().Name}, AppKey: {appKey}, TestMode: {testMode})");
             _service.Initialize(() =>
             {
-                Debug.Log(_service.IsInitialized
-                    ? "[Yodo1MAS] Initialization successful"
-                    : "[Yodo1MAS] Initialization failed or no SDK present - ads will report as unavailable.");
+                if (_service.IsInitialized)
+                {
+                    Debug.Log($"[ADS] SDK initialization successful ({_service.GetType().Name}).");
+                }
+                else
+                {
+                    Debug.LogWarning($"[ADS] SDK initialization failed or no SDK present ({_service.GetType().Name}) - ads will report as unavailable.");
+                }
+                NotifyAvailabilityChanged();
             });
+        }
+
+        public void RefreshAvailability()
+        {
+            NotifyAvailabilityChanged();
+        }
+
+        private void NotifyAvailabilityChanged()
+        {
+            Debug.Log($"[ADS] Ad availability changed: Rewarded(BonusCoins={IsRewardedAvailable(RewardedAdPlacement.BonusCoins)}, " +
+                      $"Revive={IsRewardedAvailable(RewardedAdPlacement.Revive)}, DoubleCoins={IsRewardedAvailable(RewardedAdPlacement.DoubleCoins)}), " +
+                      $"InterstitialReady={_service?.IsInterstitialAdReady}");
+            AdAvailabilityChanged?.Invoke();
         }
 
         // ----- Rewarded -----
@@ -84,16 +107,26 @@ namespace OnePercentBattery.Services
         /// </summary>
         public void ShowRewarded(RewardedAdPlacement placement, Action onRewardEarned, Action onFailedOrSkipped)
         {
-            if (_rewardedShowInFlight || !IsRewardedAvailable(placement))
+            if (_rewardedShowInFlight)
             {
-                Debug.Log($"[Yodo1MAS] Rewarded not available for {placement}");
+                Debug.LogWarning($"[ADS] Rewarded ad show rejected: another ad is already in flight for {placement}. Duplicate taps blocked.");
+                onFailedOrSkipped?.Invoke();
+                return;
+            }
+
+            if (!IsRewardedAvailable(placement))
+            {
+                bool adsEnabled = AdsEnabled(rewarded: true);
+                bool ready = _service != null && _service.IsRewardedAdReady;
+                Debug.LogWarning($"[ADS] Rewarded ad show rejected: not available for {placement} (adsEnabled={adsEnabled}, ready={ready}).");
                 onFailedOrSkipped?.Invoke();
                 return;
             }
 
             _rewardedShowInFlight = true;
             _pendingRewardPlacement = placement;
-            Debug.Log($"[Yodo1MAS] Rewarded requested: {placement}");
+            NotifyAvailabilityChanged();
+            Debug.Log($"[ADS] Rewarded ad show requested: {placement}");
             MuteForAd();
 
             _service.ShowRewardedAd(placement,
@@ -103,20 +136,23 @@ namespace OnePercentBattery.Services
                     _rewardedShowInFlight = false;
                     if (_pendingRewardPlacement != placement)
                     {
-                        Debug.LogWarning($"[Yodo1MAS] Dropped reward callback for {placement} - it was no longer the pending placement.");
+                        Debug.LogWarning($"[ADS] Dropped reward callback for {placement} - it was no longer the pending placement (pending was {_pendingRewardPlacement}). Duplicate protection active.");
+                        NotifyAvailabilityChanged();
                         return;
                     }
                     _pendingRewardPlacement = null;
-                    Debug.Log($"[Yodo1MAS] Reward earned: {placement}");
+                    Debug.Log($"[ADS] Reward earned: {placement}. Granting reward.");
                     onRewardEarned?.Invoke();
+                    NotifyAvailabilityChanged();
                 },
                 onFailedOrSkipped: () =>
                 {
                     UnmuteAfterAd();
                     _rewardedShowInFlight = false;
                     _pendingRewardPlacement = null;
-                    Debug.Log($"[Yodo1MAS] Rewarded failed/skipped: {placement}");
+                    Debug.Log($"[ADS] Rewarded ad failed/skipped/closed without reward: {placement}");
                     onFailedOrSkipped?.Invoke();
+                    NotifyAvailabilityChanged();
                 });
         }
 
@@ -160,7 +196,7 @@ namespace OnePercentBattery.Services
             _runsSinceLastInterstitial = 0;
             _lastInterstitialRealtime = Time.unscaledTime;
             _pendingInterstitialContinuation = continuation;
-            Debug.Log("[Yodo1MAS] Interstitial requested");
+            Debug.Log("[ADS] Interstitial show requested");
             MuteForAd();
 
             _interstitialWatchdogRoutine = StartCoroutine(InterstitialWatchdog(CurrentInterstitialWatchdogSeconds));
@@ -177,7 +213,7 @@ namespace OnePercentBattery.Services
         private IEnumerator InterstitialWatchdog(float seconds)
         {
             yield return new WaitForSecondsRealtime(seconds);
-            Debug.LogWarning($"[Yodo1MAS] Interstitial callback never arrived within the {seconds}s watchdog window - continuing without waiting further.");
+            Debug.LogWarning($"[ADS] Interstitial callback never arrived within the {seconds}s watchdog window - continuing without waiting further.");
             CompleteInterstitial("timed out");
         }
 
@@ -199,7 +235,7 @@ namespace OnePercentBattery.Services
 
             UnmuteAfterAd();
             _interstitialShowInFlight = false;
-            Debug.Log($"[Yodo1MAS] Interstitial {reason}");
+            Debug.Log($"[ADS] Interstitial {reason}");
 
             Action continuation = _pendingInterstitialContinuation;
             _pendingInterstitialContinuation = null;

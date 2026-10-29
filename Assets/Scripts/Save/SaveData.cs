@@ -47,6 +47,7 @@ namespace OnePercentBattery.Save
         public float bestDistanceFrenzy;
         public float bestDistancePro;
         public float bestDistanceDaily;
+        public float bestDistanceDailyAllTime;
 
         public float lifetimeDistanceMeters;
         public int totalRuns;
@@ -73,6 +74,7 @@ namespace OnePercentBattery.Save
         public bool soundEffectsEnabled = true;
         public bool hapticsEnabled = true;
         public bool practiceMode;
+        public bool hasCompletedTutorial;
 
         /// <summary>Future "Remove Ads" purchase flag. No purchase flow exists yet - AdsManager already respects it.</summary>
         public bool adsRemoved;
@@ -96,13 +98,20 @@ namespace OnePercentBattery.Save
                 case Core.RunModeType.Easy: bestDistanceEasy = value; break;
                 case Core.RunModeType.Frenzy: bestDistanceFrenzy = value; break;
                 case Core.RunModeType.Pro: bestDistancePro = value; break;
-                case Core.RunModeType.Daily: bestDistanceDaily = value; break;
+                case Core.RunModeType.Daily:
+                    bestDistanceDaily = value;
+                    if (value > bestDistanceDailyAllTime) bestDistanceDailyAllTime = value;
+                    break;
             }
         }
 
         public float OverallBestDistance()
         {
-            return UnityEngine.Mathf.Max(bestDistanceEasy, UnityEngine.Mathf.Max(bestDistanceFrenzy, bestDistancePro));
+            return UnityEngine.Mathf.Max(
+                bestDistanceEasy,
+                UnityEngine.Mathf.Max(
+                    bestDistanceFrenzy,
+                    UnityEngine.Mathf.Max(bestDistancePro, UnityEngine.Mathf.Max(bestDistanceDaily, bestDistanceDailyAllTime))));
         }
     }
 }

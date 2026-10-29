@@ -61,6 +61,11 @@ namespace OnePercentBattery.Player
         [Range(0f, 0.6f)]
         [SerializeField] private float landSquashAmount = 0.24f;
 
+        [Header("Damage flash feedback")]
+        [SerializeField] private float damageFlashLowAlpha = 0.40f;
+        [SerializeField] private int damageFlashPulses = 4;
+        [SerializeField] private float damageFlashPulseDuration = 0.08f;
+
         private Color _skinTint;
         private Vector3 _baseScale;
         private Vector3 _scaleVelocity;
@@ -73,6 +78,12 @@ namespace OnePercentBattery.Player
         private Vector3 _chargeIntendedLocalPos = Vector3.zero;
         private Vector3 _topGlowBaseScale = Vector3.one;
         private Vector3 _topGlowIntendedLocalPos = Vector3.zero;
+
+        private SpriteRenderer[] _allRenderers;
+        private float[] _baseAlphas;
+        private Coroutine _damageFlashRoutine;
+        private bool _isFlashing;
+        private float _lastBatteryPercent = 100f;
 
         private void Awake()
         {
@@ -100,6 +111,32 @@ namespace OnePercentBattery.Player
                     happySprite = mouthRenderer.sprite;
                 }
             }
+
+            _allRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+            if (_allRenderers != null)
+            {
+                _baseAlphas = new float[_allRenderers.Length];
+                CaptureBaseAlphas();
+            }
+            EnsureTerminalCap();
+        }
+
+        private void EnsureTerminalCap()
+        {
+            if (bodyRenderer == null || transform.Find("TerminalCap") != null) return;
+            var capGo = new GameObject("TerminalCap");
+            capGo.transform.SetParent(transform, false);
+            capGo.transform.localPosition = new Vector3(0f, 0.56f, 0f);
+            capGo.transform.localScale = new Vector3(0.36f, 0.14f, 1f);
+            var sr = capGo.AddComponent<SpriteRenderer>();
+            sr.sprite = bodyRenderer.sprite;
+            sr.sharedMaterial = bodyRenderer.sharedMaterial;
+            sr.color = new Color(0.76f, 0.79f, 0.84f, 1f);
+            sr.sortingLayerID = bodyRenderer.sortingLayerID;
+            sr.sortingOrder = bodyRenderer.sortingOrder - 1;
+            _allRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+            _baseAlphas = new float[_allRenderers.Length];
+            CaptureBaseAlphas();
         }
 
         private void OnEnable()
@@ -111,6 +148,9 @@ namespace OnePercentBattery.Player
             GameEvents.Landed += HandleLanded;
             GameEvents.SurvivalModeEntered += HandleSurvivalModeEntered;
             GameEvents.RunStarted += HandleRunStarted;
+            GameEvents.ObstacleHit += HandleObstacleHit;
+            GameEvents.SecondChanceGranted += HandleSecondChanceGranted;
+            GameEvents.ReturnedToMenu += HandleReturnedToMenu;
         }
 
         private void OnDisable()
@@ -122,6 +162,10 @@ namespace OnePercentBattery.Player
             GameEvents.Landed -= HandleLanded;
             GameEvents.SurvivalModeEntered -= HandleSurvivalModeEntered;
             GameEvents.RunStarted -= HandleRunStarted;
+            GameEvents.ObstacleHit -= HandleObstacleHit;
+            GameEvents.SecondChanceGranted -= HandleSecondChanceGranted;
+            GameEvents.ReturnedToMenu -= HandleReturnedToMenu;
+            ResetDamageFlash();
         }
 
         private void Update()
@@ -190,6 +234,8 @@ namespace OnePercentBattery.Player
 
         private void HandleRunStarted(RunModeType mode)
         {
+            ResetDamageFlash();
+            _lastBatteryPercent = 100f;
             _survivalMode = false;
             transform.localScale = _baseScale;
             _scaleVelocity = Vector3.zero;
@@ -222,6 +268,7 @@ namespace OnePercentBattery.Player
 
         private void HandleBatteryChanged(float currentPercent, float delta)
         {
+            _lastBatteryPercent = currentPercent;
             if (bodyRenderer == null) return;
 
             // The equipped skin's accent color stands in for "healthy" (the default skin's accent
@@ -236,6 +283,10 @@ namespace OnePercentBattery.Player
             bodyRenderer.color = baseColor;
             RefreshExpression(currentPercent);
             UpdateInnerCharge(currentPercent, baseColor);
+            if (!_isFlashing)
+            {
+                CaptureBaseAlphas();
+            }
         }
 
         /// <summary>
@@ -254,40 +305,61 @@ namespace OnePercentBattery.Player
         /// </summary>
         private void UpdateInnerCharge(float currentPercent, Color tierColor)
         {
-            float fillFraction = Mathf.Max(chamberMinFillFraction, Mathf.Clamp01(currentPercent / 100f));
-            float fillHeight = (chamberTop - chamberBottom) * fillFraction;
-            float topY = chamberBottom + fillHeight;
-
-            // Applied immediately (not just stored for Update() to pick up next frame) so the capsule/
-            // glow are correct the instant battery changes, regardless of Update() call timing/order -
-            // Update() still re-applies these every frame afterward, but only to counter-scale against
-            // squash/stretch, not to do the actual positioning for the first time.
-            Vector3 chargeCounterScale = InverseScaleAround(Vector3.one, transform.localScale, _baseScale);
+            // The ugly floating center pill/glow has been redesigned into a clean lower energy
+            // reservoir at the base of the battery, exactly matching the App Icon presentation.
+            // At high/healthy battery, the clean battery body and face dominate.
+            // At lower charge (and especially <= 15% / 1%), the bottom indicator glows bright amber/red.
+            if (innerChargeTopGlow != null)
+            {
+                // Completely disable the blurry floating center meniscus glow
+                innerChargeTopGlow.enabled = false;
+            }
 
             if (innerCharge != null)
             {
-                Color c = Color.Lerp(tierColor, Color.white, 0.4f);
-                c.a = 0.95f;
-                innerCharge.color = c;
-                innerCharge.size = new Vector2(chamberWidth, fillHeight);
-                _chargeIntendedLocalPos = new Vector3(_chargeIntendedLocalPos.x, chamberBottom + fillHeight * 0.5f, _chargeIntendedLocalPos.z);
-                innerCharge.transform.localPosition = Vector3.Scale(_chargeIntendedLocalPos, chargeCounterScale);
+                Vector3 chargeCounterScale = InverseScaleAround(Vector3.one, transform.localScale, _baseScale);
+                
+                // Position cleanly in the lower half of the battery (under mouth at y = -0.08)
+                // Width = 0.52 (wide lower reservoir bar), height = 0.12
+                const float barWidth = 0.52f;
+                const float barHeight = 0.12f;
+                const float barY = -0.32f;
+
+                if (currentPercent <= 15f)
+                {
+                    // 1% / Critical: glowing red danger segment at the base
+                    innerCharge.enabled = true;
+                    innerCharge.color = new Color(0.95f, 0.25f, 0.25f, 0.95f);
+                    innerCharge.size = new Vector2(barWidth * Mathf.Max(0.18f, currentPercent / 15f), barHeight);
+                    _chargeIntendedLocalPos = new Vector3(0f, barY, -0.05f);
+                    innerCharge.transform.localPosition = Vector3.Scale(_chargeIntendedLocalPos, chargeCounterScale);
+                }
+                else if (currentPercent <= 40f)
+                {
+                    // Low battery: amber caution segment at the base
+                    innerCharge.enabled = true;
+                    innerCharge.color = new Color(0.95f, 0.70f, 0.20f, 0.90f);
+                    innerCharge.size = new Vector2(barWidth * (currentPercent / 40f), barHeight);
+                    _chargeIntendedLocalPos = new Vector3(0f, barY, -0.05f);
+                    innerCharge.transform.localPosition = Vector3.Scale(_chargeIntendedLocalPos, chargeCounterScale);
+                }
+                else
+                {
+                    // Healthy battery (>40%): The clean battery body color and face read clearly
+                    // with an integrated subtle bottom charge bar matching the skin accent
+                    innerCharge.enabled = true;
+                    Color c = Color.Lerp(tierColor, Color.white, 0.35f);
+                    c.a = 0.85f;
+                    innerCharge.color = c;
+                    innerCharge.size = new Vector2(barWidth, barHeight);
+                    _chargeIntendedLocalPos = new Vector3(0f, barY, -0.05f);
+                    innerCharge.transform.localPosition = Vector3.Scale(_chargeIntendedLocalPos, chargeCounterScale);
+                }
             }
-            if (innerChargeTopGlow != null)
-            {
-                Color glowColor = Color.Lerp(tierColor, Color.white, 0.5f);
-                glowColor.a = 0.55f;
-                innerChargeTopGlow.color = glowColor;
-                _topGlowIntendedLocalPos = new Vector3(_topGlowIntendedLocalPos.x, topY, _topGlowIntendedLocalPos.z);
-                innerChargeTopGlow.transform.localPosition = Vector3.Scale(_topGlowIntendedLocalPos, chargeCounterScale);
-            }
+
             if (glowRenderer != null)
             {
-                // Previously a fixed scene-authored color/alpha never touched at runtime, so the aura
-                // never visibly reacted to anything - now tinted per tier like the body/capsule, and
-                // its intensity tracks the same fillFraction the capsule's height already reads from,
-                // so a fuller battery genuinely radiates more (an "energy aura"), a dying one visibly
-                // dims but never fully goes dark.
+                float fillFraction = Mathf.Clamp01(currentPercent / 100f);
                 Color glow = tierColor;
                 glow.a = glowMaxAlpha * Mathf.Lerp(glowMinAlphaFraction, 1f, fillFraction);
                 glowRenderer.color = glow;
@@ -352,5 +424,99 @@ namespace OnePercentBattery.Player
                 trailRenderer.endColor = transparent;
             }
         }
+
+        // ----- Damage Flash Feedback -----
+
+        private void HandleObstacleHit()
+        {
+            TriggerDamageFlash();
+        }
+
+        public void TriggerDamageFlash()
+        {
+            if (_damageFlashRoutine != null)
+            {
+                StopCoroutine(_damageFlashRoutine);
+                _damageFlashRoutine = null;
+            }
+            _damageFlashRoutine = StartCoroutine(DamageFlashRoutine());
+        }
+
+        private System.Collections.IEnumerator DamageFlashRoutine()
+        {
+            if (!_isFlashing)
+            {
+                CaptureBaseAlphas();
+                _isFlashing = true;
+            }
+
+            for (int i = 0; i < damageFlashPulses; i++)
+            {
+                ApplyAlphaFactor(damageFlashLowAlpha);
+                yield return new WaitForSeconds(damageFlashPulseDuration);
+
+                ApplyAlphaFactor(1f);
+                yield return new WaitForSeconds(damageFlashPulseDuration);
+            }
+
+            ResetDamageFlash();
+        }
+
+        private void CaptureBaseAlphas()
+        {
+            if (_allRenderers == null) return;
+            for (int i = 0; i < _allRenderers.Length; i++)
+            {
+                var r = _allRenderers[i];
+                if (r != null)
+                {
+                    _baseAlphas[i] = r.color.a;
+                }
+            }
+        }
+
+        private void ApplyAlphaFactor(float factor)
+        {
+            if (_allRenderers == null) return;
+            for (int i = 0; i < _allRenderers.Length; i++)
+            {
+                var r = _allRenderers[i];
+                if (r != null && r.enabled)
+                {
+                    Color c = r.color;
+                    c.a = _baseAlphas[i] * factor;
+                    r.color = c;
+                }
+            }
+        }
+
+        public void ResetDamageFlash()
+        {
+            if (_damageFlashRoutine != null)
+            {
+                StopCoroutine(_damageFlashRoutine);
+                _damageFlashRoutine = null;
+            }
+            if (_isFlashing)
+            {
+                _isFlashing = false;
+                if (_allRenderers != null && _baseAlphas != null)
+                {
+                    for (int i = 0; i < _allRenderers.Length; i++)
+                    {
+                        var r = _allRenderers[i];
+                        if (r != null)
+                        {
+                            Color c = r.color;
+                            c.a = _baseAlphas[i];
+                            r.color = c;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void HandleSecondChanceGranted() => ResetDamageFlash();
+        private void HandleReturnedToMenu() => ResetDamageFlash();
     }
 }

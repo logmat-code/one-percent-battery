@@ -2,7 +2,8 @@
     "name": "OnePercentBattery",
     "rootNamespace": "OnePercentBattery",
     "references": [
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "Yodo1.MAS"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

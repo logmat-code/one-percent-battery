@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b997ecb855ee041ac95192a7f0745381, type: 3}
   m_Name: Yodo1AdsConfig
   m_EditorClassIdentifier: OnePercentBattery::OnePercentBattery.Services.Yodo1AdsConfig
-  androidAppKey: 
+  androidAppKey: WTDc7gSXr1
   iosAppKey: 
   enableRewardedAds: 1
   enableInterstitialAds: 1

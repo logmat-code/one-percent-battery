@@ -27,9 +27,9 @@ namespace OnePercentBattery.Player
 
         [Header("Forgiveness (make the input feel fair, not just accurate)")]
         [Tooltip("A jump pressed shortly after walking off a ledge still fires.")]
-        [SerializeField] private float coyoteTimeSeconds = 0.1f;
+        [SerializeField] private float coyoteTimeSeconds = 0.12f;
         [Tooltip("A jump pressed shortly before landing is remembered and fires on landing.")]
-        [SerializeField] private float jumpBufferSeconds = 0.1f;
+        [SerializeField] private float jumpBufferSeconds = 0.12f;
 
         [Header("1% Survival Mode")]
         [Tooltip("Extra forward-speed multiplier while the battery is coasting at 1% (see PlayerBattery.IsInSurvivalMode), stacked on top of GameManager.CurrentGameSpeedMultiplier. Lowered from 1.15 - it was stacking with the battery curve's own ~1.42x tail to reach ~1.63x total at exactly 1%, which is what made Survival Mode 'far too fast, practically impossible' on real devices. Now just a small final-urgency tic on top of the curve's own (much flatter) ceiling, not the main source of 1%'s intensity.")]
@@ -166,6 +166,13 @@ namespace OnePercentBattery.Player
             if (justPressed)
             {
                 _jumpBufferTimer = jumpBufferSeconds;
+                if (_coyoteTimer > 0f || IsGrounded)
+                {
+                    StartJump();
+                    _jumpBufferTimer = 0f;
+                    _coyoteTimer = 0f;
+                    _pitGraceActive = false;
+                }
             }
             _jumpHeldThisFrame = heldNow;
         }
@@ -181,10 +188,6 @@ namespace OnePercentBattery.Player
                 StartJump();
                 _jumpBufferTimer = 0f;
                 _coyoteTimer = 0f;
-                // This IS the coyote jump a Pit's grace exists to wait for - no separate jump system,
-                // just ending grace right where the existing consumption already happens. StartJump
-                // just applied the normal jump velocity, so the fall stops under its own steam; Step()
-                // needs nothing else from this.
                 _pitGraceActive = false;
             }
 
@@ -369,7 +372,16 @@ namespace OnePercentBattery.Player
             // falling far enough while over one is handled entirely inside Step().
             if (other.GetComponent<PitZone>() != null) return;
 
-            var obstacle = other.GetComponent<Obstacle>();
+            // Pickups (coins, shields, energy, magnets) must NEVER be treated as obstacles,
+            // even if they are child objects of an obstacle container like Coin Gate!
+            var pickup = other.GetComponent<Pickup>();
+            if (pickup != null)
+            {
+                pickup.Collect(this);
+                return;
+            }
+
+            var obstacle = other.GetComponent<Obstacle>() ?? other.GetComponentInParent<Obstacle>();
             if (obstacle != null)
             {
                 // Purely cosmetic notification for the VFX layer - read BEFORE ApplyHit() since that
@@ -382,12 +394,6 @@ namespace OnePercentBattery.Player
                 }
                 Battery.ApplyHit();
                 return;
-            }
-
-            var pickup = other.GetComponent<Pickup>();
-            if (pickup != null)
-            {
-                pickup.Collect(this);
             }
         }
     }

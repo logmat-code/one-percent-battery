@@ -27,6 +27,10 @@ namespace OnePercentBattery.World
         [SerializeField] private SpriteRenderer starsRenderer;
         [Tooltip("Camera-locked nebula cloud sitting between the star field and Skyline - stays invisible through the city zones and only becomes prominent from Stratosphere on, so Galactic's is a real late-run payoff.")]
         [SerializeField] private SpriteRenderer nebulaRenderer;
+        [Tooltip("Ground tile renderers - tinted per-zone to give each environment a distinct platform feel.")]
+        [SerializeField] private SpriteRenderer[] groundRenderers;
+        [Header("Zone Floors (City, Forest, Stratosphere, Orbit, Galactic)")]
+        [SerializeField] private Sprite[] zoneFloorSprites;
 
         public ZoneDefinition CurrentZone { get; private set; }
 
@@ -36,6 +40,7 @@ namespace OnePercentBattery.World
         private Color _targetForestTint;
         private float _targetStarAlpha;
         private float _targetNebulaAlpha;
+        private Color _targetGroundTint;
 
         private void OnEnable()
         {
@@ -56,10 +61,11 @@ namespace OnePercentBattery.World
             _targetForestTint = CurrentZone.ForestTint;
             _targetStarAlpha = CurrentZone.StarAlpha;
             _targetNebulaAlpha = CurrentZone.NebulaAlpha;
+            _targetGroundTint = CurrentZone.GroundTint;
             // Hard-set rather than left to Update()'s lerp - a Retry/new run must show the starting
             // zone's look immediately, not fade in from whatever tint the previous run (or a stale
             // Galactic star/nebula/forest layer) ended on.
-            ApplyImmediate(_targetColor, _targetSkyTint, _targetSkylineTint, _targetForestTint, _targetStarAlpha, _targetNebulaAlpha);
+            ApplyImmediate(_targetColor, _targetSkyTint, _targetSkylineTint, _targetForestTint, _targetStarAlpha, _targetNebulaAlpha, _targetGroundTint);
             GameEvents.RaiseZoneChanged(CurrentZone);
         }
 
@@ -75,6 +81,8 @@ namespace OnePercentBattery.World
                 _targetForestTint = zone.ForestTint;
                 _targetStarAlpha = zone.StarAlpha;
                 _targetNebulaAlpha = zone.NebulaAlpha;
+                _targetGroundTint = zone.GroundTint;
+                UpdateGroundSprite(zone);
                 GameEvents.RaiseZoneChanged(zone);
             }
         }
@@ -88,7 +96,7 @@ namespace OnePercentBattery.World
                 1f);
         }
 
-        private void ApplyImmediate(Color backgroundColor, Color skyTint, Color skylineTint, Color forestTint, float starAlpha, float nebulaAlpha)
+        private void ApplyImmediate(Color backgroundColor, Color skyTint, Color skylineTint, Color forestTint, float starAlpha, float nebulaAlpha, Color groundTint)
         {
             if (targetCamera != null) targetCamera.backgroundColor = backgroundColor;
             if (skyRenderer != null) skyRenderer.color = skyTint;
@@ -108,6 +116,18 @@ namespace OnePercentBattery.World
             }
             if (starsRenderer != null) starsRenderer.color = new Color(1f, 1f, 1f, starAlpha);
             if (nebulaRenderer != null) nebulaRenderer.color = new Color(1f, 1f, 1f, nebulaAlpha);
+            if (groundRenderers != null)
+            {
+                Sprite sp = (zoneFloorSprites != null && zoneFloorSprites.Length > 0) ? zoneFloorSprites[0] : null;
+                foreach (var gr in groundRenderers)
+                {
+                    if (gr != null)
+                    {
+                        if (sp != null) gr.sprite = sp;
+                        gr.color = groundTint;
+                    }
+                }
+            }
         }
 
         private void Update()
@@ -143,6 +163,35 @@ namespace OnePercentBattery.World
             {
                 float a = Mathf.Lerp(nebulaRenderer.color.a, _targetNebulaAlpha, Time.deltaTime * tintLerpSpeed);
                 nebulaRenderer.color = new Color(1f, 1f, 1f, a);
+            }
+            if (groundRenderers != null)
+            {
+                foreach (var gr in groundRenderers)
+                {
+                    if (gr != null) gr.color = Color.Lerp(gr.color, _targetGroundTint, Time.deltaTime * tintLerpSpeed);
+                }
+            }
+        }
+
+        private void UpdateGroundSprite(ZoneDefinition zone)
+        {
+            if (groundRenderers == null || zoneFloorSprites == null || zoneFloorSprites.Length == 0) return;
+            int zoneIndex = 0;
+            for (int i = 0; i < ZoneCatalog.Zones.Length; i++)
+            {
+                if (ZoneCatalog.Zones[i] == zone)
+                {
+                    zoneIndex = i;
+                    break;
+                }
+            }
+            if (zoneIndex < zoneFloorSprites.Length && zoneFloorSprites[zoneIndex] != null)
+            {
+                Sprite newFloor = zoneFloorSprites[zoneIndex];
+                foreach (var gr in groundRenderers)
+                {
+                    if (gr != null) gr.sprite = newFloor;
+                }
             }
         }
     }
